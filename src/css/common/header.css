@@ -15,4 +15,12 @@
 
 .header a {
     color: var(--white);
+    
+}
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.nav-pills .nav-link.active {
+    color: red;
 }

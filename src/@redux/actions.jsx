@@ -5,9 +5,9 @@ const getLoading = () => ({
     type: TypeActions.GET_LOADING
 })
 
-const getCarreras = (id) => ({
+const getCarreras = (id,descripcion,cantCuotas) => ({
     type: TypeActions.GET_CARRERAS,
-    payload: id
+    payload: id,descripcion,cantCuotas
 })
 
 
