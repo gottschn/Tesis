@@ -62,8 +62,7 @@ const CarrerasProvider = ({ children }) => {
       throw error;
     }
   };
-
-  const addCarrera = async (carrera) => {
+   const addCarrera = async (carrera) => {
     try {
 
       carrera.cantCuotas = parseFloat(carrera.cantCuotas);
@@ -81,7 +80,7 @@ const CarrerasProvider = ({ children }) => {
     } catch (error) {
       throw error;
     }
-  };
+  }; 
 
   const updateCarrera = async (carrera) => {
     try {
@@ -123,7 +122,7 @@ const CarrerasProvider = ({ children }) => {
         ...values,
         getCarreras,
         getCarrera,
-        addCarrera,
+       // addCarrera,
         deleteCarrera,
         updateCarrera,
         clearCurrentCarrera,

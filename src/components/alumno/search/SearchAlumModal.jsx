@@ -5,7 +5,7 @@ import AlumListBase from './AlumListBase';
 const SearchAlumModal = ({ show, onHide }) => {
 
     return (
-        <>
+        <> {/* ESTO TOCA CUOTA */}
             <Modal
                 show={show}
                 size="xl"

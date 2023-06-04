@@ -5,6 +5,9 @@ import { Button } from 'react-bootstrap';
 import SearchCarrModal from './SearchCarrModal';
 import CarreraSearched from './CarreraSearched';
 import React from 'react';
+
+
+//ESTO TOCA CUOTAS
 const SearchCarrPanel = () => {
 
     const [showSearchCarrModal, setShowSearchCarrModal] = useState(false);
@@ -13,7 +16,7 @@ const SearchCarrPanel = () => {
         <>
             <div className="row">
                 <div className="col-6">
-                    <h3>Seleccionar Carrera</h3>
+                    <h3>Seleccionar Precio Cuota</h3>
                 </div>
                 <div className="col-6 d-flex justify-content-end mb-1">
                     <Button

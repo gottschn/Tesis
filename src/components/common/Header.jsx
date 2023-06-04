@@ -1,20 +1,13 @@
-import { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router';
+
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../../css/common/header.css'
-import Button from 'react-bootstrap/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSolid } from "@fortawesome/free-solid-svg-icons";
-import OffCanvas from './OffCanvas';
-import React from 'react';
+import UTNJPG from '../common/img/UTNJPG.jpg'
 
 const Header = () => {
     const navigate = useNavigate();
-    const [showOffCanvas, setShowOffCanvas] = useState(false);
-
-    const handleClose = () => setShowOffCanvas(false);
-    const handleShow = () => setShowOffCanvas(true);
 
     const goToPage = page => {
         navigate(page)
@@ -23,25 +16,14 @@ const Header = () => {
     return (
         <>
             <Navbar className='header'>
-                <Button
-                    variant='dark'
-                    className='ms-3 me-4'
-                    onClick={handleShow}
-                >
-                    <FontAwesomeIcon icon={faBars} />
-                </Button>
-
-                <OffCanvas showOffCanvas={showOffCanvas} handleClose={handleClose}/>
-
-                <Navbar.Brand>
-                    <Nav.Link onClick={() => goToPage('/')}>UTN FRT</Nav.Link>
-                </Navbar.Brand>
+                <img src={UTNJPG} alt="Logo" />
                 <Nav className="me-auto nav nav-pills">
                     <Nav.Link  onClick={() => goToPage('/')}>Home</Nav.Link>
-                    <Nav.Link className={({isActive}) => `nav-link active ${ isActive ? 'active':''}`} onClick={() => goToPage('/carreras')}>Carreras</Nav.Link>
                     <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/alumnos')}>Alumnos</Nav.Link>
-                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/cuotas')}>Cuotas</Nav.Link>
-                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/preciocuotas')}>PrecioCuota</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-link active ${ isActive ? 'active':''}`} onClick={() => goToPage('/carreras')}>Carreras</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/preciocuota')}>PrecioCuota</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/cuota')}>Cuotas</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/pago')}>Pago</Nav.Link>
                 </Nav>
             </Navbar>
         </>

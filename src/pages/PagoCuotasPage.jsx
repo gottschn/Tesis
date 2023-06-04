@@ -8,6 +8,7 @@ import CarreraContext from '../context/carrera/CarrerasContext';
 import AlumCarreraContext from '../context/alumCarrera/AlumCarreraContext';
 import CuotaContext from '../context/cuota/CuotaContext';
 import React from 'react'; 
+import PagoCuotaList from '../components/pagoCuota/base/PagoCuotaList';
 
 export const PagoCuotasPage = () => {
     const { clearCurrentAlumno } = useContext(AlumnoContext);
@@ -25,11 +26,7 @@ export const PagoCuotasPage = () => {
     return (
         <>
             <div className='app'>
-                <SearchAlumPanel />
-
-                <SearchCarrPanel />
-
-                <CuotaList />
+                <CuotaList />     
             </div>
         </>
     );

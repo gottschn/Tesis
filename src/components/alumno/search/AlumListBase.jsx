@@ -4,7 +4,7 @@ import { Table, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPointer } from "@fortawesome/free-solid-svg-icons";
 import React from 'react';
-const AlumListBase = ({ closeSearchModal }) => {
+const AlumListBase = () => {
 
     const { alumnos, getAlumnos, getAlumno } = useContext(AlumnoContext);
 
@@ -47,7 +47,7 @@ const AlumListBase = ({ closeSearchModal }) => {
                                             className='me-2'
                                             onClick={() => {
                                                 getAlumno(alumno.id);
-                                                closeSearchModal();
+                                                //closeSearchModal();
                                             }}
                                         >
                                             <FontAwesomeIcon icon={faHandPointer} />
