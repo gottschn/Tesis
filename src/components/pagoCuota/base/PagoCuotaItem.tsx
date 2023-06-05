@@ -1,37 +1,21 @@
-import { useContext } from 'react';
-import PagoCuotaContext from '../../../context/pagoCuota/PagoCuotaContext';
-import { Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPen, faEye } from "@fortawesome/free-solid-svg-icons";
 import React from 'react'; 
+
 import { PagoCuotaProps } from '../../../@redux/PagoCuota/types';
 import moment from 'moment';
+import ModalEditPagoCuota from '../modals/ModalEditPagoCuota';
+import ModalDeletePagoCuota from '../modals/ModalDeletePagoCuota';
 const PagoCuotaItem:React.FC<{pagoCuotas:PagoCuotaProps}> = ({...props}) => {
     const NewDate = moment(props.pagoCuotas.fechaPago).format('DD-MM-YYYY')
     return (
         <>
             <tr>
-                <td> {props.pagoCuotas.monto} </td>
+                <td> {props.pagoCuotas.id} </td>
+                <td> ${props.pagoCuotas.monto} </td>
                 <td> {props.pagoCuotas.porcPago}% </td>
                 <td> {NewDate} </td>
                 <td className="text-center">
-                    <Button
-                        variant="warning"
-                        className='me-2'
-                        onClick={() => {
-                           
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faPen} />
-                    </Button>
-                    <Button
-                        variant="danger"
-                        onClick={() => {
-                            
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faTrash} />
-                    </Button>
+                    <ModalEditPagoCuota pagocuotas={props.pagoCuotas} />
+                    <ModalDeletePagoCuota  pagocuotas={props.pagoCuotas}/>
                 </td>
             </tr>
         </>

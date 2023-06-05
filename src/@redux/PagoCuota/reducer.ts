@@ -3,6 +3,7 @@ import { StateProps, TypeActions } from "./types";
 const initialState: StateProps = {
     isLoading: false,
     pagoCuotas: [],
+    cuotas: [],
 
 }
 

@@ -5,19 +5,18 @@ const getPagoCuotas = () => {
     return instance.get(`/pago/ObtenerTodos`)
 }
 
-const createPrecioCuotas = (monto: number, fecha: Date, carreraId: number) => {
+const createPagoCuotas = (monto: number, cuotaId: number) => {
     return instance.post(`/pago`,{
         monto,
-        fecha,
-        carreraId
+        cuotaId
     })
 } 
 
-const updatePrecioCuotas = (id: number ,monto: number, carreraId: number) => {
+const updatePagoCuotas = (id: number ,monto: number, cuotaId: number) => {
     return instance.put(`/pago`, {
         id,
         monto,
-        carreraId
+        cuotaId
     })
 }
 
@@ -27,7 +26,7 @@ const deletePagoCuotas = (id: number) => {
 
 export {
     getPagoCuotas,
-    createPrecioCuotas,
-    updatePrecioCuotas,
+    createPagoCuotas,
+    updatePagoCuotas,
     deletePagoCuotas
 }

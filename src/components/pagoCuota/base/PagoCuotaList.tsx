@@ -8,6 +8,7 @@ import React from 'react';
 import { HelperRedux } from '../../../@redux';
 import { Actions } from '../../../@redux/PagoCuota';
 import { getPagoCuotas } from '../../../domain/pagoCuotas';
+import ModalAddPagoCuota from '../modals/ModalAddPagoCuota';
 
 const PagoCuotaList = () => {
     const dispatch = HelperRedux.useDispatch()
@@ -30,9 +31,19 @@ const PagoCuotaList = () => {
 
     return (
         <>
+        <div className="row">
+                <div className="col-6">
+                    <h3>Pago de Cuotas</h3>
+                </div>
+
+                <div className="col-6 d-flex justify-content-end mb-1">
+                    <ModalAddPagoCuota /> 
+                </div>
+        </div>
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Monto</th>
                         <th>Porc. Pago</th>
                         <th>Fecha</th>

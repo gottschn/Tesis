@@ -1,3 +1,5 @@
+import { CuotaProps } from "../cuotas/types";
+
 const TypeActions = {
     GET_START: '_GET_START',
     GET_ERROR: '_GET_ERROR',
@@ -12,14 +14,16 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     pagoCuotas: PagoCuotaProps[];
+    cuotas: CuotaProps[];
 }
 
 interface PagoCuotaProps {
     id: number;
     monto: number;
-    fechaPago: Date
+    fechaPago: string;
     porcPago: number;
     cuotaId: number;
+    cuotas?: CuotaProps;
 
 }
 
