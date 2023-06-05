@@ -2,6 +2,7 @@ import React, { } from 'react';
 import { CuotaProps } from '../../../@redux/cuotas/types';
 import { HelperRedux } from '../../../@redux';
 import ModalEditCuota from '../modals/ModalEditCuota';
+import ModalDeleteCuota from '../modals/ModalDeleteCuota';
 const CuotaItem:React.FC<{cuotas:CuotaProps}> = ({...props}) => {
 
     const { precioCuotas } = HelperRedux.useSelector((state) => state.precioCuota)
@@ -17,6 +18,7 @@ const CuotaItem:React.FC<{cuotas:CuotaProps}> = ({...props}) => {
                 <td>{`ID:${props.cuotas.precioCuotaId} $:${monto}`}</td>
                 <td className="text-center">
                         <ModalEditCuota cuota={props.cuotas}/>
+                        <ModalDeleteCuota cuota={props.cuotas} />
                 </td>
             </tr>
         </>
