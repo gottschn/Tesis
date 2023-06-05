@@ -15,7 +15,7 @@ const PrecioCuoItem:React.FC<{precioCuotas:PrecioCuotaProps}> = ({...props}) => 
           <td> ${props.precioCuotas.monto} </td>
           <td> {Date} </td> 
           <td className="text-center">
-          <ModalEditPrecioCuota precioCuota={props.precioCuotas} />  
+              <ModalEditPrecioCuota precioCuota={props.precioCuotas} />  
               <ModalDeletePrecioCuota precioCuota={props.precioCuotas} />
               <HistoryPrecioCuoModal precioCuota={props.precioCuotas} /> 
           </td>

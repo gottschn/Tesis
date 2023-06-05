@@ -24,6 +24,7 @@ interface CuotaProps {
     numero: number;
     alumnoId: number;
     precioCuotaId: number;
+    monto: number
     alumno?: AlumnoProps;
 }
 

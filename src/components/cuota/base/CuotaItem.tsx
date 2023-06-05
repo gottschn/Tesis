@@ -1,49 +1,22 @@
-/* import { useContext } from 'react';
-import CuotaContext from '../../../context/cuota/CuotaContext'; */
-import { Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPen, faEye } from "@fortawesome/free-solid-svg-icons";
-import React from 'react';
+import React, { } from 'react';
 import { CuotaProps } from '../../../@redux/cuotas/types';
+import { HelperRedux } from '../../../@redux';
+import ModalEditCuota from '../modals/ModalEditCuota';
 const CuotaItem:React.FC<{cuotas:CuotaProps}> = ({...props}) => {
 
-    console.log('render cuota', props.cuotas)
+    const { precioCuotas } = HelperRedux.useSelector((state) => state.precioCuota)
+    const precioCuotaActual = precioCuotas.find((precioCuota) => precioCuota.id === props.cuotas.precioCuotaId);
+    const monto = precioCuotaActual ? precioCuotaActual.monto : "";
+
+    console.log(monto,"a")
     return (
         <>
             <tr>
                 <td> {props.cuotas.numero} </td>
                 <td> {`${props.cuotas.alumnoId} - ${props.cuotas?.alumno?.nombre} ${props.cuotas?.alumno?.apellido}`} </td>
-                <td> {props.cuotas.precioCuotaId} -  </td>
+                <td>{`ID:${props.cuotas.precioCuotaId} $:${monto}`}</td>
                 <td className="text-center">
-                    <Button
-                        variant="primary"
-                        className='me-2'
-                        onClick={() => {
-                           // getCuota(cuota.id);
-                           //openPagoCuotaModal();
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faEye} />
-                    </Button>
-                    <Button
-                        variant="warning"
-                        className='me-2'
-                        onClick={() => {
-                           // getCuota(cuota.id);
-                            //openEditModal();
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faPen} />
-                    </Button>
-                    <Button
-                        variant="danger"
-                        onClick={() => {
-                            //getCuota(cuota.id);
-                            //openDeleteModal();
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faTrash} />
-                    </Button>
+                        <ModalEditCuota cuota={props.cuotas}/>
                 </td>
             </tr>
         </>

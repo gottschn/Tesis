@@ -104,7 +104,7 @@ const ModalEditPrecioCuota:React.FC<{precioCuota:PrecioCuotaProps}> = ({...props
                         <Form.Group className="mb-3">
                             <Form.Label>Carrera</Form.Label>
                             <Form.Control
-                                type="number"
+                                type="text"
                                 placeholder="Carrera"
                                 name="carrera"
                                 value={carrera}

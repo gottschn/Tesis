@@ -19,7 +19,6 @@ const ModalEditCarrera:React.FC<{carrera:CarrerasProps}> = ({...props}) => {
       const { descripcion, cantCuotas } = form;
 
     const  dispatch = HelperRedux.useDispatch()
-    //const { carreras } = HelperRedux.useSelector((state) => state.carreras)
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
     useEffect(() => {

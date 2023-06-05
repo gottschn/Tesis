@@ -17,7 +17,7 @@ const CarreraItem:React.FC<{carrera:CarrerasProps}>= ({...props}) => {
                 <td> ${props.carrera.precioCuo} </td>
                 <td className="text-center">
                     <ModalEditCarrera carrera={props.carrera} /> 
-                    <ModalDeleteCarrera carrera={props.carrera}/> 
+                    <ModalDeleteCarrera carrera={props.carrera} /> 
                 </td>
             </tr>
         </>

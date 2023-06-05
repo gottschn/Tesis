@@ -1,29 +1,17 @@
-import { useContext, useState, useEffect } from 'react';
-/* import AlumnoContext from '../../../context/alumno/AlumnoContext'; */
+import { useEffect } from 'react';
 import AlumnoItem from './AlumnoItem';
-import { Table, Button } from 'react-bootstrap';
-/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAdd } from "@fortawesome/free-solid-svg-icons";
-import EditAlumnoModal from '../modals/EditAlumnoModal';
-import DeleteAlumnoModal from '../modals/DeleteAlumnoModal';
-import InscripAlumCarrModal from '../inscription/InscripAlumCarrModal'; */
+import { Table } from 'react-bootstrap';
+
 import React from 'react';
 import { HelperRedux } from '../../../@redux';
 import { getAlumnos } from '../../../domain/alumnos';
 import { Actions } from '../../../@redux/alumno';
 import ModalAddAlumno from '../modals/ModalAddAlumno';
-import InscripAlumCarrModal from '../inscription/InscripAlumCarrModal';
 
 const AlumnoList = () => {
 
     const dispatch = HelperRedux.useDispatch()
     const { alumnos } = HelperRedux.useSelector((state) => state.alumnos)
-    
-
-    /* const [showAddAlumnoModal, setShowAddAlumnoModal] = useState(false);
-    const [showEditAlumnoModal, setShowEditAlumnoModal] = useState(false);
-    const [showDeleteAlumnoModal, setShowDeleteAlumnoModal] = useState(false);
-    const [showInscripAlumCarrModal, setShowInscripAlumCarrModal] = useState(false); */
 
     useEffect(() => {
         if(alumnos.length === 0)
@@ -35,9 +23,6 @@ const AlumnoList = () => {
         
     }
 
-
-    /* const openInscripModal = () => setShowInscripAlumCarrModal(true);  */
-
     return (
         <>
             <div className="row">
@@ -45,17 +30,14 @@ const AlumnoList = () => {
                     <h3>Listado de Alumnos</h3>
                 </div>
                 <div className="col-6 d-flex justify-content-end mb-1">
-                        <ModalAddAlumno />
-                        <div className='col-6 d-flex justify-content-end mb-1'>
-                        <InscripAlumCarrModal />
-                        </div>
+                    <ModalAddAlumno />
                 </div>
-
             </div>
 
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
+                        <th>ID del Alumno</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Dni</th>

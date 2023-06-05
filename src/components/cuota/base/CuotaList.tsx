@@ -1,17 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
-import EditCuotaModal from '../modals/EditCuotaModal';
+import { useState, useEffect } from 'react';
 import DeleteCuotaModal from '../modals/DeleteCuotaModal';
-import CuotaContext from '../../../context/cuota/CuotaContext';
 import { Table } from 'react-bootstrap';
 import CuotaItem from './CuotaItem';
-//import CarreraContext from '../../../context/carrera/CarrerasContext';
-//import AlumnoContext from '../../../context/alumno/AlumnoContext';
 import PagoCuotaModal from '../../pagoCuota/modals/PagoCuotaModal';
 import React from 'react';
 import { getCuotas } from '../../../domain/cuotas';
 import { Actions } from '../../../@redux/cuotas';
 import { HelperRedux } from '../../../@redux';
-import ModalAddAlumno from '../../alumno/modals/ModalAddAlumno';
 import ModalAddCuota from '../modals/ModalAddCuota';
 
 const CuotaList = () => {
@@ -19,9 +14,9 @@ const CuotaList = () => {
     const { cuotas } = HelperRedux.useSelector((state) => state.cuotas)
     
     /* const { getCuotasByAlumAndCarr, cuotas } = useContext(CuotaContext); */
-    const [showPagoCuotaModal, setShowPagoCuotaModal] = useState(false);
-    const [showEditCuotaModal, setShowEditCuotaModal] = useState(false);
-    const [showDeleteCuotaModal, setShowDeleteCuotaModal] = useState(false);
+    // const [showPagoCuotaModal, setShowPagoCuotaModal] = useState(false);
+    // const [showEditCuotaModal, setShowEditCuotaModal] = useState(false);
+    // const [showDeleteCuotaModal, setShowDeleteCuotaModal] = useState(false);
 
     /* const { currentAlumno } = useContext(AlumnoContext);
     const { currentCarrera } = useContext(CarreraContext); */
@@ -57,8 +52,11 @@ const CuotaList = () => {
                 <div className="col-6">
                     <h3>Listado de Cuotas</h3>
                 </div>
+                <div className="col-6 d-flex justify-content-end mb-1">
+                <ModalAddCuota /> 
+                </div>
             </div>
-                <ModalAddCuota />
+                
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
@@ -71,10 +69,11 @@ const CuotaList = () => {
                 <tbody>
                     {
                         cuotas && cuotas.length > 0 ?
-                            cuotas.map((cuota, index) =>
+                            cuotas.map((cuota, index )  =>
                                 <CuotaItem
                                     cuotas={cuota}
                                     key={index}
+                                   
                                 
                                     /* openPagoCuotaModal={openPagoCuotaModal}
                                     openEditModal={openEditModal}
@@ -91,20 +90,20 @@ const CuotaList = () => {
                 </tbody>
             </Table>
 
-            <PagoCuotaModal
+            {/* <PagoCuotaModal
                 show={showPagoCuotaModal}
                 onHide={() => setShowPagoCuotaModal(false)}
-            />
+            /> */}
 
-            <EditCuotaModal
+            {/* <EditCuotaModal
                 show={showEditCuotaModal}
                 onHide={() => setShowEditCuotaModal(false)}
-            />
+            /> */}
 
-            <DeleteCuotaModal
+            {/* <DeleteCuotaModal
                 show={showDeleteCuotaModal}
                 onHide={() => setShowDeleteCuotaModal(false)}
-            />
+            /> */}
 
         </>
     );

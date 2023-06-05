@@ -24,7 +24,8 @@ const ModalAddCuota = () => {
     id: 0,
     numero: 0,
     alumnoId: 0,
-    precioCuotaId: 0
+    precioCuotaId: 0,
+    monto: 0
   });
   
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -62,7 +63,8 @@ const ModalAddCuota = () => {
         id: 0,
         numero: 0,
         alumnoId: 0,
-        precioCuotaId: 0
+        precioCuotaId: 0,
+        monto: 0
     })
     window.location.reload()
   }

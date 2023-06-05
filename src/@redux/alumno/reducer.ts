@@ -42,15 +42,15 @@ const reducer = (state = initialState, action: any = {} ) => {
         case TypeActions.UPDATE_ALUMNOS:
             nextState = {
                 ...state,
-                alumnos: state.alumnos.map((carrera) =>
-                    carrera.id === action.id ? action.data : carrera
+                alumnos: state.alumnos.map((alumno) =>
+                alumno.id === action.id ? action.data : alumno
                 )
             }
             break;
         case TypeActions.DELETE_ALUMNOS:
             nextState = {
                 ...state,
-                alumnos: state.alumnos.filter((carrera) => carrera.id !== action.data.id),
+                alumnos: state.alumnos.filter((alumno) => alumno.id !== action.data.id),
             }
             break;
         default:

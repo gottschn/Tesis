@@ -15,7 +15,6 @@ import ModalAddCarrera from '../modals/ModalAddCarrera';
 /* icons */
 import { Table } from 'react-bootstrap';
 import { getCarreras } from '../../../domain/carreras';
-import ModalDeleteCarrera from '../modals/ModalDeleteCarrera';
 //import { useNavigate } from 'react-router-dom';
 
 
@@ -25,7 +24,10 @@ const CarreraList = () => {
     const { carreras } = HelperRedux.useSelector((state) => state.carreras)
 
     useEffect(() => {
-        getInitial();
+        if(carreras.length === 0)
+        {
+            getInitial()
+        }
     }, [])
     
     const getInitial = () => {

@@ -8,7 +8,6 @@ import { Table } from 'react-bootstrap';
 import { getPrecioCuotas } from '../../../domain/precioCuotas';
 import { Actions } from '../../../@redux/precioCuotas';
 import ModalAddPrecioCuota from '../modals/ModalAddPrecioCuota';
-import HistoryPrecioCuoModal from '../modals/HistoryPrecioCuoModal';
 const PrecioCuoList = () => {
     const dispatch = HelperRedux.useDispatch()
     const { precioCuotas } = HelperRedux.useSelector((state) => state.precioCuota)

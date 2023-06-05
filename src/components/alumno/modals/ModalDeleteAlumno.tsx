@@ -3,12 +3,12 @@ import { Modal, Button } from 'react-bootstrap';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { deleteCarreras } from '../../../domain/carreras';
-import { CarrerasProps } from '../../../@redux/carreras/types';
 import { useDispatch } from 'react-redux';
-import { Actions } from '../../../@redux/carreras';
+import { AlumnoProps } from '../../../@redux/alumno/types';
+import { deleteAlumno } from '../../../domain/alumnos';
+import { Actions } from '../../../@redux/alumno';
 
-const ModalDeleteCarrera:React.FC<{carrera:CarrerasProps}> = ({...props}) => {
+const ModalDeleteAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
 
@@ -21,8 +21,8 @@ const ModalDeleteCarrera:React.FC<{carrera:CarrerasProps}> = ({...props}) => {
       };
 
       const handleConfirmDeleteModal = () => {
-        deleteCarreras(props.carrera.id).then(() => {
-            dispatch(Actions.deleteCarreras(props.carrera))
+        deleteAlumno(props.alumno.id).then(() => {
+            dispatch(Actions.deleteAlumnos(props.alumno))
         })
         .catch(error => console.log(error))
         .finally(() => handleCloseDeleteModal())
@@ -66,4 +66,4 @@ const ModalDeleteCarrera:React.FC<{carrera:CarrerasProps}> = ({...props}) => {
     );
 };
 
-export default ModalDeleteCarrera;
+export default ModalDeleteAlumno;

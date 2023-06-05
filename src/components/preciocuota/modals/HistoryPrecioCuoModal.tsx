@@ -30,7 +30,7 @@ const HistoryPrecioCuoModal:React.FC<{precioCuota:PrecioCuotaProps}> = ({...prop
           
         </Button>
         <Modal
-          size= "xl"
+          size= "lg"
           show={showModal}
           aria-labelledby="contained-modal-title-vcenter"
           centered
