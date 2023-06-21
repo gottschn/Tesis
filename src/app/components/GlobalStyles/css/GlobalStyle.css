@@ -1,3 +1,5 @@
+/* Header  */
+
 :root {
     --white: #fff;
     --black: #000;
@@ -10,7 +12,7 @@
 }
 
 .header {
-    background-color: var(--purple2);
+    background-color: var(--purple2) !important;
 }
 
 .header a {
@@ -29,4 +31,26 @@
     width: 50px; /* Ajusta el ancho según tus necesidades */
     height: auto; /* Permite que la altura se ajuste proporcionalmente */
     margin-right: 10px; /* Espacio entre la imagen y el texto */
-  }
+}
+
+/* Footer */
+
+.footerStyle {
+    background-color:#5e4485;
+    color: #fff !important;
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.footerNames {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerLogin {
+    display: flex;
+    justify-content: end;
+}

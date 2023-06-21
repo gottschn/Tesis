@@ -1,0 +1,19 @@
+.container-input {
+    position: relative;
+}
+
+.ul-style {
+    max-height: 160px;
+    overflow-y: scroll;
+    border: 1px solid rgb(201 199 199);
+    width: 100%;
+}
+
+.li-style {
+    font-size: 0.875rem;
+    padding: 0.005rem 0.7rem 0.005rem 1rem;
+    cursor: default;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

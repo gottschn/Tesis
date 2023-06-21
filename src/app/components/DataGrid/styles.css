@@ -1,0 +1,87 @@
+.container-data-grid {
+    border-radius: 3px;
+    border: 1px solid #e0e0e0;
+    font-size: 0.8rem;
+}
+
+.button-pagination-data-grid {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 30px;
+    transition: background-color .15s ease-in-out;
+}
+
+.button-clear-style {
+    border: 0;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.button-pagination-data-grid:hover {
+    background-color: #fee5e5;
+}
+
+.footer-data-grid {
+    border-top: 1px solid #dee2e6;
+    height: 60px;
+    background-color: white;
+}
+
+.container-pagination {
+    background-color: white;
+    display: flex; 
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-body-data-grid {
+    width: 100%;
+    overflow: scroll;
+    height: 300px;
+}
+
+.fixed-cell {
+    position: sticky;
+    top: 0;
+    -webkit-box-shadow: var(--datatable-border-color) 0 1px;
+    box-shadow: var(--datatable-border-color) 0 1px;
+}
+
+.row-abm {
+    font-size: 0.8rem;
+}
+
+.row-abm:hover .button-abm{
+    visibility: visible !important;
+}
+
+.circle-point-filter {
+    height: 8px;
+    width: 8px;
+    position: relative; 
+    background-color:red; 
+    top: -5px; 
+    border-radius: 15px; 
+}
+
+.td-min-width {
+    padding: 0.25rem 0.25rem;
+    min-width: 200px;
+    max-width: 240px;
+}
+
+.min-width {
+    min-width: 110px;
+}
+
+svg:not(:root).svg-inline--fa, svg:not(:host).svg-inline--fa {
+    overflow: visible;
+    box-sizing: content-box;
+    margin-left: 10px;
+}
+
+.FilasPorPagina {
+    display: inline-block;
+}

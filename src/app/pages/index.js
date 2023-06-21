@@ -1,0 +1,7 @@
+export * from './AlumnosPage'
+export * from './CarrerasPage'
+export * from './Home'
+export * from './LoginPage'
+export * from './PagoCuotasPage'
+export * from './PagoPage'
+export * from './PrecioCarrerasPage'
