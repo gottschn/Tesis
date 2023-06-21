@@ -1,6 +1,5 @@
-import { useContext, useEffect } from 'react';
-import CarreraContext from '../../../context/carrera/CarrerasContext';
-import AlumCarreraContext from '../../../context/alumCarrera/AlumCarreraContext';
+import {  useEffect } from 'react';
+
 
 import { Table } from 'react-bootstrap';
 import React from 'react';
@@ -8,7 +7,8 @@ import { CarrerasProps } from '../../../@redux/carreras/types';
 import { Actions } from '../../../@redux/carreras';
 import { getCarreras } from '../../../domain/carreras';
 import { HelperRedux } from '../../../@redux';
-import CarreraItem from '../base/CarreraItem';
+import CarreraList from '../base/CarreraList';
+/* import CarreraItem from '../base/CarreraItem'; */
 
 const SearchedCarrera:React.FC<{carrera:CarrerasProps}>= () => {
     const dispatch = HelperRedux.useDispatch()
@@ -39,7 +39,7 @@ const SearchedCarrera:React.FC<{carrera:CarrerasProps}>= () => {
                 {
                         carreras ?
                             carreras.map((carrera, index) => 
-                                <CarreraItem
+                                <CarreraList
                                     carrera={carrera}
                                     key={index}
                                     

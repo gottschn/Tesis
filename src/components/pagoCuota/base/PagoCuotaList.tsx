@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { Table } from "react-bootstrap";
 import PagoCuotaItem from './PagoCuotaItem';
-import EditPagoCuotaModal from '../modals/EditPagoCuotaModal';
-import DeletePagoCuotaModal from '../modals/DeletePagoCuotaModal';
 import React from 'react';
 import { HelperRedux } from '../../../@redux';
 import { Actions } from '../../../@redux/PagoCuota';
@@ -68,16 +66,6 @@ const PagoCuotaList = () => {
                     }
                 </tbody>
             </Table>
-
-            <EditPagoCuotaModal
-                show={showEditModal}
-                onHide={() => setShowEditModal(false)}
-            />
-
-            <DeletePagoCuotaModal
-                show={showDeleteModal}
-                onHide={() => setShowDeleteModal(false)}
-            />
         </>
     );
 };

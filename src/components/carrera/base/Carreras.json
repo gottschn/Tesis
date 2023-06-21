@@ -1,0 +1,24 @@
+{
+    "carreras": [
+        {
+            "field": "id",
+            "name": "Codigo"
+        },
+        {
+            "field": "descripcion",
+            "name": "Nombre"
+        },
+        {
+            "field": "cantCuotas",
+            "name": "Cantidad de Cuotas"
+        },
+        {
+            "field": "precioCuo",
+            "name": "Precio Carrera"
+        },
+        {
+            "field": "precioMatricula",
+            "name": "Precio Matricula"
+        }
+    ]
+}

@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import DeleteCuotaModal from '../modals/DeleteCuotaModal';
+import {  useEffect } from 'react';
+
 import { Table } from 'react-bootstrap';
 import CuotaItem from './CuotaItem';
-import PagoCuotaModal from '../../pagoCuota/modals/PagoCuotaModal';
 import React from 'react';
 import { getCuotas } from '../../../domain/cuotas';
 import { Actions } from '../../../@redux/cuotas';

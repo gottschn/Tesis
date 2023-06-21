@@ -2,14 +2,12 @@ import { useContext, useEffect } from 'react';
 import AlumCarreraContext from '../../../context/alumCarrera/AlumCarreraContext';
 import { Table, Button } from 'react-bootstrap';
 import AlumnoContext from '../../../context/alumno/AlumnoContext';
-import CuotaContext from '../../../context/cuota/CuotaContext';
 import React from 'react';
 
 const CarrDispList = () => {
 
     const { addAlumCarrera, carrerasDispAlum, getAlumCarrDispByAlumId } = useContext(AlumCarreraContext);
     const { currentAlumno } = useContext(AlumnoContext);
-    const { addCuota } = useContext(CuotaContext);
 
     useEffect(() => {
         currentAlumno.id && getAlumCarrDispByAlumId(currentAlumno.id);

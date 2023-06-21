@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 import '../../../css/entities/carrera/carrera.css';
 import { HelperRedux } from '../../../@redux';
 import { Actions } from '../../../@redux/carreras';
@@ -7,6 +7,7 @@ import { CarrerasProps } from '../../../@redux/carreras/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd } from '@fortawesome/free-solid-svg-icons';
 import { createCarreras } from '../../../domain/carreras';
+import { Button } from '@mui/material';
 
 const ModalAddCarrera = () => {
   
@@ -67,8 +68,10 @@ const ModalAddCarrera = () => {
   return (
     <>
        <Button
-          variant="success"
-         onClick={(handleOpenModal)}
+        size='small'
+        variant="contained"
+        color="success"
+        onClick={(handleOpenModal)}
         >
         <FontAwesomeIcon icon={faAdd} />
          <span>Agregar Carrera </span>              
@@ -110,10 +113,10 @@ const ModalAddCarrera = () => {
             <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="success" type="submit">
+            <Button variant="contained" color="success" type="submit">
               Añadir
             </Button>
-            <Button variant="danger"  onClick={handleCloseModal} >
+            <Button variant="contained" color="error"  onClick={handleCloseModal} >
               Cancelar
             </Button>
           </Modal.Footer>
