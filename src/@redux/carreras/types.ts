@@ -8,11 +8,13 @@ const TypeActions = {
     CREATE_CARRERAS: '_CREATE_CARERAS',
     UPDATE_CARRERAS: '_UDATE_CARRERAS',
     DELETE_CARRERAS: '_DELETE_CARRERAS',
+    SET_CARRERA_FILTER_STORE: `_SET_CARRERA_FILTER_STORE`,
 }
 
 interface StateProps {
     isLoading: boolean;
     carreras: CarrerasProps[];
+    filter: CarrerasFilter;
 }
 
 interface CarrerasProps {
@@ -23,8 +25,14 @@ interface CarrerasProps {
 
 }
 
+interface CarrerasFilter {
+   id: number | string,
+   descripcion: string,
+}
+
 export {
     TypeActions,
     StateProps,
     CarrerasProps,
+    CarrerasFilter,
 }

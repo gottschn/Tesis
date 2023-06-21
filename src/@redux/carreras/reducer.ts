@@ -4,6 +4,10 @@ import { StateProps, TypeActions } from "./types";
 const initialState: StateProps = {
     isLoading: false,
     carreras: [],
+    filter: {
+        id: '',
+        descripcion: ''
+    }
 
 }
 
