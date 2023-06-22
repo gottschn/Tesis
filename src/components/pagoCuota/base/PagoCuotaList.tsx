@@ -1,72 +1,64 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-import { Table } from "react-bootstrap";
-import PagoCuotaItem from './PagoCuotaItem';
 import React from 'react';
 import { HelperRedux } from '../../../@redux';
 import { Actions } from '../../../@redux/PagoCuota';
 import { getPagoCuotas } from '../../../domain/pagoCuotas';
 import ModalAddPagoCuota from '../modals/ModalAddPagoCuota';
+import DataGrid from '../../../app/components/DataGrid';
+import Columns from './PagoCuota.json';
+import PagoCuotasFilter from './PagoCuotasFilter';
+import ModalEditPagoCuota from '../modals/ModalEditPagoCuota';
+import ModalDeletePagoCuota from '../modals/ModalDeletePagoCuota';
+import { PagoCuotaProps } from '../../../@redux/PagoCuota/types';
+import ModalAddPagoMasivo from '../modals/ModalAddPagoMasivo';
 
-const PagoCuotaList = () => {
+const PagoCuotaList: React.FC<{ pagocuota: PagoCuotaProps }> = ({ ...props }) => {
+
     const dispatch = HelperRedux.useDispatch()
     const { pagoCuotas } = HelperRedux.useSelector((state) => state.pagoCuotas)
-    const [showEditModal, setShowEditModal] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-  /*   const { getPagosCuotaByCuotaId, pagosCuota } = useContext(PagoCuotaContext);
-    const { currentCuota } = useContext(CuotaContext); */
 
     useEffect(() => {
-        if(pagoCuotas.length === 0)
+        if (pagoCuotas.length === 0)
             getInitial();
     }, [])
-    
+
     const getInitial = () => {
-        getPagoCuotas().then(x => {dispatch(Actions.setPagoCuotasStore(x.data.value))})
-        
+        getPagoCuotas().then(x => { dispatch(Actions.setPagoCuotasStore(x.data.value)) })
+
     }
 
     return (
         <>
-        <div className="row">
-                <div className="col-6">
+        <main>
+            <div className="modalMain">
+                <div className="">
                     <h3>Pago de Cuotas</h3>
                 </div>
 
-                <div className="col-6 d-flex justify-content-end mb-1">
-                    <ModalAddPagoCuota /> 
-                </div>
-        </div>
-            <Table striped bordered hover variant="dark">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Monto</th>
-                        <th>Porc. Pago</th>
-                        <th>Fecha</th>
-                        <th className='text-center'>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        pagoCuotas && pagoCuotas.length > 0 ?
-                        pagoCuotas.map((pagoCuota, index) =>
-                                <PagoCuotaItem
-                                 pagoCuotas={pagoCuota}
-                                    key={index}
-                                />
-                            )
-                            :
-                            <tr>
-                                <td colSpan={5} className="text-center">
-                                    La Cuota seleccionada no posee Pagos realizados
-                                </td>
-                            </tr>
-                    }
-                </tbody>
-            </Table>
-        </>
+                 <div className="">
+                        <ModalAddPagoCuota />
+
+                        <ModalAddPagoMasivo />
+                </div> 
+            </div>
+
+            <DataGrid
+                singlePagination={true}
+                subTableName='details'
+                pageSize={10}
+                columns={Columns.pagocuotas}
+                onClickEdit={(row) => { <ModalEditPagoCuota pagocuotas={props.pagocuota} /> }}
+                onClickDelete={(row) => { <ModalDeletePagoCuota pagocuotas={props.pagocuota} /> }}
+
+                rows={pagoCuotas.map(x => ({
+                    ...x,
+                }),
+                )}
+                filterComponent={(onClosedFilter) => <PagoCuotasFilter onClosed={onClosedFilter} />}
+            />
+        </main>
+    </>
     );
 };
 

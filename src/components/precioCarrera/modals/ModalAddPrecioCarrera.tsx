@@ -88,7 +88,7 @@ const ModalAddPrecioCarrera = () => {
                 onClick={(handleOpenModal)}
             >
                 <AddCircleIcon />
-                <span>Agregar Carrera</span>
+                <span>Precio Carrera</span>
             </Button>
 
             <Modal

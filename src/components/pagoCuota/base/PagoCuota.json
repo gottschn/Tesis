@@ -1,0 +1,20 @@
+{
+    "pagocuotas": [
+        {
+            "field": "id",
+            "name": "Id"
+        },
+        {
+            "field": "monto",
+            "name": "Monto"
+        },
+        {
+            "field": "porcPago",
+            "name": "PorcPago"
+        },
+        {
+            "field": "fechaPago",
+            "name": "Fecha"
+        }
+    ]
+}

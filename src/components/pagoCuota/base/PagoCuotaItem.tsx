@@ -1,4 +1,4 @@
-import React from 'react'; 
+/* import React from 'react'; 
 
 import { PagoCuotaProps } from '../../../@redux/PagoCuota/types';
 import moment from 'moment';
@@ -22,4 +22,4 @@ const PagoCuotaItem:React.FC<{pagoCuotas:PagoCuotaProps}> = ({...props}) => {
     );
 };
 
-export default PagoCuotaItem;
+export default PagoCuotaItem; */
