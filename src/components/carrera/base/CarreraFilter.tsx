@@ -47,13 +47,11 @@ const CarreraFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ on
         <div className='container-filter'>
             <main>
                 <TextInput
-                    dataTestId='test-input-id'
                     value={id}
                     onChange={(e) => setId(e.target.value)}
                     label='Codigo de Carrera'
                 />
                 <TextInput
-                    dataTestId='test-input-descripcion'
                     value={descripcion}
                     onChange={(e) => setDescripcion(e.target.value)}
                     label='Descripcion'

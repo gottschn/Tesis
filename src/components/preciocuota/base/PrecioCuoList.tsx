@@ -25,7 +25,7 @@ const PrecioCuoList = () => {
 
         <div className="row">
                 <div className="col-6">
-                    <h3>Precio Cuotas</h3>
+                    <h3>Precio Carrera</h3>
                 </div>
 
                 <div className="col-6 d-flex justify-content-end mb-1">

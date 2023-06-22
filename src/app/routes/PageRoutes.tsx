@@ -15,7 +15,7 @@ export const PageRoutes = () => {
                     <Route path='/alumnos' element={<AlumnosPage />} />
                     <Route path='/cuota' element={<PagoCuotasPage />} />
                     <Route path='/pago' element={<PagoPage />} />
-                    <Route path='/precioCuota' element={<PrecioCarrerasPage />} />
+                    <Route path='/preciocarrera' element={<PrecioCarrerasPage />} />
 
 
                     <Route path="/" element={<Navigate to="/home" />} />
