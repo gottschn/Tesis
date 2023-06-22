@@ -43,7 +43,7 @@ const deleteCarreras = ( data: any ) => ({
     data
 })
 
-const setFilterCarreraStore = (data: CarrerasFilter = {
+const setFilterCarreraStore = (data: CarrerasFilter  = {
     id: '', 
     descripcion: '', 
 }) => ({

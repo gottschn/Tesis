@@ -3,7 +3,10 @@ import { StateProps, TypeActions } from "./types";
 const initialState: StateProps = {
     isLoading: false,
     alumnos: [],
-
+    filter: {
+        dni: '',
+        legajo: '',
+    }
 }
 
 const reducer = (state = initialState, action: any = {} ) => {

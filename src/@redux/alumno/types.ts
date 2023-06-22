@@ -7,12 +7,14 @@ const TypeActions = {
     CREATE_ALUMNOS: '_CREATE_ALUMNOS',
     UPDATE_ALUMNOS: '_UDATE_ALUMNOS',
     DELETE_ALUMNOS: '_DELETE_ALUMNOS',
+    SET_ALUMNO_FILTER_STORE: `_SET_ALUMNO_FILTER_STORE`,
     
 }
 
 interface StateProps {
     isLoading: boolean;
     alumnos: AlumnoProps[];
+    filter: AlumnosFilter;
 }
 
 interface AlumnoProps {
@@ -30,8 +32,14 @@ interface AlumnoProps {
     carreras: any[];
 }
 
+interface AlumnosFilter {
+    dni: number | string,
+    legajo: number | string,
+ }
+
 export {
     TypeActions,
     StateProps,
     AlumnoProps,
+    AlumnosFilter
 }

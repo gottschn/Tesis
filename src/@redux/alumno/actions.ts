@@ -1,5 +1,5 @@
 // Aca obtenes los get/post/put/delete
-import { TypeActions } from "./types"
+import { AlumnosFilter, TypeActions } from "./types"
 
 const getStart = () => ({
     type: TypeActions.GET_START
@@ -8,17 +8,17 @@ const getComplete = () => ({
     type: TypeActions.GET_COMPLETE
 })
 const getAlumnos = (
-    id: number,
+    id: number | string,
     nombre: string,
     apellido:string,
     dni: string,
     legajo: string,
     direccion: string,
     mail: string,
-    porcBeca: number,
+    porcBeca: number | string,
     telefono: string,
-    carreraId: number,
-    fechaIngreso: Date
+    carreraId: number | string,
+    fechaIngreso: Date | string
     
 ) => ({
     type: TypeActions.GET_ALUMNOS,
@@ -56,6 +56,14 @@ const deleteAlumnos = ( data: any ) => ({
     data
 })
 
+const setFilterAlumnosStore = ( data: AlumnosFilter = {
+    dni: '',
+    legajo: '',
+})  => ({
+    type: TypeActions.SET_ALUMNO_FILTER_STORE,
+    data
+})
+
 
 export const Actions = {
     getStart,
@@ -64,5 +72,6 @@ export const Actions = {
     getAlumnos,
     createAlumnos,
     updateAlumnos,
-    deleteAlumnos
+    deleteAlumnos,
+    setFilterAlumnosStore
 }
