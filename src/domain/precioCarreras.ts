@@ -1,11 +1,11 @@
 import instance from "../config/axios/axios"
 
 
-const getPrecioCuotas = () => {
+const getPrecioCarreras = () => {
     return instance.get(`/preciocuota/ObtenerTodos`)
 }
 
-const createPrecioCuotas = (monto: number, fecha: Date, carreraId: number) => {
+const createPrecioCarreras = (monto: number, fecha: Date, carreraId: number) => {
     return instance.post(`/preciocuota`,{
         monto,
         fecha,
@@ -13,7 +13,7 @@ const createPrecioCuotas = (monto: number, fecha: Date, carreraId: number) => {
     })
 } 
 
-const updatePrecioCuotas = (id: number ,monto: number, carreraId: number) => {
+const updatePrecioCarreras = (id: number ,monto: number, carreraId: number) => {
     return instance.put(`/preciocuota`, {
         id,
         monto,
@@ -21,13 +21,13 @@ const updatePrecioCuotas = (id: number ,monto: number, carreraId: number) => {
     })
 }
 
-const deletePrecioCuotas = (id: number) => {
+const deletePrecioCarreras = (id: number) => {
     return instance.delete(`/preciocuota/${id}`)
 } 
 
 export {
-    getPrecioCuotas,
-    createPrecioCuotas,
-    updatePrecioCuotas,
-    deletePrecioCuotas
+    getPrecioCarreras,
+    createPrecioCarreras,
+    updatePrecioCarreras,
+    deletePrecioCarreras,
 }

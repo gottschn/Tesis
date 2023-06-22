@@ -1,8 +1,8 @@
-import React from 'react';
-import { PrecioCuotaProps } from '../../../@redux/precioCuotas/types';
+/* import React from 'react';
+import { PrecioCuotaProps } from '../../../@redux/precioCarrera/types';
 import moment from 'moment';
-import ModalEditPrecioCuota from '../modals/ModalEditPrecioCuota';
-import ModalDeletePrecioCuota from '../modals/ModalDeletePrecioCuota';
+import ModalEditPrecioCuota from '../modals/ModalEditPrecioCarrera';
+import ModalDeletePrecioCuota from '../modals/ModalDeletePrecioCarrera';
 import HistoryPrecioCuoModal from '../modals/HistoryPrecioCuoModal';
 
 const PrecioCuoItem:React.FC<{precioCuotas:PrecioCuotaProps}> = ({...props}) => {
@@ -24,4 +24,4 @@ const PrecioCuoItem:React.FC<{precioCuotas:PrecioCuotaProps}> = ({...props}) => 
     );
 };
 
-export default PrecioCuoItem;
+export default PrecioCuoItem; */

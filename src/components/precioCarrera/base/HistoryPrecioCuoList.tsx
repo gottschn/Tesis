@@ -3,20 +3,20 @@ import React, { useEffect }from 'react';
 import { HelperRedux } from '../../../@redux';
 /* Components */
 import { Table } from 'react-bootstrap';
-import { getPrecioCuotas } from '../../../domain/precioCuotas';
-import { Actions } from '../../../@redux/precioCuotas';
+import { getPrecioCarreras } from '../../../domain/precioCarreras';
+import { Actions } from '../../../@redux/precioCarrera';
 import HistoryPrecioCuoItem from './HistoryPrecioCuoItem';
 
 const HistoryPrecioCuoList = () => {
     const dispatch = HelperRedux.useDispatch()
-    const { precioCuotas } = HelperRedux.useSelector((state) => state.precioCuota)
+    const { precioCarreras } = HelperRedux.useSelector((state) => state.precioCarrera)
     
     useEffect(() => {
         getInitial();
     }, [])
     
     const getInitial = () => {
-        getPrecioCuotas().then(x => {dispatch(Actions.setPrecioCuotasStore(x.data.value))})
+        getPrecioCarreras().then(x => {dispatch(Actions.setPrecioCarrerasStore(x.data.value))})
         
     }
     return (
@@ -32,10 +32,10 @@ const HistoryPrecioCuoList = () => {
                 </thead>
                 <tbody>
                     {
-                        precioCuotas ?
-                        precioCuotas.map((precioCuo, index) =>
+                        precioCarreras ?
+                        precioCarreras.map((precioCarr, index) =>
                                 <HistoryPrecioCuoItem
-                                    precioCuotas={precioCuo}
+                                     precioCarreras={precioCarr}
                                     key={index}
                                 />
                             )

@@ -15,8 +15,8 @@ import { getAlumnos } from '../../../domain/alumnos';
 
 import { Actions } from '../../../@redux/cuotas';
 import { Actions as ActionsAlumno } from '../../../@redux/alumno'
-import { Actions as ActionsPrecioCuota } from '../../../@redux/precioCuotas';
-import { getPrecioCuotas } from '../../../domain/precioCuotas';
+import { Actions as ActionsPrecioCuota } from '../../../@redux/precioCarrera';
+import { getPrecioCarreras } from '../../../domain/precioCarreras';
 
 const ModalAddCuota = () => {
   const dispatch = HelperRedux.useDispatch()
@@ -32,7 +32,7 @@ const ModalAddCuota = () => {
     const [showModal, setShowModal] = useState(false);
     const [clearModal, setClearModal] = useState(false);
     
-    const { alumnos, precioCuota } = HelperRedux.useSelector((state) => state)
+    const { alumnos, precioCarrera } = HelperRedux.useSelector((state) => state)
   
     React.useEffect(() => {
         const onError = () => alert('Se produjo un erorr.')
@@ -41,8 +41,8 @@ const ModalAddCuota = () => {
         })
         .catch(onError)
 
-        getPrecioCuotas().then(x => {
-            dispatch(ActionsPrecioCuota.setPrecioCuotasStore(x.data.value))
+        getPrecioCarreras().then(x => {
+            dispatch(ActionsPrecioCuota.setPrecioCarrerasStore(x.data.value))
         })
         .catch(onError)
 
@@ -151,7 +151,7 @@ const ModalAddCuota = () => {
                     onFocus={() => setErrorMsg(null)}
                 >
                     <option key={`option-precio-cuota-0`} value={0}>Seleccione...</option>
-                    {precioCuota.precioCuotas.map(x => <option key={`option-precio-cuto-${x.id}`} value={x.id}>{`${x.id} - ${x.monto} $`}</option>)}
+                    {precioCarrera.precioCarreras.map(x => <option key={`option-precio-cuto-${x.id}`} value={x.id}>{`${x.id} - ${x.monto} $`}</option>)}
                 </Form.Control>
             </Form.Group>
             <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>

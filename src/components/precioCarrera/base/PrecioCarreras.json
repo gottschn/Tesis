@@ -1,0 +1,20 @@
+{
+    "precioCarreras": [
+        {
+            "field": "id",
+            "name": "Codigo"
+        },
+        {
+            "field": "monto",
+            "name": "Monto"
+        },
+        {
+            "field": "fecha",
+            "name": "Fecha"
+        },
+        {
+            "field": "carrera",
+            "name": " Carrera"
+        }
+    ]
+}

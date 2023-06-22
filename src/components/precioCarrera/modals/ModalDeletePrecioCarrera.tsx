@@ -3,12 +3,12 @@ import { Modal, Button } from 'react-bootstrap';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { deletePrecioCuotas } from '../../../domain/precioCuotas';
+import { deletePrecioCarreras } from '../../../domain/precioCarreras';
 import { useDispatch } from 'react-redux';
-import { Actions } from '../../../@redux/precioCuotas';
-import { PrecioCuotaProps } from '../../../@redux/precioCuotas/types';
+import { Actions } from '../../../@redux/precioCarrera';
+import { PrecioCarreraProps } from '../../../@redux/precioCarrera/types';
 
-const ModalDeletePrecioCuota:React.FC<{precioCuota:PrecioCuotaProps}> = ({...props}) => {
+const ModalDeletePrecioCarrera:React.FC<{precioCuota:PrecioCarreraProps}> = ({...props}) => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
 
@@ -21,8 +21,8 @@ const ModalDeletePrecioCuota:React.FC<{precioCuota:PrecioCuotaProps}> = ({...pro
       };
 
       const handleConfirmDeleteModal = () => {
-        deletePrecioCuotas(props.precioCuota.id).then(() => {
-            dispatch(Actions.deletePrecioCuotas(props.precioCuota))
+        deletePrecioCarreras(props.precioCuota.id).then(() => {
+            dispatch(Actions.deletePrecioCarreras(props.precioCuota))
         })
         .catch(error => console.log(error))
         .finally(() => handleCloseDeleteModal())
@@ -66,4 +66,4 @@ const ModalDeletePrecioCuota:React.FC<{precioCuota:PrecioCuotaProps}> = ({...pro
     );
 };
 
-export default ModalDeletePrecioCuota;
+export default ModalDeletePrecioCarrera;

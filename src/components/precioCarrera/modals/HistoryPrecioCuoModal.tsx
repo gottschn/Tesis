@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { PrecioCuotaProps } from '../../../@redux/precioCuotas/types';
-import moment from 'moment';
-import PrecioCuoList from '../base/PrecioCuoList';
+import { PrecioCarreraProps } from '../../../@redux/precioCarrera/types';
 import HistoryPrecioCuoList from '../base/HistoryPrecioCuoList';
 
 
-const HistoryPrecioCuoModal:React.FC<{precioCuota:PrecioCuotaProps}> = ({...props}) => {
+const HistoryPrecioCuoModal:React.FC<{precioCuota:PrecioCarreraProps}> = ({...props}) => {
 
     const [showModal, setShowModal] = useState(false);
-	const Date = moment(props.precioCuota.fecha).format('DD-MM-YYYY');
+	  //const Date = moment(props.precioCuota.fecha).format('DD-MM-YYYY');
     const handleOpenModal = () => {
         setShowModal(true);
       };

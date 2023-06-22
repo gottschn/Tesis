@@ -1,12 +1,12 @@
 import React from 'react';
-import PrecioCuoList from '../../components/preciocuota/base/PrecioCuoList';
 import '../../app/components/GlobalStyles/css/basePage.css'
+import PrecioCarreraList from '../../components/precioCarrera/base/PrecioCarreraList';
 
 export const PrecioCarrerasPage = () => {
   return (
     <>
         <div className='app'>
-            <PrecioCuoList />
+            <PrecioCarreraList />
         </div>
     </>
 

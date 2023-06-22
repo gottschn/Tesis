@@ -5,8 +5,8 @@ import ModalEditCuota from '../modals/ModalEditCuota';
 import ModalDeleteCuota from '../modals/ModalDeleteCuota';
 const CuotaItem:React.FC<{cuotas:CuotaProps}> = ({...props}) => {
 
-    const { precioCuotas } = HelperRedux.useSelector((state) => state.precioCuota)
-    const precioCuotaActual = precioCuotas.find((precioCuota) => precioCuota.id === props.cuotas.precioCuotaId);
+    const { precioCarreras } = HelperRedux.useSelector((state) => state.precioCarrera)
+    const precioCuotaActual = precioCarreras.find((precioCarrera) => precioCarrera.id === props.cuotas.precioCuotaId);
     const monto = precioCuotaActual ? precioCuotaActual.monto : "";
 
     console.log(monto,"a")

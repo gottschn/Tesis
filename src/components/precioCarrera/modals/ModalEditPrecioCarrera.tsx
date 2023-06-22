@@ -4,13 +4,13 @@ import React from 'react';
 import { HelperRedux } from "../../../@redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { PrecioCuotaProps } from "../../../@redux/precioCuotas/types";
-import { updatePrecioCuotas } from "../../../domain/precioCuotas";
-import { Actions } from "../../../@redux/precioCuotas";
+import { PrecioCarreraProps } from "../../../@redux/precioCarrera/types";
+import { updatePrecioCarreras } from "../../../domain/precioCarreras";
+import { Actions } from "../../../@redux/precioCarrera";
 
-const ModalEditPrecioCuota:React.FC<{precioCuota:PrecioCuotaProps}> = ({...props}) => {
+const ModalEditPrecioCarrera:React.FC<{precioCuota:PrecioCarreraProps}> = ({...props}) => {
     
-    const [form, setForm] = useState<PrecioCuotaProps>({
+    const [form, setForm] = useState<PrecioCarreraProps>({
         id: props.precioCuota.id,
         monto: props.precioCuota.monto,
         fecha: props.precioCuota.fecha,
@@ -47,8 +47,8 @@ const ModalEditPrecioCuota:React.FC<{precioCuota:PrecioCuotaProps}> = ({...props
         }
        
         setErrorMsg(null);
-        updatePrecioCuotas(form.id, form.monto,form.carrera).then((x) => {
-          dispatch(Actions.updatePrecioCuotas({...form}, form.id));
+        updatePrecioCarreras(form.id, form.monto,form.carrera).then((x) => {
+          dispatch(Actions.updatePrecioCarreras({...form}, form.id));
         })
         
         .catch(error => {console.log(error)})
@@ -130,4 +130,4 @@ const ModalEditPrecioCuota:React.FC<{precioCuota:PrecioCuotaProps}> = ({...props
     );
 };
 
-export default ModalEditPrecioCuota;
+export default ModalEditPrecioCarrera;
