@@ -1,5 +1,5 @@
 // Aca obtenes los get/post/put/delete
-import { TypeActions } from "./types"
+import { PagoCuotaFilter, TypeActions } from "./types"
 
 const getStart = () => ({
     type: TypeActions.GET_START
@@ -9,10 +9,10 @@ const getComplete = () => ({
 })
 
 const getPagoCuotas = (
-    monto: number,
-    fechaPago: Date,
-    porcPago: number,
-    cuotaId: number,
+    monto: number | string,
+    fechaPago: Date | string,
+    porcPago: number | string,
+    cuotaId: number | string,
     
 ) => ({
     type: TypeActions.GET_PAGO_CUOTAS,
@@ -43,6 +43,14 @@ const deletePagoCuotas = ( data: any ) => ({
     data
 })
 
+const setPagoCuotasFilterStore = ( data: PagoCuotaFilter = {
+    monto: '',
+    cuotaid: '',
+}) => ({
+    type: TypeActions.SET_PAGO_CUOTAS_FILTER_STORE,
+    data
+})
+
 
 export const Actions = {
     getStart,
@@ -51,5 +59,6 @@ export const Actions = {
     setPagoCuotasStore,
     createPagoCuotas,
     updatePagoCuotas,
-    deletePagoCuotas
+    deletePagoCuotas,
+    setPagoCuotasFilterStore
 }

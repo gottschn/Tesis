@@ -4,6 +4,10 @@ const initialState: StateProps = {
     isLoading: false,
     pagoCuotas: [],
     cuotas: [],
+    filter: {
+        monto: '',
+        cuotaid: '',
+    }
 
 }
 
