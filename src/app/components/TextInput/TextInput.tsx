@@ -10,7 +10,6 @@ const TextInput: React.FC<TextInputProps> = ({ type = 'text', ...props}) => {
     return(
         <div className='mb-4'>
             <TextField
-                data-testid={props.dataTestId}
                 type={type}
                 {...props}
             />

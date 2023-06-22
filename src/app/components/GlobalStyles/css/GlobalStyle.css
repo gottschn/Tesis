@@ -54,3 +54,12 @@
     display: flex;
     justify-content: end;
 }
+
+.modalMain {
+    display: flex;
+   justify-content: space-between;
+}
+
+.modalMargin {
+    margin: 10px !important;
+}
