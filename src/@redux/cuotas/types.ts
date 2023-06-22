@@ -1,5 +1,5 @@
 import { AlumnoProps } from "../alumno/types";
-import { PrecioCuotaProps } from "../precioCuotas/types";
+import { PrecioCarreraProps } from "../precioCarrera/types";
 
 const TypeActions = {
     GET_START: '_GET_START',
@@ -15,7 +15,7 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     cuotas: CuotaProps[];
-    precioCuotas: PrecioCuotaProps [];
+    precioCuotas: PrecioCarreraProps [];
     alumnos?: AlumnoProps [];
 }
 

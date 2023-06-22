@@ -2,7 +2,11 @@ import { StateProps, TypeActions } from "./types";
 
 const initialState: StateProps = {
     isLoading: false,
-    precioCuotas: [],
+    precioCarreras: [],
+    filter: {
+        carrera: '',
+        monto: '',
+    }
 
 }
 
@@ -21,36 +25,36 @@ const reducer = (state = initialState, action: any = {} ) => {
                 isLoading: true
             }
             break;
-            case TypeActions.GET_PRECIO_CUOTAS:
+            case TypeActions.GET_PRECIO_CARRERAS:
             nextState = {
                 ...state,
-                precioCuotas: []
+                precioCarreras: []
             }
             break;
-        case TypeActions.SET_PRECIO_CUOTAS_STORE:
+        case TypeActions.SET_PRECIO_CARRERAS_STORE:
             nextState = {
                 ...state,
-                precioCuotas: action.data
+                precioCarreras: action.data
             }
             break;
-            case TypeActions.CREATE_PRECIO_CUOTAS:
+            case TypeActions.CREATE_PRECIO_CARRERAS:
             nextState = {
                 ...state,
-                precioCuotas: [...state.precioCuotas, action.data]
+                precioCarreras: [...state.precioCarreras, action.data]
             }
             break;
-        case TypeActions.UPDATE_PRECIO_CUOTAS:
+        case TypeActions.UPDATE_PRECIO_CARRERAS:
             nextState = {
                 ...state,
-                precioCuotas: state.precioCuotas.map((precioCuota) =>
+                precioCarreras: state.precioCarreras.map((precioCuota) =>
                 precioCuota.id === action.id ? action.data : precioCuota
                 )
             }
             break;
-        case TypeActions.DELETE_PRECIO_CUOTAS:
+        case TypeActions.DELETE_PRECIO_CARRERAS:
             nextState = {
                 ...state,
-                precioCuotas: state.precioCuotas.filter((precioCuota) => precioCuota.id !== action.data.id),
+                precioCarreras: state.precioCarreras.filter((precioCarrera) => precioCarrera.id !== action.data.id),
             }
             break;
         default:
