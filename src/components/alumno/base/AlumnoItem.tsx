@@ -1,7 +1,4 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPen, faI } from "@fortawesome/free-solid-svg-icons";
+/* import React from 'react';
 import { AlumnoProps } from '../../../@redux/alumno/types';
 import moment from 'moment';
 import ModalEditAlumno from '../modals/ModalEditAlumno';
@@ -34,4 +31,4 @@ const AlumnoItem:React.FC<{alumnos:AlumnoProps}> = ({...props}) => {
     );
 };
 
-export default AlumnoItem;
+export default AlumnoItem; */

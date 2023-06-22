@@ -12,13 +12,12 @@ import { AlumnoProps } from '../../../@redux/alumno/types';
 import { Actions as ActionsCarrera } from '../../../@redux/carreras';
 
 import '../../../css/entities/carrera/carrera.css';
-import '../../../app/components/GlobalStyles/css/GlobalStyle.css'
 import { Button } from '@mui/material';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 
 let newDate = new Date()
 
-const ModalAddAlumno = () => {
+const ModalAddAlumnoMasivo = () => {
 
     const [form, setForm] = useState<AlumnoProps>({
         id: 0,
@@ -94,19 +93,18 @@ const ModalAddAlumno = () => {
     return (
         <>
             <Button
-                className='modalMargin'
                 size='small'
                 variant="contained"
                 color="success"
                 onClick={(handleOpenModal)}
             >
-                <AddCircleIcon />
-                <span>Agregar Alumno</span>
+                <LibraryAddIcon />
+                <span>Importacion Masiva</span>
             </Button>
 
             <Modal
                 show={showModal}
-                size="lg"
+                size="sm"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
@@ -137,86 +135,6 @@ const ModalAddAlumno = () => {
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Dni</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Dni del alumno"
-                                name="dni"
-                                value={dni}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Legajo</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Legajo del alumno"
-                                name="legajo"
-                                value={legajo}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Direccion</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Direccion del Alumno"
-                                name="direccion"
-                                value={direccion}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Mail</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Mail del alumno"
-                                name="mail"
-                                value={mail}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Porc. de Beca</Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Porc. de Beca"
-                                name="porcBeca"
-                                value={porcBeca}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Telefono</Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Telefono"
-                                name="telefono"
-                                value={telefono}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Carrera</Form.Label>
-                            <Form.Control
-                                as={'select'}
-                                multiple={false}
-                                name="carrerasId"
-                                value={carrerasId}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            >
-                                <option key={`option-carera-0`} value={0}>Seleccione...</option>
-                                {carreras.carreras.map(x => <option key={`option-carera-${x.id}`} value={x.id}>{x.descripcion}</option>)}
-                            </Form.Control>
-                        </Form.Group>
                         <div>
                             {errorMsg && (<p className="error-msg">{errorMsg}</p>)}
                         </div>
@@ -235,4 +153,4 @@ const ModalAddAlumno = () => {
     );
 };
 
-export default ModalAddAlumno;
+export default ModalAddAlumnoMasivo;

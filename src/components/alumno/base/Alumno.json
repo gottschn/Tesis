@@ -1,0 +1,44 @@
+{
+    "alumnos": [
+        {
+            "field": "id",
+            "name": "Id"
+        },
+        {
+            "field": "nombre",
+            "name": "Nombre"
+        },
+        {
+            "field": "apellido",
+            "name": "Apellido"
+        },
+        {
+            "field": "dni",
+            "name": "Dni"
+        },
+        {
+            "field": "direccion",
+            "name": "Direccion"
+        },
+        {
+            "field": "telefono",
+            "name": "Telefono"
+        },
+        {
+            "field": "mail",
+            "name": "Mail"
+        },
+        {
+            "field": "porcBeca",
+            "name": "PorcBeca"
+        },
+        {
+            "field": "fechaIngreso",
+            "name": "Fecha"
+        },
+        {
+            "field": "legajo",
+            "name": "Legajo"
+        }
+    ]
+}
