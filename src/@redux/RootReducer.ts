@@ -6,6 +6,10 @@ import { Reducer as AlumnosReducer }    from "./alumno"
 import { Reducer as CuotasReducer }    from "./cuotas"
 import { Reducer as PagoCuotasReducer }    from "./PagoCuota"
 import { Reducer as ReducerAuth } from './Auth'
+import { Reducer as ReducerCiudades } from './ciudad'
+import { Reducer as ReducerExtensiones } from './extension'
+ /* import { Reducer as ReducerUsuarios } from './usuario'
+import { Reducer as ReducerEmpleados } from './empleado' */ 
 
 const RootReducer = combineReducers({
 
@@ -15,6 +19,10 @@ const RootReducer = combineReducers({
     cuotas: CuotasReducer,
     pagoCuotas: PagoCuotasReducer,
     auth: ReducerAuth,
+    ciudades: ReducerCiudades,
+    extensiones: ReducerExtensiones,
+    /* usuarios: ReducerUsuarios,
+    empleados: ReducerEmpleados, */ 
 
 })
 

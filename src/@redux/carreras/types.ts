@@ -21,7 +21,8 @@ interface CarrerasProps {
     id: number;
     descripcion: string;
     cantCuotas: number;
-    precioCuo: number;
+    precioCarrera: number;
+    fecha: Date | string;
 
 }
 
