@@ -1,0 +1,12 @@
+{
+    "ciudades": [
+        {
+            "field": "id",
+            "name": "Codigo"
+        },
+        {
+            "field": "descripcion",
+            "name": "Nombre"
+        }
+    ]
+}
