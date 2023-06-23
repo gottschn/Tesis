@@ -19,12 +19,23 @@ const Header = () => {
                 <img src={UTNJPG} alt="Logo" />
                 <Nav className="me-auto nav nav-pills">
                     <Nav.Link  onClick={() => goToPage('/home')}>Home</Nav.Link>
-                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/alumnos')}>Alumnos</Nav.Link>
-                    <Nav.Link className={({isActive}) => `nav-link active ${ isActive ? 'active':''}`} onClick={() => goToPage('/carreras')}>Carreras</Nav.Link>
-                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/preciocarrera')}>Precio Carrera</Nav.Link>
-                  {/*   <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/cuota')}>Cuotas</Nav.Link> */}
-                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/pago')}>Pago</Nav.Link>
-                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} onClick={() => goToPage('/usuarios')}>Usuarios</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`}
+                     onClick={() => goToPage('/alumnos')}>Alumnos</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-link active ${ isActive ? 'active':''}`} 
+                    onClick={() => goToPage('/carreras')}>Carreras</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`}
+                     onClick={() => goToPage('/preciocarrera')}>Precio Carreras</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`}
+                     onClick={() => goToPage('/pago')}>Pagos</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`}
+                     onClick={() => goToPage('/ciudad')}>Ciudades</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`}
+                     onClick={() => goToPage('/extension')}>Extensiones</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} 
+                    onClick={() => goToPage('/usuarios')}>Usuarios</Nav.Link>
+                    <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`}
+                     onClick={() => goToPage('/empleados')}>Empleados</Nav.Link>
+                    
                 </Nav>
             </Navbar>
         </>

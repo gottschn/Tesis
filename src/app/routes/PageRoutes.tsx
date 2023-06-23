@@ -1,8 +1,14 @@
 import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Home, AlumnosPage, CarrerasPage, PagoCuotasPage, PagoPage, PrecioCarrerasPage } from '../pages'
+/* Components */
 import Footer from '../components/GlobalStyles/Footer'
 import HeaderOld from '../components/GlobalStyles/HeaderOld'
+/* Pages */
+import {
+    Home, AlumnosPage, CarrerasPage, PagoCuotasPage,
+    PagoPage, PrecioCarrerasPage, CiudadesPage,
+    UsuariosPage, EmpleadosPage, ExtensionesPage
+} from '../pages'
 
 export const PageRoutes = () => {
     return (
@@ -11,12 +17,15 @@ export const PageRoutes = () => {
             <div>
                 <Routes>
                     <Route path='/home' element={<Home />} />
-                    <Route path='/carreras' element={<CarrerasPage/>} />
+                    <Route path='/carreras' element={<CarrerasPage />} />
                     <Route path='/alumnos' element={<AlumnosPage />} />
                     <Route path='/cuota' element={<PagoCuotasPage />} />
                     <Route path='/pago' element={<PagoPage />} />
                     <Route path='/preciocarrera' element={<PrecioCarrerasPage />} />
-
+                    <Route path='/ciudad' element={<CiudadesPage />} />
+                    <Route path='/usuarios' element={<UsuariosPage />} />
+                    <Route path='/empleados' element={<EmpleadosPage />} />
+                    <Route path='/extension' element={<ExtensionesPage />} />
 
                     <Route path="/" element={<Navigate to="/home" />} />
                 </Routes>
