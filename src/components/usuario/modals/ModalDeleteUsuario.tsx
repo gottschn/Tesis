@@ -2,14 +2,14 @@ import React from 'react';
 import {  useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { Actions } from '../../../@redux/ciudad';
-import { CiudadesProps } from '../../../@redux/ciudad/types';
+import { UsuarioProps } from '../../../@redux/usuario/types';
+import { Actions } from '../../../@redux/usuario/actions';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { deleteCiudades } from '../../../domain/ciudades';
+import { deleteUsuarios } from '../../../domain/usuarios';
 
-const ModalDeleteCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
+const ModalDeleteUsuario:React.FC<{usuario:UsuarioProps}> = ({...props}) => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
 
@@ -22,8 +22,8 @@ const ModalDeleteCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
       };
 
       const handleConfirmDeleteModal = () => {
-        deleteCiudades(props.ciudad.id).then(() => {
-            dispatch(Actions.deleteCiudades(props.ciudad))
+        deleteUsuarios(props.usuario.id).then(() => {
+            dispatch(Actions.deleteUsuarios(props.usuario))
         })
         .catch(error => console.log(error))
         .finally(() => handleCloseDeleteModal())
@@ -67,4 +67,4 @@ const ModalDeleteCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
     );
 };
 
-export default ModalDeleteCiudad;
+export default ModalDeleteUsuario;

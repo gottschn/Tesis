@@ -1,0 +1,25 @@
+{
+    "usuarios": [
+        {
+            "field": "id",
+            "name": "Codigo"
+        },
+        {
+            "field": "nombre",
+            "name": "Nombre"
+        }
+        ,
+        {
+            "field": "password",
+            "name": "Contraseña"
+        },
+        {
+            "field": "rol",
+            "name": "Rol"
+        },
+        {
+            "field": "personaId",
+            "name": "Persona ID"
+        }
+    ]
+}
