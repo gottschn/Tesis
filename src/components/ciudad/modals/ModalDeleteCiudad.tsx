@@ -2,12 +2,13 @@ import React from 'react';
 import {  useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { Actions } from '../../../@redux/carreras';
+import { Actions } from '../../../@redux/ciudad';
 import { CiudadesProps } from '../../../@redux/ciudad/types';
 
-import { deleteCarreras } from '../../../domain/carreras';
+import {  } from '../../../domain/extensiones';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { deleteCiudades } from '../../../domain/ciudades';
 
 const ModalDeleteCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
     const dispatch = useDispatch();
@@ -22,8 +23,8 @@ const ModalDeleteCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
       };
 
       const handleConfirmDeleteModal = () => {
-        deleteCarreras(props.ciudad.id).then(() => {
-            dispatch(Actions.deleteCarreras(props.ciudad))
+        deleteCiudades(props.ciudad.id).then(() => {
+            dispatch(Actions.deleteCiudades(props.ciudad))
         })
         .catch(error => console.log(error))
         .finally(() => handleCloseDeleteModal())
