@@ -1,20 +1,36 @@
 {
     "alumnos": [
         {
-            "field": "id",
-            "name": "Id"
+            "field": "legajo",
+            "name": "Legajo"
         },
         {
-            "field": "nombre",
-            "name": "Nombre"
+            "field": "apynom",
+            "name": "Nombre y Apellido"
         },
         {
-            "field": "apellido",
-            "name": "Apellido"
+            "field": "carreraId",
+            "name": "Codigo de Carrera"
         },
         {
-            "field": "dni",
-            "name": "Dni"
+            "field": "carrera",
+            "name": "Carrera"
+        },
+        {
+            "field": "pagos",
+            "name": "Pagos"
+        },
+        {
+            "field": "tipoDoc",
+            "name": "Tipo Doc"
+        },
+        {
+            "field": "nroDoc",
+            "name": "Nro Doc"
+        },
+        {
+            "field": "fechaNacimiento",
+            "name": "Fecha de Nacimiento"
         },
         {
             "field": "direccion",
@@ -29,16 +45,32 @@
             "name": "Mail"
         },
         {
-            "field": "porcBeca",
-            "name": "PorcBeca"
+            "field": "extensionId",
+            "name": "Extension ID"
+        },
+        {
+            "field": "extension",
+            "name": "Extension"
+        },
+        {
+            "field": "ciudadId",
+            "name": "Ciudad ID"
+        },
+        {
+            "field": "ciudad",
+            "name": "Ciudad"
+        },
+        {
+            "field": "codigoPostal",
+            "name": "Codigo Postal"
         },
         {
             "field": "fechaIngreso",
             "name": "Fecha"
         },
         {
-            "field": "legajo",
-            "name": "Legajo"
+            "field": "id",
+            "name": "Id del Alumno"
         }
     ]
 }

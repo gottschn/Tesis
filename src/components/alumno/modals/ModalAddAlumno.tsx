@@ -39,7 +39,7 @@ const ModalAddAlumno = () => {
     const dispatch = HelperRedux.useDispatch()
     const { alumnos, carreras } = HelperRedux.useSelector((state) => state)
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
+    const [clearModal, setClearModal] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
     const handleOpenModal = () => {
@@ -78,19 +78,36 @@ const ModalAddAlumno = () => {
 
     }, [])
 
+    const handlerClearFilter = () => {
+        setClearModal(true)
+        handleCloseModal()
+        /* setForm({
+            id: 0,
+            nombre: '',   
+        }) */
+        window.location.reload()
+    }
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
+        const { nombre, apellido, dni, legajo, direccion, mail, porcBeca, telefono, carrerasId} = form;
 
         setErrorMsg(null);
 
         createAlumno(form.nombre, form.apellido, form.dni, form.legajo, form.direccion,
             form.mail, form.porcBeca, form.telefono, form.carrerasId, form.fechaIngreso,).then((x) => {
-                dispatch(Actions.createAlumnos({ ...form, id: x.data.value }));
-            })
-            .catch(error => { console.log(error, "Error ?") })
-            .finally(() => { handleCloseModal() })
-    };
+                dispatch(Actions.createAlumnos({
+                    ...form,
+                     id: x.data.value 
+                    }));
+                    alert('Se Registro el Alumno con Exito.')
+        })
+            .catch(error => {
+                console.log('createAlumno', error)
 
+            })
+        .finally(() => handlerClearFilter())
+    };
     return (
         <>
             <Button
