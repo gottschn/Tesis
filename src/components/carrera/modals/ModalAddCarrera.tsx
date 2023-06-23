@@ -14,7 +14,8 @@ const ModalAddCarrera = () => {
         id: 0,
         descripcion: '',
         cantCuotas: 0,
-        precioCuo: 0,
+        precioCarrera: 0,
+        fecha: ''
     });
     const { descripcion, cantCuotas } = form;
 

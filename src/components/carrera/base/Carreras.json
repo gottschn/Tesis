@@ -13,12 +13,12 @@
             "name": "Cantidad de Cuotas"
         },
         {
-            "field": "precioCuo",
+            "field": "precioCarrera",
             "name": "Precio Carrera"
         },
         {
-            "field": "precioMatricula",
-            "name": "Precio Matricula"
+            "field": "fecha",
+            "name": "Fecha"
         }
     ]
 }

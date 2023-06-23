@@ -14,7 +14,8 @@ const ModalEditCarrera:React.FC<{carrera:CarrerasProps}> = ({...props}) => {
         id: props.carrera.id,
         descripcion: props.carrera.descripcion,
         cantCuotas: props.carrera.cantCuotas,
-        precioCuo: props.carrera.precioCuo,
+        precioCarrera: props.carrera.precioCarrera,
+        fecha: props.carrera.fecha,
       });
       const { descripcion, cantCuotas } = form;
 
