@@ -12,7 +12,9 @@ const HistoryPrecioCuoList = () => {
     const { precioCarreras } = HelperRedux.useSelector((state) => state.precioCarrera)
     
     useEffect(() => {
-        getInitial();
+        if (precioCarreras.length === 0) {
+            getInitial()
+        }
     }, [])
     
     const getInitial = () => {

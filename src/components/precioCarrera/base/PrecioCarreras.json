@@ -9,12 +9,16 @@
             "name": "Monto"
         },
         {
-            "field": "fecha",
-            "name": "Fecha"
+            "field": "carreraId",
+            "name": " Carrera"
+        } ,
+        {
+            "field": "matricula",
+            "name": "Matricula"
         },
         {
-            "field": "carrera",
-            "name": " Carrera"
+            "field": "fecha",
+            "name": "Fecha"
         }
     ]
 }
