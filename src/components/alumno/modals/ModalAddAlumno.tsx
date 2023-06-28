@@ -64,21 +64,21 @@ const ModalAddAlumno = () => {
         if (name === 'carrerasId') {
             setForm({
                 ...form,
-                [name]: [parseInt(value)],
+                [name]: parseInt(value),
             });
             return
         }
         if (name === 'ciudadId') {
             setForm({
                 ...form,
-                [name]: [parseInt(value)],
+                [name]: parseInt(value),
             });
             return
         }
         if (name === 'extensionId') {
             setForm({
                 ...form,
-                [name]: [parseInt(value)],
+                [name]: parseInt(value),
             });
             return
         }
@@ -86,7 +86,7 @@ const ModalAddAlumno = () => {
         if (name === 'fechaIngreso' || name === 'fechaNacimiento') {
             setForm({
                 ...form,
-                [name]: [moment(value, 'YYYY-MM-DD').toDate()],
+                [name]: moment(value, 'YYYY-MM-DD').toDate()
             });
             return
         }

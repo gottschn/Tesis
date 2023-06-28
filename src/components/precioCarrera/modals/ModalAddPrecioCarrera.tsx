@@ -72,7 +72,7 @@ const ModalAddPrecioCarrera = () => {
         }
 
         setErrorMsg(null);
-        createPrecioCarreras(form.monto,form.matricula, form.fecha, form.carrera).then((x) => {
+        createPrecioCarreras(form.monto,form.matricula, new Date(), form.carrera).then((x) => {
             dispatch(Actions.createPrecioCarreras({ ...form, id: x.data.value }));
         })
             .catch(error => { console.log(error) })
@@ -130,7 +130,7 @@ const ModalAddPrecioCarrera = () => {
                                 type="date"
                                 placeholder="Fecha"
                                 name="fecha"
-                                value={form.fecha}
+                                // value={form.fecha}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />

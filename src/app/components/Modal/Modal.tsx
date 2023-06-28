@@ -13,12 +13,12 @@ const Modal: React.FC<ModalProps> = ({ onClosed = () => ({}), ...props}) => {
                 </ModalDefault.Header>
                 
                 <ModalDefault.Body>
-                {props.children}
+                    {props.children}
                 </ModalDefault.Body>
 
                 <ModalDefault.Footer>
+                    
                 </ModalDefault.Footer>
-            
             </>
         </ModalDefault>
     )
