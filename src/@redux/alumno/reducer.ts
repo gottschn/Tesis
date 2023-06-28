@@ -56,6 +56,12 @@ const reducer = (state = initialState, action: any = {} ) => {
                 alumnos: state.alumnos.filter((alumno) => alumno.id !== action.data.id),
             }
             break;
+            case TypeActions.CLEAN_ALUMNOS_STORE:
+            nextState = {
+                ...state,
+                alumnos: [],
+            }
+            break;
         default:
             nextState = state
             break;

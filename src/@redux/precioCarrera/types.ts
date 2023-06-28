@@ -19,6 +19,7 @@ interface StateProps {
 interface PrecioCarreraProps {
     id: number;
     monto: number;
+    matricula: number;
     fecha: Date | string;
     carrera: number;
 

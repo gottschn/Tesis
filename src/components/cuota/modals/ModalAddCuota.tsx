@@ -138,7 +138,7 @@ const ModalAddCuota = () => {
                     onFocus={() => setErrorMsg(null)}
                 >
                     <option key={`option-carera-0`} value={0}>Seleccione...</option>
-                    {alumnos.alumnos.map(x => <option key={`option-alumno-${x.id}`} value={x.id}>{`${x.nombre} ${x.apellido}`}</option>)}
+                    {alumnos.alumnos.map(x => <option key={`option-alumno-${x.id}`} value={x.id}>{`${x.apynom}`}</option>)}
                 </Form.Control>
             </Form.Group>
             <Form.Group className="mb-3">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 
 
@@ -11,24 +11,36 @@ import DataGrid from '../../../app/components/DataGrid';
 import Columns from './Alumno.json';
 import ModalEditAlumno from '../modals/ModalEditAlumno';
 import ModalDeleteAlumno from '../modals/ModalDeleteAlumno';
-import ModalAddAlumnoMasivo from '../modals/ModalAddAlumnoMasivo';
 import AlumnoFilter from './AlumnoFilter';
 import '../../../app/components/GlobalStyles/css/GlobalStyle.css'
+import { Button } from '@mui/material';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import { useNavigate } from 'react-router-dom';
+import { current } from '@reduxjs/toolkit';
 
 const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
     const { alumnos } = HelperRedux.useSelector((state) => state.alumnos)
+    const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
 
     useEffect(() => {
         if (alumnos.length === 0)
             getInitial();
     }, [])
 
+    const handleRedirectMasive = () => {
+        navigate("/alumnosmasivo")
+     };
+
     const getInitial = () => {
         getAlumnos().then(x => { dispatch(Actions.setAlumnosStore(x.data.value)) })
 
     }
+
+
 
     return (
         <>
@@ -39,18 +51,30 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
                     </div>
 
                     <div className="">
-                            <ModalAddAlumno />
+                        <ModalAddAlumno />
 
-                            <ModalAddAlumnoMasivo />
-                        </div>
+                        <Button
+                            size='small'
+                            variant="contained"
+                            color="success"
+                            onClick={(handleRedirectMasive)}
+                        >
+                            <LibraryAddIcon />
+                            <span>Importacion Masiva</span>
+                        </Button>
+                    </div>
                 </div>
+
+                <ModalEditAlumno alumno={currentUser as AlumnoProps} />
 
                 <DataGrid
                     singlePagination={true}
-                    subTableName='details'
                     pageSize={10}
                     columns={Columns.alumnos}
-                    onClickEdit={(row) => { <ModalEditAlumno alumno={props.alumno} /> }}
+                    onClickEdit={(row) => {
+                        setCurrentUser(row)
+                        setShowModal(true)
+                    }}
                     onClickDelete={(row) => { <ModalDeleteAlumno alumno={props.alumno} /> }}
 
                     rows={alumnos.map(x => ({

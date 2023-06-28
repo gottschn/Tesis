@@ -20,8 +20,9 @@ const ExtensionList: React.FC<{ extension: ExtensionProps }> = ({ ...props }) =>
     const { extensiones } = HelperRedux.useSelector((state) => state.extensiones)
 
     useEffect(() => {
+        if (extensiones.length === 0) {
             getInitial()
-        
+        }
     }, [])
 
     const getInitial = () => {
@@ -45,8 +46,8 @@ const ExtensionList: React.FC<{ extension: ExtensionProps }> = ({ ...props }) =>
                     subTableName='details'
                     pageSize={10}
                     columns={Columns.extension}
-                     onClickEdit={(row) => { <ModalEditExtension extension={props.extension} /> }}
-                    onClickDelete={(row) => { <ModalDeleteExtension extension={props.extension} /> }} 
+                    onClickEdit={(row) => { <ModalEditExtension extension={props.extension} /> }}
+                    onClickDelete={(row) => { <ModalDeleteExtension extension={props.extension} /> }}
 
                     rows={extensiones.map(x => ({
                         ...x,

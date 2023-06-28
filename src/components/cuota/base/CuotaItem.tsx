@@ -14,7 +14,7 @@ const CuotaItem:React.FC<{cuotas:CuotaProps}> = ({...props}) => {
         <>
             <tr>
                 <td> {props.cuotas.numero} </td>
-                <td> {`${props.cuotas.alumnoId} - ${props.cuotas?.alumno?.nombre} ${props.cuotas?.alumno?.apellido}`} </td>
+                <td> {`${props.cuotas.alumnoId} - ${props.cuotas?.alumno?.apynom}`} </td>
                 <td>{`ID:${props.cuotas.precioCuotaId} $:${monto}`}</td>
                 <td className="text-center">
                         <ModalEditCuota cuota={props.cuotas}/>

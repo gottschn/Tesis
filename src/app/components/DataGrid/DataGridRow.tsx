@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { ReactNode, useRef } from 'react'
 import { DataGridColumnProps } from './types'
 import { PencilIcon, TrashIcon, PlusCircleIcon, NoEntryIcon } from '@primer/octicons-react'
 
@@ -94,7 +94,7 @@ const DataGridRow: React.FunctionComponent<{
                 {(canEdit || canDelete) && 
                     <td>
                         <div  style={{ display: 'flex' }}>
-                            { canEdit && 
+                            { canEdit &&
                                 <button 
                                     style={{ visibility: 'hidden' }}
                                     data-testid="btn-edit-row"
@@ -103,7 +103,7 @@ const DataGridRow: React.FunctionComponent<{
                                 >
                                     <PencilIcon fill="#6C9DFF" size={20} />
                                 </button>
-                            }
+                                }
 
                             { canDelete && 
                                 <button 

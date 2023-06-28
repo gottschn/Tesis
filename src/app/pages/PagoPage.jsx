@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PagoCuotaList from '../../components/pagoCuota/base/PagoCuotaList';
+import PagoCuotaList from '../../components/pagoCuota/base/PagoList';
 import '../../app/components/GlobalStyles/css/basePage.css'
 
 export const PagoPage = () => {

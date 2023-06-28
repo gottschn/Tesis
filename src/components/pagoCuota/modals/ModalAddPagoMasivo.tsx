@@ -19,21 +19,11 @@ let newDate = new Date()
 
 const ModalAddPagoMasivo = () => {
 
-    const [form, setForm] = useState<AlumnoProps>({
+   /*  const [form, setForm] = useState<AlumnoProps>({
         id: 0,
-        nombre: '',
-        apellido: '',
-        dni: '',
-        legajo: '',
-        direccion: '',
-        mail: '',
-        porcBeca: 0,
-        telefono: '',
-        carrerasId: [],
-        fechaIngreso: newDate,
-        carreras: []
-    });
-    const { id, nombre, apellido, dni, legajo, direccion, mail, porcBeca, telefono, carrerasId } = form;
+
+    }); */
+    /* const { id, nombre, apellido, dni, legajo, direccion, mail, porcBeca, telefono, carrerasId } = form; */
 
     const dispatch = HelperRedux.useDispatch()
     const { alumnos, carreras } = HelperRedux.useSelector((state) => state)
@@ -51,7 +41,7 @@ const ModalAddPagoMasivo = () => {
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
-
+/* 
         if (name === 'carrerasId') {
             setForm({
                 ...form,
@@ -62,7 +52,7 @@ const ModalAddPagoMasivo = () => {
         setForm({
             ...form,
             [name]: value,
-        });
+        }); */
     };
     useEffect(() => {
         if (showModal) {
@@ -72,22 +62,22 @@ const ModalAddPagoMasivo = () => {
         }
     }, [showModal])
     useEffect(() => {
-        const AlumnosModal = alumnos.alumnos.find((x) => x.id)
+        /* const AlumnosModal = alumnos.alumnos.find((x) => x.id)
         if (AlumnosModal) setForm(AlumnosModal)
-
+ */
     }, [])
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
         setErrorMsg(null);
-
+/* 
         createAlumno(form.nombre, form.apellido, form.dni, form.legajo, form.direccion,
             form.mail, form.porcBeca, form.telefono, form.carrerasId, form.fechaIngreso,).then((x) => {
                 dispatch(Actions.createAlumnos({ ...form, id: x.data.value }));
             })
             .catch(error => { console.log(error, "Error ?") })
-            .finally(() => { handleCloseModal() })
+            .finally(() => { handleCloseModal() }) */
     };
 
     return (
@@ -119,7 +109,7 @@ const ModalAddPagoMasivo = () => {
                                 type="text"
                                 placeholder="Nombre del alumno"
                                 name="nombre"
-                                value={nombre}
+                                /* value={nombre} */
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -130,7 +120,7 @@ const ModalAddPagoMasivo = () => {
                                 type="text"
                                 placeholder="Apellido del alumno"
                                 name="apellido"
-                                value={apellido}
+                                /* value={apellido} */
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />

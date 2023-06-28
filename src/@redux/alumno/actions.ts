@@ -1,5 +1,5 @@
 // Aca obtenes los get/post/put/delete
-import { AlumnosFilter, TypeActions } from "./types"
+import { AlumnoProps, AlumnosFilter, TypeActions } from "./types"
 
 const getStart = () => ({
     type: TypeActions.GET_START
@@ -9,30 +9,44 @@ const getComplete = () => ({
 })
 const getAlumnos = (
     id: number | string,
-    nombre: string,
-    apellido:string,
-    dni: string,
     legajo: string,
+    apynom: string,
+    tipoDoc: number | string,
+    nroDoc: string,
+    fechaNacimiento: Date | string,
+    fechaIngreso: Date | string,
     direccion: string,
-    mail: string,
-    porcBeca: number | string,
     telefono: string,
-    carreraId: number | string,
-    fechaIngreso: Date | string
+    mail: string,
+    extensionId: number | string,
+    extension: string,
+    ciudadId: number | string,
+    ciudad: string,
+    codigoPostal: number | string,
+    pagos: number | string,
+    carrerasId: number | string,
+    carreras: number | string,
     
 ) => ({
     type: TypeActions.GET_ALUMNOS,
     id,
-    nombre,
-    apellido,
-    dni,
     legajo,
-    direccion,
-    mail,
-    porcBeca,
-    telefono,
-    carreraId,
+    apynom,
+    tipoDoc,
+    nroDoc,
+    fechaNacimiento,
     fechaIngreso,
+    direccion,
+    telefono,
+    mail,
+    extensionId,
+    extension,
+    ciudadId,
+    ciudad,
+    codigoPostal,
+    pagos,
+    carrerasId,
+    carreras,
 })
 
 const setAlumnosStore = (data: any) => ({
@@ -64,6 +78,23 @@ const setFilterAlumnosStore = ( data: AlumnosFilter = {
     data
 })
 
+const addAlumnosMasivo = () => ({
+    type: TypeActions.ADD_ALUMNOS_MASSIVO
+})
+
+const confirmAlumnosMasivo= () => ({
+    type: TypeActions.CONFIRM_ALUMNOS_MASSIVO
+})
+
+const deleteAlumnosMasivo = (data: AlumnoProps[]) => ({
+    type: TypeActions.DELETE_ALUMNOS_MASSIVO,
+    data
+})
+
+const cleanAlumnosStore = () => ({
+    type: TypeActions.CLEAN_ALUMNOS_STORE,
+}) 
+
 
 export const Actions = {
     getStart,
@@ -73,5 +104,10 @@ export const Actions = {
     createAlumnos,
     updateAlumnos,
     deleteAlumnos,
-    setFilterAlumnosStore
+    setFilterAlumnosStore,
+    /* Masivo */
+    addAlumnosMasivo,
+    deleteAlumnosMasivo,
+    confirmAlumnosMasivo,
+    cleanAlumnosStore
 }

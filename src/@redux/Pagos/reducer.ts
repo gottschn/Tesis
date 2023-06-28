@@ -2,11 +2,10 @@ import { StateProps, TypeActions } from "./types";
 
 const initialState: StateProps = {
     isLoading: false,
-    pagoCuotas: [],
-    cuotas: [],
+    pagos: [],
+    alumnos: [],
     filter: {
-        monto: '',
-        cuotaid: '',
+        legajo: '',
     }
 
 }
@@ -26,36 +25,36 @@ const reducer = (state = initialState, action: any = {} ) => {
                 isLoading: true
             }
             break;
-            case TypeActions.GET_PAGO_CUOTAS:
+            case TypeActions.GET_PAGO:
             nextState = {
                 ...state,
-                pagoCuotas: []
+                pagos: []
             }
             break;
-        case TypeActions.SET_PAGO_CUOTAS_STORE:
+        case TypeActions.SET_PAGO_STORE:
             nextState = {
                 ...state,
-                pagoCuotas: action.data
+                pagos: action.data
             }
             break;
-            case TypeActions.CREATE_PAGO_CUOTAS:
+            case TypeActions.CREATE_PAGO:
             nextState = {
                 ...state,
-                pagoCuotas: [...state.pagoCuotas, action.data]
+                pagos: [...state.pagos, action.data]
             }
             break;
-        case TypeActions.UPDATE_PAGO_CUOTAS:
+        case TypeActions.UPDATE_PAGO:
             nextState = {
                 ...state,
-                pagoCuotas: state.pagoCuotas.map((pagoCuota) =>
-                pagoCuota.id === action.id ? action.data : pagoCuota
+                pagos: state.pagos.map((pago) =>
+                pago.id === action.id ? action.data : pago
                 )
             }
             break;
-        case TypeActions.DELETE_PAGO_CUOTAS:
+        case TypeActions.DELETE_PAGO:
             nextState = {
                 ...state,
-                pagoCuotas: state.pagoCuotas.filter((pagoCuota) => pagoCuota.id !== action.data.id),
+                pagos: state.pagos.filter((pago) => pago.id !== action.data.id),
             }
             break;
         default:

@@ -17,31 +17,47 @@ const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onC
 
     const dispatch = HelperRedux.useDispatch()
     const [id, setId] = useState('')
-    const [nombre, setNombre] = useState('')
-    const [apellido, setApellido] = useState('')
-    const [dni, setDni] = useState('')
+    const [apynom, setApynom] = useState('')
+    const [tipoDoc, setTipoDoc] = useState('')
+    const [nroDoc, setNroDoc] = useState('')
+    const [fechaNacimiento, setFechaNacimiento] = useState('')
+    const [fechaIngreso, setFechaIngreso] = useState('')
     const [direccion, setDireccion] = useState('')
     const [telefono, setTelefono] = useState('')
     const [mail, setMail] = useState('')
-    const [porcBeca, setPorcBeca] = useState('')
-    const [fechaIngreso, setFechaIngreso] = useState('')
+    const [extensionId, setExtensionId] = useState('')
+    const [extension, setExtension] = useState('')
+    const [ciudadId, setCiudadId] = useState('')
+    const [ciudad, setCiudad] = useState('')
+    const [codigoPostal, setCodigoPostal] = useState('')
+    const [pagos, setPagos] = useState('')
+    const [carrerasId, setCarrerasId] = useState('')
+    const [carreras, setCarreras] = useState('')
+
     const [legajo, setLegajo] = useState('')
-    const [carreraId, setCarreraId] = useState('')
+
 
     const handlerFilter = () => {
 
         dispatch(Actions.getAlumnos(
             id,
-            nombre,
-            apellido,
-            dni,
             legajo,
-            direccion,
-            mail,
-            porcBeca,
-            telefono,
-            carreraId,
+            apynom,
+            tipoDoc,
+            nroDoc,
+            fechaNacimiento,
             fechaIngreso,
+            direccion,
+            telefono,
+            mail,
+            extensionId,
+            extension,
+            ciudadId,
+            ciudad,
+            codigoPostal,
+            pagos,
+            carrerasId,
+            carreras,
         ))
 
         onClosed(true)
@@ -49,16 +65,22 @@ const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onC
 
     const handlerClearFilter = () => {
         setId('')
-        setNombre('')
-        setApellido('')
-        setDni('')
+        setApynom('')
+        setTipoDoc('')
+        setNroDoc('')
+        setFechaNacimiento('')
+        setFechaIngreso('')
         setDireccion('')
         setTelefono('')
         setMail('')
-        setPorcBeca('')
-        setFechaIngreso('')
-        setLegajo('')
-        setCarreraId('')
+        setExtensionId('')
+        setExtension('')
+        setCiudadId('')
+        setCiudad('')
+        setCodigoPostal('')
+        setPagos('')
+        setCarrerasId('')
+        setCarreras('')
 
         getAlumnos().then(x => { dispatch(Actions.setAlumnosStore(x.data.value)) })
         dispatch(Actions.setFilterAlumnosStore())

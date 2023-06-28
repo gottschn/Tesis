@@ -5,18 +5,21 @@ const getPrecioCarreras = () => {
     return instance.get(`/preciocarrera/ObtenerTodos`)
 }
 
-const createPrecioCarreras = (monto: number, fecha: Date, carreraId: number) => {
+const createPrecioCarreras = (monto: number, matricula: number, fecha: Date, carreraId: number) => {
     return instance.post(`/preciocarrera`,{
         monto,
+        matricula,
         fecha,
         carreraId
     })
 } 
 
-const updatePrecioCarreras = (id: number ,monto: number, carreraId: number) => {
+const updatePrecioCarreras = (id: number ,monto: number, matricula: number, fecha: Date, carreraId: number) => {
     return instance.put(`/preciocarrera`, {
         id,
         monto,
+        matricula,
+        fecha,
         carreraId
     })
 }

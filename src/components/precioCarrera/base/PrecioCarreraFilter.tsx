@@ -16,6 +16,7 @@ const PrecioCarreraFilter: React.FC<{ onClosed: (isActive: boolean) => void }> =
     const dispatch = HelperRedux.useDispatch()
     const [id, setId] = useState('')
     const [monto, setMonto] = useState('')
+    const [matricula, setMatricula] = useState('')
     const [fecha, setFecha] = useState('')
     const [carreraId, setCarreraId] = useState('')
 
@@ -23,6 +24,7 @@ const PrecioCarreraFilter: React.FC<{ onClosed: (isActive: boolean) => void }> =
 
         dispatch(Actions.getPrecioCarreras(
             monto,
+            matricula,
             fecha,
             carreraId
         ))

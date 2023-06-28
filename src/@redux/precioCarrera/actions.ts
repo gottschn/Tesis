@@ -10,12 +10,14 @@ const getComplete = () => ({
 
 const getPrecioCarreras = (
     monto: number | string,
+    matricula: number | string,
     fecha: string | Date,
     carreraId:string | number,
     
 ) => ({
     type: TypeActions.GET_PRECIO_CARRERAS,
     monto,
+    matricula,
     fecha,
     carreraId,
 })

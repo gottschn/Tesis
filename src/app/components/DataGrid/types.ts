@@ -32,8 +32,21 @@ interface DataPaginationProps {
     totalPage: number;
 }
 
+interface DataGridSingleProps {
+    columns: DataGridColumnProps[];
+    rows: any[];
+    canSelect?: boolean;
+    ref: React.MutableRefObject<DataGridRefProps>;
+}
+
+interface DataGridRefProps {
+    onGetSelection: () => any[];
+}
+
 export {
     DataGridProps,
     DataGridColumnProps,
-    DataPaginationProps
+    DataPaginationProps,
+    DataGridSingleProps,
+    DataGridRefProps,
 }

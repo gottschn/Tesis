@@ -6,33 +6,44 @@ const getAlumnos = () => {
 }
 
 
- const createAlumno = (nombre:string, apellido: string, dni: string, legajo: string, direccion: string,  mail: string, porcBeca:number, telefono: string, carrerasId: [], fechaIngreso: Date ) => {
+ const createAlumno = (legajo:string, apynom: string, tipoDoc: number, nroDoc: string, 
+    fechaNacimiento: Date,  direccion: string, telefono:string, mail: string, fechaIngreso: Date,
+     carreraId: [], ciudadId: number, extensionId: number, codigoPostal: number ) => {
     return instance.post(`/alumno`,{
-        nombre,
-        apellido,
-        dni,
         legajo,
+        apynom,
+        tipoDoc,
+        nroDoc,
+        fechaNacimiento,
         direccion,
-        mail,
-        porcBeca,
         telefono,
-        carrerasId,
-        fechaIngreso
+        mail,
+        fechaIngreso,
+        carreraId,
+        ciudadId,
+        extensionId,
+        codigoPostal,
     })
 }
 
-const updateAlumno = (id:number, nombre:string, apellido: string, dni: string, legajo: string, direccion: string,  mail: string, porcBeca:number, telefono: string, carrerasId: [], ) => {
+const updateAlumno = (id:number,legajo:string, apynom: string, tipoDoc: number, nroDoc: string, 
+    fechaNacimiento: Date,  direccion: string, telefono:string, mail: string, fechaIngreso: Date,
+     carreraId: [], ciudadId: number, extensionId: number, codigoPostal: number) => {
     return instance.put(`/alumno`,{
         id,
-        nombre,
-        apellido,
-        dni,
         legajo,
+        apynom,
+        tipoDoc,
+        nroDoc,
+        fechaNacimiento,
         direccion,
-        mail,
-        porcBeca,
         telefono,
-        carrerasId
+        mail,
+        fechaIngreso,
+        carreraId,
+        ciudadId,
+        extensionId,
+        codigoPostal,
     })
 }
 
@@ -40,9 +51,21 @@ const deleteAlumno = (id: number) => {
     return instance.delete(`/alumno/${id}`)
 } 
 
+const addAlumnosMassivo = () => {
+    return instance.post(`/alumno/cargamasiva`)
+}
+
+/* const deleteAlumnosMassivo = (data: AlumnoProps[]) => {
+    return instance.delete('/alumno/cargamasiva', data[] )
+} */
+
+
 export {
     getAlumnos,
     createAlumno,
     updateAlumno,
-    deleteAlumno
+    deleteAlumno,
+    /* Masivo */
+    addAlumnosMassivo,
+    /* deleteAlumnosMassivo */
 }

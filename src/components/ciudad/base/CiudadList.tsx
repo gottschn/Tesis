@@ -22,7 +22,9 @@ const CiudadList: React.FC<{ ciudad: CiudadesProps }> = ({ ...props }) => {
     const { ciudades } = HelperRedux.useSelector((state) => state.ciudades)
 
     useEffect(() => {
+        if (ciudades.length === 0) {
             getInitial()
+        }
     }, [])
 
     const getInitial = () => {
@@ -46,8 +48,8 @@ const CiudadList: React.FC<{ ciudad: CiudadesProps }> = ({ ...props }) => {
                     subTableName='details'
                     pageSize={10}
                     columns={Columns.ciudades}
-                     onClickEdit={(row) => { <ModalEditCiudad ciudad={props.ciudad} /> }}
-                    onClickDelete={(row) => { <ModalDeleteCiudad ciudad={props.ciudad} /> }} 
+                    onClickEdit={(row) => { <ModalEditCiudad ciudad={props.ciudad} /> }}
+                    onClickDelete={(row) => { <ModalDeleteCiudad ciudad={props.ciudad} /> }}
 
                     rows={ciudades.map(x => ({
                         ...x,

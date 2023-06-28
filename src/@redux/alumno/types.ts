@@ -8,7 +8,11 @@ const TypeActions = {
     UPDATE_ALUMNOS: '_UDATE_ALUMNOS',
     DELETE_ALUMNOS: '_DELETE_ALUMNOS',
     SET_ALUMNO_FILTER_STORE: `_SET_ALUMNO_FILTER_STORE`,
-    
+    /* Masivo */
+    ADD_ALUMNOS_MASSIVO: `_ADD_ALUMNOS_MASSIVO`,
+    DELETE_ALUMNOS_MASSIVO: `_DELETE_ALUMNOS_MASSIVO`,
+    CONFIRM_ALUMNOS_MASSIVO: `_CONFIRM_ALUMNOS_MASSIVO`,
+    CLEAN_ALUMNOS_STORE: `_CLEAN_ALUMNOS_STORE`,
 }
 
 interface StateProps {
@@ -19,17 +23,23 @@ interface StateProps {
 
 interface AlumnoProps {
     id: number;
-    nombre: string;
-    apellido: string;
-    dni: string;
-    direccion: string;
-    telefono: string;
-    mail: string;
-    porcBeca: number;
-    fechaIngreso: Date;
-    legajo: string;
+    legajo: string,
+    apynom: string,
+    tipoDoc: number,
+    nroDoc: string,
     carrerasId: [];
     carreras: any[];
+    pagos: [],
+    fechaNacimiento: Date ,
+    fechaIngreso: Date,
+    direccion: string,
+    telefono: string,
+    mail: string,
+    extensionId: number,
+    extension: string,
+    ciudadId: number,
+    ciudad: string,
+    codigoPostal: number,
 }
 
 interface AlumnosFilter {

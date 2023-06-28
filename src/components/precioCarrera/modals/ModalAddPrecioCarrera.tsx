@@ -10,16 +10,16 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Button } from '@mui/material';
 import { PrecioCarreraProps } from '../../../@redux/precioCarrera/types';
 import { createPrecioCarreras } from '../../../domain/precioCarreras';
-let DateNew = new Date()
 const ModalAddPrecioCarrera = () => {
 
     const [form, setForm] = useState<PrecioCarreraProps>({
         id: 0,
         monto: 0,
-        fecha: DateNew,
+        matricula: 0,
+        fecha: '',
         carrera: 0,
     });
-    const { monto, carrera } = form;
+    const { monto, matricula, carrera } = form;
 
     const { precioCarrera, carreras } = HelperRedux.useSelector((state) => state)
     const dispatch = HelperRedux.useDispatch()
@@ -72,7 +72,7 @@ const ModalAddPrecioCarrera = () => {
         }
 
         setErrorMsg(null);
-        createPrecioCarreras(form.monto, DateNew, form.carrera).then((x) => {
+        createPrecioCarreras(form.monto,form.matricula, form.fecha, form.carrera).then((x) => {
             dispatch(Actions.createPrecioCarreras({ ...form, id: x.data.value }));
         })
             .catch(error => { console.log(error) })
@@ -98,17 +98,39 @@ const ModalAddPrecioCarrera = () => {
                 centered
             >
                 <Modal.Header className="modaltitle">
-                    <Modal.Title>Agregar Precio Cuota</Modal.Title>
+                    <Modal.Title>Agregar Precio Carrera</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handleSubmit}>
                     <Modal.Body>
                         <Form.Group className="mb-3">
-                            <Form.Label>Precio de la Cuota</Form.Label>
+                            <Form.Label>Precio de la Carrera</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="monto"
                                 name="monto"
                                 value={monto}
+                                onChange={handleChange}
+                                onFocus={() => setErrorMsg(null)}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Matricula</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Matricula"
+                                name="matricula"
+                                value={matricula}
+                                onChange={handleChange}
+                                onFocus={() => setErrorMsg(null)}
+                            />
+                        </Form.Group>
+                         <Form.Group className="mb-3">
+                            <Form.Label>Fecha</Form.Label>
+                            <Form.Control
+                                type="date"
+                                placeholder="Fecha"
+                                name="fecha"
+                                value={form.fecha}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />

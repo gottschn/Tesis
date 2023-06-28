@@ -1,0 +1,72 @@
+{
+    "empleados": [
+        {
+            "field": "areaTrabajo",
+            "name": "Area de Trabajo"
+        },
+        {
+            "field": "apynom",
+            "name": "Nombre y Apellido"
+        },
+        {
+            "field": "tipoDoc",
+            "name": "Tipo de Documento"
+        },
+        {
+            "field": "nroDoc",
+            "name": "Numero de Documento"
+        },
+        {
+            "field": "fechaNacimiento",
+            "name": "Fecha de Nacimiento"
+        },
+        {
+            "field": "direccion",
+            "name": "Direccion"
+        },
+        {
+            "field": "telefono",
+            "name": "Telefono"
+        },
+        {
+            "field": "mail",
+            "name": "Mail"
+        },
+        {
+            "field": "extensionid",
+            "name": "Extension ID"
+        },
+        {
+            "field": "extension",
+            "name": "Extension"
+        },
+        {
+            "field": "ciudadId",
+            "name": "Ciudad ID"
+        },
+        {
+            "field": "ciudad",
+            "name": "Ciudad"
+        },
+        {
+            "field": "codigoPostal",
+            "name": "Codigo Postal"
+        },
+        {
+            "field": "extension",
+            "name": "Extension"
+        },
+        {
+            "field": "ciudadId",
+            "name": "Ciudad ID"
+        },
+        {
+            "field": "codigoPostal",
+            "name": "Codigo Postal"
+        },
+        {
+            "field": "id",
+            "name": "Id del Alumno"
+        }
+    ]
+}

@@ -9,10 +9,11 @@ import { updatePrecioCarreras } from "../../../domain/precioCarreras";
 import { Actions } from "../../../@redux/precioCarrera";
 
 const ModalEditPrecioCarrera:React.FC<{precioCuota:PrecioCarreraProps}> = ({...props}) => {
-    
+    let DateNew = new Date();
     const [form, setForm] = useState<PrecioCarreraProps>({
         id: props.precioCuota.id,
         monto: props.precioCuota.monto,
+        matricula: props.precioCuota.matricula,
         fecha: props.precioCuota.fecha,
         carrera: props.precioCuota.carrera,
     });
@@ -47,7 +48,7 @@ const ModalEditPrecioCarrera:React.FC<{precioCuota:PrecioCarreraProps}> = ({...p
         }
        
         setErrorMsg(null);
-        updatePrecioCarreras(form.id, form.monto,form.carrera).then((x) => {
+        updatePrecioCarreras(form.id, form.monto, form.matricula, DateNew, form.carrera).then((x) => {
           dispatch(Actions.updatePrecioCarreras({...form}, form.id));
         })
         

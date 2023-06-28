@@ -4,11 +4,12 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { Actions } from '../../../@redux/PagoCuota';
-import { PagoCuotaProps } from '../../../@redux/PagoCuota/types';
-import { deletePagoCuotas } from '../../../domain/pagoCuotas';
+import { Actions } from '../../../@redux/Pagos';
+import { PagosProps } from '../../../@redux/Pagos/types';
+import { deletePagos } from '../../../domain/pagos';
 
-const ModalDeletePagoCuota:React.FC<{pagocuotas:PagoCuotaProps}> = ({...props}) => {
+
+const ModalDeletePagoCuota:React.FC<{pago:PagosProps}> = ({...props}) => {
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
 
@@ -21,8 +22,8 @@ const ModalDeletePagoCuota:React.FC<{pagocuotas:PagoCuotaProps}> = ({...props}) 
       };
 
       const handleConfirmDeleteModal = () => {
-        deletePagoCuotas(props.pagocuotas.id).then(() => {
-            dispatch(Actions.deletePagoCuotas(props.pagocuotas))
+        deletePagos(props.pago.id).then(() => {
+            dispatch(Actions.deletePagos(props.pago))
         })
         .catch(error => console.log(error))
         .finally(() => handleCloseDeleteModal())

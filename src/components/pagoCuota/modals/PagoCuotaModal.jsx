@@ -1,5 +1,5 @@
 import { Modal, Button } from "react-bootstrap";
-import PagoCuotaList from "../base/PagoCuotaList";
+import PagoCuotaList from "../base/PagoList";
 import AddPagoCuota from "./AddPagoCuota";
 import React from 'react';
 

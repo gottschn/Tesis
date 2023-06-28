@@ -34,8 +34,7 @@ const Header = () => {
                     <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`} 
                     onClick={() => goToPage('/usuarios')}>Usuarios</Nav.Link>
                     <Nav.Link className={({isActive}) => `nav-item nav-link ${isActive ? 'active': ''}`}
-                     onClick={() => goToPage('/empleados')}>Empleados</Nav.Link>
-                    
+                     onClick={() => goToPage('/empleados')}>Empleados</Nav.Link> 
                 </Nav>
             </Navbar>
         </>

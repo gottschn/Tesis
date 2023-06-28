@@ -103,7 +103,7 @@ const ModalAddCarrera = () => {
                         <Form.Group className="mb-3">
                             <Form.Label>Cantidad Cuotas</Form.Label>
                             <Form.Control
-                                type="number"
+                                type="text"
                                 placeholder="Cantidad de cuotas"
                                 name="cantCuotas"
                                 value={cantCuotas}

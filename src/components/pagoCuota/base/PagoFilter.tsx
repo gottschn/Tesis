@@ -1,46 +1,50 @@
 import React, { useState } from 'react'
 /** redux */
 import { HelperRedux } from '../../../@redux'
-import { Actions } from '../../../@redux/PagoCuota'
+import { Actions } from '../../../@redux/Pagos'
 
 /** components */
 import { TextInput } from '../../../app/components/TextInput'
 
 /** styles */
-import { getPagoCuotas } from '../../../domain/pagoCuotas'
 import { Button } from 'react-bootstrap'
+import { getPagos } from '../../../domain/pagos'
 
 
-const PagoCuotasFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onClosed }) => {
+const PagoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onClosed }) => {
     
-
     const dispatch = HelperRedux.useDispatch()
-    const [cuotaId, setCuotaId] = useState('')
-    const [monto, setMonto] = useState('')
-    const [porcPago, setPorcPago] = useState('')
-    const [fechaPago, setFechaPago] = useState('')
+    const [legajo, setLegajo] = useState('')
+    const [cantCuota, setCantCuota] = useState(0)
+    const [nroCuota, setNroCuota] = useState(0)
+    const [monto, setMonto] = useState(0)
+    const [nroRecibo, setNroRecibo] = useState(0)
+    const [fechaCarga, setFechaCarga] = useState<Date | null>(null);
+    const [fechaRecibo, setFechaRecibo] = useState<Date | null>(null);
+    const [alumnoId, setAlumnoId] = useState(0)
+    const [alumno, setAlumno] = useState('')
 
     const handlerFilter = () => {
 
-        dispatch(Actions.getPagoCuotas(
+        dispatch(Actions.getPagos(
+            legajo,
+            cantCuota,
+            nroCuota,
             monto,
-            porcPago,
-            fechaPago,
-            cuotaId,
+            nroRecibo,
+            fechaCarga,
+            fechaRecibo,
+            alumnoId,
+            alumno,
         ))
-
         onClosed(true)
     }
 
     const handlerClearFilter = () => {
-        setCuotaId('')
-        setMonto('')
-        setPorcPago('')
-        setFechaPago('')
+        setLegajo('')
 
-
-        getPagoCuotas().then(x => { dispatch(Actions.setPagoCuotasStore(x.data.value)) })
-        dispatch(Actions.setPagoCuotasFilterStore())
+        getPagos().then(x => { dispatch(Actions.setPagosStore(x.data.value)) })
+        dispatch(Actions.setPagosFilterStore())
 
         onClosed(false)
     }
@@ -49,15 +53,9 @@ const PagoCuotasFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({
         <div className='container-filter'>
             <main>
                 <TextInput
-                    value={cuotaId}
-                    onChange={(e) => setCuotaId(e.target.value)}
-                    label='Cuota ID'
-                />
-
-                <TextInput
-                    value={monto}
-                    onChange={(e) => setMonto(e.target.value)}
-                    label='Monto'
+                    value={legajo}
+                    onChange={(e) => setLegajo(e.target.value)}
+                    label='Legajo'
                 />
             </main>
 
@@ -85,4 +83,4 @@ const PagoCuotasFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({
     )
 }
 
-export default PagoCuotasFilter;
+export default PagoFilter;
