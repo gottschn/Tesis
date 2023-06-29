@@ -21,11 +21,6 @@ const Footer = () => {
                         {`Copyright © ${new Date().getFullYear()} Universidad Tecnológica Nacional`}
                     </Typography>
                 </Grid>
-                <Grid item>
-                    <Typography variant="caption">
-                        Developed by: Esteban Marino, Matias Martinez
-                    </Typography>
-                </Grid>
             </Grid>
         </footer>
     );

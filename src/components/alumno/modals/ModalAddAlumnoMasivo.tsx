@@ -51,7 +51,7 @@ const ModalAddAlumnoMasivo = () => {
                 onClick={(handleOpenModal)}
             >
                 <LibraryAddIcon />
-                <span>Importar Alumnos Masivamente</span>
+                <span>Importarcion Masiva Alumnos</span>
             </Button>
 
             <Modal

@@ -89,7 +89,7 @@ const ModalAddPagoMasivo = () => {
                 onClick={(handleOpenModal)}
             >
                 <RequestQuoteIcon />
-                <span>Importacion Masiva</span>
+                <span>Importacion Masiva Pagos</span>
             </Button>
 
             <Modal
@@ -103,28 +103,8 @@ const ModalAddPagoMasivo = () => {
                 </Modal.Header>
                 <Form onSubmit={handleSubmit}>
                     <Modal.Body>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Nombre</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Nombre del alumno"
-                                name="nombre"
-                                /* value={nombre} */
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Apellido</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Apellido del alumno"
-                                name="apellido"
-                                /* value={apellido} */
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
+                        
+                        <p> Hola</p>
                         <div>
                             {errorMsg && (<p className="error-msg">{errorMsg}</p>)}
                         </div>

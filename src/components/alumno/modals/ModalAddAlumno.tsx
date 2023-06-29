@@ -281,8 +281,8 @@ const ModalAddAlumno = () => {
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             >
-                                <option key={`option-carera-0`} value={0}>Seleccione...</option>
-                                {carreras.carreras.map(x => <option key={`option-carera-${x.id}`} value={x.id}>{x.descripcion}</option>)}
+                                <option key={`option-carrera`} value={0}>Seleccione...</option>
+                                {carreras.carreras.map(x => <option key={`option-carrera-${x.id}`} value={x.id}>{x.descripcion}</option>)}
                             </Form.Control>
                         </Form.Group>
                         <Form.Group className="mb-3">

@@ -15,6 +15,7 @@ import Columns from './Pago.json';
 import { Button } from '@mui/material';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import { useNavigate } from 'react-router-dom';
+import ModalAddPagoMasivo from '../modals/ModalAddPagoMasivo';
 
 const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
 
@@ -45,15 +46,7 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
                  <div className="">
                         <ModalAddPagoCuota />
 
-                        <Button
-                            size='small'
-                            variant="contained"
-                            color="success"
-                            onClick={(handleRedirectMasive)}
-                        >
-                            <LibraryAddIcon />
-                            <span>Importacion Masiva</span>
-                        </Button>
+                        <ModalAddPagoMasivo />
                 </div> 
             </div>
 

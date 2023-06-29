@@ -10,6 +10,7 @@ import { updatePagos } from '../../../domain/pagos';
 import { Actions } from '../../../@redux/Pagos';
 import { Actions as ActionsCuotas } from '../../../@redux/cuotas';
 import { getCuotas } from '../../../domain/cuotas';
+import moment from 'moment';
 
 const ModalEditPago:React.FC<{pago:PagosProps}> = ({...props}) => {
 
@@ -17,10 +18,12 @@ const ModalEditPago:React.FC<{pago:PagosProps}> = ({...props}) => {
     id: props.pago.id,
     legajo: props.pago.legajo,
     cantCuota: props.pago.cantCuota,
+    nroCuota: props.pago.nroCuota,
     monto: props.pago.monto,
     nroRecibo: props.pago.nroRecibo,
     fechaCarga: props.pago.fechaCarga,
     fechaRecibo: props.pago.fechaRecibo,
+    alumnoId: props.pago.alumnoId
   });
 
     /* const { legajo, cantCuota , cuotaId } = form; */
@@ -141,7 +144,7 @@ const ModalEditPago:React.FC<{pago:PagosProps}> = ({...props}) => {
                                 type="date"
                                 placeholder="Fecha de Carga"
                                 name="fechaCarga"
-                                value={form.fechaCarga}
+                                value={moment(form.fechaCarga).format("YYYY-MM-DD")}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -152,7 +155,7 @@ const ModalEditPago:React.FC<{pago:PagosProps}> = ({...props}) => {
                                 type="date"
                                 placeholder="Fecha de Recibo"
                                 name="fechaRecibo"
-                                value={form.fechaRecibo}
+                                value={moment(form.fechaRecibo).format("YYYY-MM-DD")}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />

@@ -17,6 +17,7 @@ import { Button } from '@mui/material';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import { useNavigate } from 'react-router-dom';
 import { current } from '@reduxjs/toolkit';
+import ModalAddAlumnoMasivo from '../modals/ModalAddAlumnoMasivo';
 
 const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
 
@@ -39,9 +40,7 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
         getAlumnos().then(x => { dispatch(Actions.setAlumnosStore(x.data.value)) })
 
     }
-
-
-
+    
     return (
         <>
             <main>
@@ -53,19 +52,9 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
                     <div className="">
                         <ModalAddAlumno />
 
-                        <Button
-                            size='small'
-                            variant="contained"
-                            color="success"
-                            onClick={(handleRedirectMasive)}
-                        >
-                            <LibraryAddIcon />
-                            <span>Importacion Masiva</span>
-                        </Button>
+                       <ModalAddAlumnoMasivo />
                     </div>
                 </div>
-
-                <ModalEditAlumno alumno={currentUser as AlumnoProps} />
 
                 <DataGrid
                     singlePagination={true}

@@ -10,13 +10,14 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Button } from '@mui/material';
 import { PrecioCarreraProps } from '../../../@redux/precioCarrera/types';
 import { createPrecioCarreras } from '../../../domain/precioCarreras';
+import moment from 'moment';
 const ModalAddPrecioCarrera = () => {
 
     const [form, setForm] = useState<PrecioCarreraProps>({
         id: 0,
         monto: 0,
         matricula: 0,
-        fecha: '',
+        fecha: new Date(),
         carrera: 0,
     });
     const { monto, matricula, carrera } = form;
@@ -130,7 +131,7 @@ const ModalAddPrecioCarrera = () => {
                                 type="date"
                                 placeholder="Fecha"
                                 name="fecha"
-                                // value={form.fecha}
+                                value={moment(form.fecha).format('YYYY-MM-DD')}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />

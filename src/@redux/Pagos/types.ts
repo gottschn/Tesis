@@ -26,12 +26,10 @@ interface PagosProps {
     nroCuota: number;
     monto: number;
     nroRecibo: number;
-    fechaCarga: Date | null;
-    fechaRecibo: Date | null;
+    fechaCarga: Date;
+    fechaRecibo: Date;
     alumnoId: number;
     alumno?: AlumnoProps;
-   /*  cuotaId: number;
-    cuotas?: CuotaProps; */
 }
 
 interface PagosFilter {

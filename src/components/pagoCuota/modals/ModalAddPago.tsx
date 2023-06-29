@@ -11,6 +11,7 @@ import { createPagos } from "../../../domain/pagos";
 
 import PaidIcon from '@mui/icons-material/Paid';
 import { Button } from "@mui/material";
+import moment from "moment";
 
 const ModalAddPago = () => {
     const dispatch = HelperRedux.useDispatch()
@@ -21,15 +22,16 @@ const ModalAddPago = () => {
         nroCuota: 0,
         monto: 0,
         nroRecibo: 0,
-        fechaCarga: null,
-        fechaRecibo: null,
+        fechaCarga: new Date(),
+        fechaRecibo: new Date(),
+        alumnoId: 0,
     });
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
     const [clearModal, setClearModal] = useState(false);
     
 
-    const { alumnos, pagos } = HelperRedux.useSelector((state) => state)
+    const { alumnos } = HelperRedux.useSelector((state) => state)
 
     React.useEffect(() => {
         const onError = () => alert('Se produjo un erorr.')
@@ -53,12 +55,14 @@ const ModalAddPago = () => {
         handleCloseModal()
         setForm({
             id: 0,
-            legajo : '',
+            legajo: '',
             cantCuota: 0,
+            nroCuota: 0,
             monto: 0,
             nroRecibo: 0,
-            fechaCarga: null,
-            fechaRecibo: null,
+            fechaCarga: new Date(),
+            fechaRecibo: new Date(),
+            alumnoId: 0,
         })
         window.location.reload()
     }
@@ -164,7 +168,7 @@ const ModalAddPago = () => {
                                 type="date"
                                 placeholder="Fecha de Carga"
                                 name="fechaCarga"
-                                value={form.fechaCarga}
+                                value={moment(form.fechaCarga).format("YYYY-MM-DD")}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -175,7 +179,7 @@ const ModalAddPago = () => {
                                 type="date"
                                 placeholder="Fecha de Recibo"
                                 name="fechaRecibo"
-                                value={form.fechaRecibo}
+                                value={moment(form.fechaRecibo).format("YYYY-MM-DD")}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -190,7 +194,7 @@ const ModalAddPago = () => {
                                 onFocus={() => setErrorMsg(null)}
                             >
                                 <option key={`option-carera-0`} value={0}>Seleccione...</option>
-                                {alumnos.alumnos.map(x => <option key={`option-cuotas-${x.id}`} value={x.id}>{`Alumno ID: ${x.id} ${x.apynom}`}</option>)}
+                                {alumnos.alumnos.map(x => <option key={`option-cuotas-${x.id}`} value={x.id}>{`Alumno ID:${x.id} ${x.apynom} Legajo: ${x.legajo}`}</option>)}
                             </Form.Control>
                         </Form.Group>
                         <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>

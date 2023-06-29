@@ -53,18 +53,6 @@
             "name": "Codigo Postal"
         },
         {
-            "field": "extension",
-            "name": "Extension"
-        },
-        {
-            "field": "ciudadId",
-            "name": "Ciudad ID"
-        },
-        {
-            "field": "codigoPostal",
-            "name": "Codigo Postal"
-        },
-        {
             "field": "id",
             "name": "Id del Alumno"
         }
