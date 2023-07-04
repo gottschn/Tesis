@@ -14,9 +14,7 @@ import { addAlumnosMassivo } from '../../../domain/alumnos';
 const ModalAddAlumnoMasivo = () => {
 
     const dispatch = HelperRedux.useDispatch()
-    const { alumnos } = HelperRedux.useSelector((state) => state)
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const isVisualize = alumnos.alumnos.length > 0
 
     const [showModal, setShowModal] = useState(false);
 

@@ -10,6 +10,11 @@ const TypeActions = {
     UPDATE_PAGO: '_UPDATE_PAGO',
     DELETE_PAGO: '_DELETE_PAGO',
     SET_PAGO_FILTER_STORE: '_SET_PAGO_FILTER_STORE',
+    /* Masivo */
+    ADD_PAGOS_MASSIVO: `_ADD_PAGOS_MASSIVO`,
+    CONFIRM_PAGOS_MASSIVO: `_CONFIRM_PAGOS_MASSIVO`,
+    DELETE_PAGOS_MASSIVO: `_DELETE_PAGOS_MASSIVO`,
+    CLEAN_PAGOS_STORE: `_CLEAN_PAGOS_STORE`,
 }
 
 interface StateProps {
@@ -20,16 +25,15 @@ interface StateProps {
 }
 
 interface PagosProps {
-    id: number;
-    legajo: string;
-    cantCuota: number;
-    nroCuota: number;
-    monto: number;
-    nroRecibo: number;
-    fechaCarga: Date;
-    fechaRecibo: Date;
-    alumnoId: number;
-    alumno?: AlumnoProps;
+    id: number,
+    legajo: string,
+    cantCuota: number,
+    monto: number,
+    nroRecibo: number,
+    fechaCarga: Date,
+    fechaRecibo: Date,
+    alumnoId?: number,
+    alumno?: AlumnoProps,
 }
 
 interface PagosFilter {

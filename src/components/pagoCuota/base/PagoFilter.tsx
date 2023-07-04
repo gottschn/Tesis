@@ -19,8 +19,8 @@ const PagoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onClo
     const [nroCuota, setNroCuota] = useState(0)
     const [monto, setMonto] = useState(0)
     const [nroRecibo, setNroRecibo] = useState(0)
-    const [fechaCarga, setFechaCarga] = useState<Date | null>(null);
-    const [fechaRecibo, setFechaRecibo] = useState<Date | null>(null);
+    const [fechaCarga, setFechaCarga] = useState('');
+    const [fechaRecibo, setFechaRecibo] = useState('');
     const [alumnoId, setAlumnoId] = useState(0)
     const [alumno, setAlumno] = useState('')
 

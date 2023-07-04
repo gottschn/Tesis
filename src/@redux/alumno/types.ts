@@ -29,8 +29,8 @@ interface AlumnoProps {
     nroDoc: string,
     carrerasId: [];
     carreras: any[];
-    pagos: [],
-    fechaNacimiento: Date ,
+    pagos: any[],
+    fechaNacimiento: Date,
     fechaIngreso: Date,
     direccion: string,
     telefono: string,

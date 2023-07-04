@@ -20,7 +20,7 @@ interface PrecioCarreraProps {
     id: number;
     monto: number;
     matricula: number;
-    fecha: Date | string;
+    fecha: Date;
     carrera: number;
 
 }

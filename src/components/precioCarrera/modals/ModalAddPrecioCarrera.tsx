@@ -37,6 +37,12 @@ const ModalAddPrecioCarrera = () => {
 
     const handlerClearFilter = () => {
         setClearModal(true)
+        handleCloseModal()
+        /* setForm({
+            id: 0,
+            nombre: '',   
+        }) */
+        /* window.location.reload() */
     }
 
 
@@ -48,7 +54,7 @@ const ModalAddPrecioCarrera = () => {
     }, [])
 
     React.useEffect(() => {
-        const onError = () => alert('Se produjo un erorr.')
+        const onError = () => alert('Se produjo un error.')
 
         getCarreras().then(x => {
             dispatch(ActionsCarrera.setCarrerasStore(x.data.value))
@@ -59,6 +65,21 @@ const ModalAddPrecioCarrera = () => {
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
+        if (name === 'carrerasId') {
+            setForm({
+                ...form,
+                [name]: parseInt(value),
+            });
+            return
+        }
+        if (name === 'fecha') {
+            setForm({
+                ...form,
+                [name]: moment(value, 'YYYY-MM-DD').toDate()
+            });
+            return
+        }
+
         setForm({
             ...form,
             [name]: value,
@@ -67,17 +88,20 @@ const ModalAddPrecioCarrera = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        if (monto === 0 || !carrera) {
-            setErrorMsg('Todos los campos son obligatorios');
-            return;
-        }
 
         setErrorMsg(null);
-        createPrecioCarreras(form.monto,form.matricula, new Date(), form.carrera).then((x) => {
-            dispatch(Actions.createPrecioCarreras({ ...form, id: x.data.value }));
+
+        createPrecioCarreras(form.monto, form.matricula, form.fecha, form.carrera).then((x) => {
+            dispatch(Actions.createPrecioCarreras({
+                ...form,
+                id: x.data.value
+            }));
+            alert('Se Registro Correctamente el Precio Carrera.')
         })
-            .catch(error => { console.log(error) })
-            .finally(() => { handlerClearFilter() })
+            .catch(error => {
+                console.log(error)
+            })
+            .finally(() => handlerClearFilter() )
     };
 
     return (
@@ -125,7 +149,7 @@ const ModalAddPrecioCarrera = () => {
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
-                         <Form.Group className="mb-3">
+                        <Form.Group className="mb-3">
                             <Form.Label>Fecha</Form.Label>
                             <Form.Control
                                 type="date"

@@ -11,7 +11,7 @@
         {
             "field": "carreraId",
             "name": " Carrera"
-        } ,
+        },
         {
             "field": "matricula",
             "name": "Matricula"

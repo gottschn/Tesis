@@ -18,7 +18,6 @@ const ModalEditPago:React.FC<{pago:PagosProps}> = ({...props}) => {
     id: props.pago.id,
     legajo: props.pago.legajo,
     cantCuota: props.pago.cantCuota,
-    nroCuota: props.pago.nroCuota,
     monto: props.pago.monto,
     nroRecibo: props.pago.nroRecibo,
     fechaCarga: props.pago.fechaCarga,

@@ -5,16 +5,28 @@
             "name": "Id"
         },
         {
+            "field": "legajo",
+            "name": "Legajo"
+        },
+        {
+            "field": "nroCuota",
+            "name": "Numero de Cuotas"
+        },
+        {
             "field": "monto",
             "name": "Monto"
         },
         {
-            "field": "porcPago",
-            "name": "PorcPago"
+            "field": "nroRecibo",
+            "name": "Numero de Recibo"
         },
         {
-            "field": "fechaPago",
-            "name": "Fecha"
+            "field": "fechaCarga",
+            "name": "Fecha de Carga"
+        },
+        {
+            "field": "fechaRecibo",
+            "name": "Fecha de Recibo"
         }
     ]
 }

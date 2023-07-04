@@ -45,7 +45,7 @@ const ModalAddAlumno = () => {
     });
 
     const dispatch = HelperRedux.useDispatch()
-    const { alumnos, carreras, ciudades, extensiones } = HelperRedux.useSelector((state) => state)
+    const { carreras, ciudades, extensiones } = HelperRedux.useSelector((state) => state)
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [clearModal, setClearModal] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -100,17 +100,17 @@ const ModalAddAlumno = () => {
         if (showModal) {
             getCarreras()
                 .then(x => dispatch(ActionsCarrera.setCarrerasStore(x.data.value)))
-                .catch(() => alert('Se produjo un bardo'))
+                .catch(() => alert('Se produjo un error en Carreras'))
         }
         if (showModal) {
             getCiudades()
                 .then(x => dispatch(ActionsCiudad.setCiudadesStore(x.data.value)))
-                .catch(() => alert('Se produjo un bardo'))
+                .catch(() => alert('Se produjo un error en Ciudades'))
         }
         if (showModal) {
             getExtensiones()
                 .then(x => dispatch(ActionsExtension.setExtensionesStore(x.data.value)))
-                .catch(() => alert('Se produjo un bardo'))
+                .catch(() => alert('Se produjo un error en Extensiones'))
         }
     }, [showModal])
     /*useEffect(() => {

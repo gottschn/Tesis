@@ -14,8 +14,8 @@ const getPagos = (
     nroCuota: number,
     monto: number,
     nroRecibo: number,
-    fechaCarga: Date | null,
-    fechaRecibo: Date | null,
+    fechaCarga: Date | string,
+    fechaRecibo: Date | string,
     alumnoId: number,
     alumno: string,
     
@@ -61,6 +61,15 @@ const setPagosFilterStore = ( data: PagosFilter = {
     data
 })
 
+/* Masivo */
+
+const addPagosMasivo = () => ({
+    type: TypeActions.ADD_PAGOS_MASSIVO
+})
+
+const confirmPagosMasivo= () => ({
+    type: TypeActions.CONFIRM_PAGOS_MASSIVO
+})
 
 export const Actions = {
     getStart,
@@ -70,5 +79,8 @@ export const Actions = {
     createPagos,
     updatePagos,
     deletePagos,
-    setPagosFilterStore
+    setPagosFilterStore,
+    /* Masivo */
+    addPagosMasivo,
+    confirmPagosMasivo
 }

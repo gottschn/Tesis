@@ -31,11 +31,16 @@ const updatePagos = (id: number , legajo: string, cantCuota: number, monto: numb
 
 const deletePagos = (id: number) => {
     return instance.delete(`/pago/${id}`)
-} 
+}
+
+const addPagosMassivo = () => {
+    return instance.post(`/pago/cargamasiva`)
+}
 
 export {
     getPagos,
     createPagos,
     updatePagos,
-    deletePagos
+    deletePagos,
+    addPagosMassivo
 }

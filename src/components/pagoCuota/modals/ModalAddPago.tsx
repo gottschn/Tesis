@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useEffect, useState } from 'react'
+
 import { Form, Modal } from 'react-bootstrap';
 
-import React from 'react';
 import { PagosProps } from "../../../@redux/Pagos/types";
 import { HelperRedux } from "../../../@redux";
 import { getAlumnos } from "../../../domain/alumnos";
@@ -19,28 +19,16 @@ const ModalAddPago = () => {
         id: 0,
         legajo: '',
         cantCuota: 0,
-        nroCuota: 0,
         monto: 0,
         nroRecibo: 0,
         fechaCarga: new Date(),
         fechaRecibo: new Date(),
-        alumnoId: 0,
     });
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
     const [clearModal, setClearModal] = useState(false);
-    
 
     const { alumnos } = HelperRedux.useSelector((state) => state)
-
-    React.useEffect(() => {
-        const onError = () => alert('Se produjo un erorr.')
-        getAlumnos().then(x => {
-            dispatch(ActionsAlumno.setAlumnosStore(x.data.value))
-        })
-            .catch(onError)
-
-    }, [])
 
     const handleOpenModal = () => {
         setShowModal(true);
@@ -50,46 +38,65 @@ const ModalAddPago = () => {
         setShowModal(false);
     };
 
-    const handlerClearFilter = () => {
-        setClearModal(true)
-        handleCloseModal()
-        setForm({
-            id: 0,
-            legajo: '',
-            cantCuota: 0,
-            nroCuota: 0,
-            monto: 0,
-            nroRecibo: 0,
-            fechaCarga: new Date(),
-            fechaRecibo: new Date(),
-            alumnoId: 0,
-        })
-        window.location.reload()
-    }
+    useEffect(() => {
+        if (showModal) {
+            getAlumnos()
+                .then(x => dispatch(ActionsAlumno.setAlumnosStore(x.data.value)))
+                .catch(() => alert('Se produjo un error en Alumnos'))
+        }
+
+    }, [showModal])
 
     const handleChange = (e: any) => {
         const { name, value } = e.target;
+
+        if (name === 'fechaCarga' || name === 'fechaRecibo') {
+            setForm({
+                ...form,
+                [name]: moment(value, 'YYYY-MM-DD').toDate()
+            });
+            return
+        }
+
         setForm({
             ...form,
             [name]: value,
         });
     };
 
+    const handlerClearFilter = () => {
+        setClearModal(true)
+        handleCloseModal()
+        /*   setForm({
+              id: 0,
+              legajo: '',
+              cantCuota: 0,
+              nroCuota: 0,
+              monto: 0,
+              nroRecibo: 0,
+              fechaCarga: new Date(),
+              fechaRecibo: new Date(),
+              alumnoId: 0,
+          })
+          window.location.reload() */
+    }
+
+
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        const { legajo, cantCuota, monto, nroRecibo, fechaCarga, fechaRecibo } = form;
 
         setErrorMsg(null);
 
-        createPagos(legajo, cantCuota, monto, nroRecibo, fechaCarga, fechaRecibo).then((x) => {
-                dispatch(ActionsPago.createPagos({
-                    ...form,
-                    id: x.data.value
-                }));
-                alert('Se pago la Cuota Correspondiente.')
-            })
+        createPagos(form.legajo, form.cantCuota, form.monto, form.nroRecibo, form.fechaCarga, form.fechaRecibo).then((x) => {
+            dispatch(ActionsPago.createPagos({
+                ...form,
+                id: x.data.value
+            }));
+            alert('Se Realizo el Pago Correctamente.')
+        })
             .catch(error => {
-                console.log('createCuotas', error)
+                console.log('createPagos', error)
 
             })
             .finally(() => handlerClearFilter())
@@ -121,19 +128,21 @@ const ModalAddPago = () => {
                         <Form.Group className="mb-3">
                             <Form.Label>Legajo</Form.Label>
                             <Form.Control
-                                type="text"
-                                placeholder="Legajo"
+                                as={'select'}
                                 name="legajo"
                                 value={form.legajo}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
-                            />
+                            >
+                                <option key={`option-legajo-0`} value={0}>Seleccione...</option>
+                                {alumnos.alumnos.map(x => <option key={`option-legajo-${x.id}`} value={x.legajo}>{`Legajo:${x.legajo} Nombre:${x.apynom}`}</option>)}
+                            </Form.Control>
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Cantidad de Cuotas</Form.Label>
+                            <Form.Label>Numeros de Cuotas</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Cantidad de Cuotas"
+                                placeholder="Numeros de Cuotas"
                                 name="cantCuota"
                                 value={form.cantCuota}
                                 onChange={handleChange}
@@ -168,7 +177,7 @@ const ModalAddPago = () => {
                                 type="date"
                                 placeholder="Fecha de Carga"
                                 name="fechaCarga"
-                                value={moment(form.fechaCarga).format("YYYY-MM-DD")}
+                                value={moment(form.fechaCarga).format('YYYY-MM-DD')}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -179,23 +188,10 @@ const ModalAddPago = () => {
                                 type="date"
                                 placeholder="Fecha de Recibo"
                                 name="fechaRecibo"
-                                value={moment(form.fechaRecibo).format("YYYY-MM-DD")}
+                                value={moment(form.fechaRecibo).format('YYYY-MM-DD')}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
-                        </Form.Group>
-                          <Form.Group className="mb-3">
-                            <Form.Label>Alumno</Form.Label>
-                            <Form.Control
-                                as={'select'}
-                                name="alumnoId"
-                                value={form.alumnoId}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            >
-                                <option key={`option-carera-0`} value={0}>Seleccione...</option>
-                                {alumnos.alumnos.map(x => <option key={`option-cuotas-${x.id}`} value={x.id}>{`Alumno ID:${x.id} ${x.apynom} Legajo: ${x.legajo}`}</option>)}
-                            </Form.Control>
                         </Form.Group>
                         <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>
                     </Modal.Body>

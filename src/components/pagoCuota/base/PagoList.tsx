@@ -12,8 +12,6 @@ import PagoCuotasFilter from './PagoFilter';
 import ModalEditPago from '../modals/ModalEditPago';
 import ModalDeletePago from '../modals/ModalDeletePago';
 import Columns from './Pago.json';
-import { Button } from '@mui/material';
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import { useNavigate } from 'react-router-dom';
 import ModalAddPagoMasivo from '../modals/ModalAddPagoMasivo';
 
@@ -27,9 +25,6 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
             getInitial();
     }, [])
 
-    const handleRedirectMasive = () => {
-        navigate("/pagosmasivo")
-     };
     const getInitial = () => {
         getPagos().then(x => { dispatch(Actions.setPagosStore(x.data.value)) })
 
