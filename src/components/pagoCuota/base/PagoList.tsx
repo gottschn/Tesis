@@ -14,6 +14,7 @@ import ModalDeletePago from '../modals/ModalDeletePago';
 import Columns from './Pago.json';
 import { useNavigate } from 'react-router-dom';
 import ModalAddPagoMasivo from '../modals/ModalAddPagoMasivo';
+import moment from 'moment';
 
 const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
 
@@ -55,6 +56,8 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
 
                 rows={pagos.map(x => ({
                     ...x,
+                    fechaCarga:moment(x.fechaCarga).format('YYYY-MM-DD'),
+                    fechaRecibo:moment(x.fechaRecibo).format('YYYY-MM-DD')
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PagoCuotasFilter onClosed={onClosedFilter} />}

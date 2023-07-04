@@ -15,6 +15,7 @@ import CarreraFilter from './CarreraFilter';
 import ModalEditCarrera from '../modals/ModalEditCarrera';
 import Columns from './Carreras.json';
 import { Modal } from '../../../app/components/Modal';
+import moment from 'moment';
 
 
 const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
@@ -61,6 +62,7 @@ const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
                 
                     rows={carreras.map(x => ({
                         ...x,
+                        fecha:moment(x.fecha).format('YYYY-MM-DD')
                     }),
                     )}
                     filterComponent={(onClosedFilter) => <CarreraFilter onClosed={onClosedFilter} />}

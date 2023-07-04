@@ -58,6 +58,15 @@ const reducer = (state = initialState, action: any = {}) => {
                 carreras: state.carreras.filter((carrera) => carrera.id !== action.data.id),
             }
             break;
+        case TypeActions.SET_CARRERA_FILTER_STORE:
+            nextState = {
+                ...state,
+                filter: {
+                    id: action.id,
+                    descripcion: action.descripcion
+                }
+            }
+            break;
         default:
             nextState = state
             break;

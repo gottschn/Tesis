@@ -13,6 +13,7 @@ import ModalDeletePrecioCarrera from '../modals/ModalDeletePrecioCarrera';
 import ModalAddPrecioCarrera from '../modals/ModalAddPrecioCarrera';
 import Columns from './PrecioCarreras.json';
 import { ModalConfirmation } from '../../../app/components/Modal';
+import moment from 'moment';
 
 
 const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ...props }) => {
@@ -73,6 +74,7 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
 
                 rows={precioCarreras.map(x => ({
                     ...x,
+                    fecha:moment(x.fecha).format('YYYY-MM-DD')
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PrecioCarreraFilter onClosed={onClosedFilter} />}

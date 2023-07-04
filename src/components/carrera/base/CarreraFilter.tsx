@@ -13,73 +13,62 @@ import { TextInput } from '../../../app/components/TextInput'
 
 
 const CarreraFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onClosed }) => {
-    const dispatch = HelperRedux.useDispatch()
-    const [id, setId] = useState('')
-    const [descripcion, setDescripcion] = useState('')
-    const [cantCuotas, setCantCuotas] = useState('')
-    const [precioCuo, setprecioCuo] = useState('')
+  const dispatch = HelperRedux.useDispatch()
+  const { filter } = HelperRedux.useSelector(state => state.carreras)
 
-    const handlerFilter = () => {
+  const handlerClearFilter = () => {
 
-        dispatch(Actions.getCarreras(
-            id,
-            descripcion,
-            cantCuotas,
-            precioCuo
-        ))
+    getCarreras().then(x => { dispatch(Actions.setCarrerasStore(x.data.value)) })
+    dispatch(Actions.setFilterCarreraStore(0, ''))
 
-        onClosed(true)
-    }
+    onClosed(false)
+  }
+  const handlerFilter = () => {
 
-    const handlerClearFilter = () => {
-        setId('')
-        setDescripcion('')
-        setCantCuotas('')
-        setprecioCuo('')
+    dispatch(Actions.getCarreras(filter.id, filter.descripcion))
 
-        getCarreras().then(x => { dispatch(Actions.setCarrerasStore(x.data.value)) })
-        dispatch(Actions.setFilterCarreraStore())
+    console.log(filter.id, "funca xd")
 
-        onClosed(false)
-    }
+    onClosed(true)
+  }
 
-    return (
-        <div className='container-filter'>
-            <main>
-                <TextInput
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                    label='Codigo de Carrera'
-                />
-                <TextInput
-                    value={descripcion}
-                    onChange={(e) => setDescripcion(e.target.value)}
-                    label='Descripcion'
-                />
-            </main>
+  return (
+    <div className='container-filter' style={{ width: '270px' }} >
 
-            <footer className='d-flex justify-content-between mt-3'>
-                <div className='d-flex'>
-                    <Button
-                        className='btn mx-1'
-                        title='Limpiar'
-                        onClick={handlerClearFilter}
-                    >
-                        Limpiar
-                    </Button>
+      <TextInput
+        value={filter.id}
+        onChange={(event) => dispatch(Actions.setFilterCarreraStore(event.target.value, filter.descripcion))}
+        label='Codigo de Carrera'
+      />
+      <TextInput
+        value={filter.descripcion}
+        onChange={(event) => dispatch(Actions.setFilterCarreraStore(filter.id, event.target.value,))}
+        label='Descripcion'
+      />
 
-                    <Button
-                        className='btn'
-                        title='Aplicar'
-                        onClick={() => handlerFilter()}
-                    >
-                        Aplicar
-                    </Button>
-                </div>
 
-            </footer>
+      <footer className='d-flex justify-content-between mt-3'>
+        <div className='d-flex'>
+          <Button
+            className='btn mx-1'
+            title='Limpiar'
+            onClick={handlerClearFilter}
+          >
+            Limpiar
+          </Button>
+
+          <Button
+            className='btn'
+            title='Aplicar'
+            onClick={handlerFilter}
+          >
+            Aplicar
+          </Button>
         </div>
-    )
+
+      </footer>
+    </div>
+  )
 }
 
 export default CarreraFilter;

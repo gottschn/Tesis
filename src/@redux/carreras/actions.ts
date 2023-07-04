@@ -1,5 +1,5 @@
 // Aca obtenes los get/post/put/delete
-import { CarrerasFilter, TypeActions } from "./types"
+import { TypeActions } from "./types"
 
 const getStart = () => ({
     type: TypeActions.GET_START
@@ -11,8 +11,8 @@ const getComplete = () => ({
 const getCarreras = (
     id: number | string,
     descripcion: string | number,
-    cantCuotas:string | number,
-    precioCuo: string | number,
+    cantCuotas?:string | number,
+    precioCuo?: string | number,
     
 ) => ({
     type: TypeActions.GET_CARRERAS,
@@ -43,12 +43,10 @@ const deleteCarreras = ( data: any ) => ({
     data
 })
 
-const setFilterCarreraStore = (data: CarrerasFilter  = {
-    id: '', 
-    descripcion: '', 
-}) => ({
+const setFilterCarreraStore = (id: number | string, descripcion: string) => ({
     type: TypeActions.SET_CARRERA_FILTER_STORE,
-    data
+    id,
+    descripcion
 })
 
 

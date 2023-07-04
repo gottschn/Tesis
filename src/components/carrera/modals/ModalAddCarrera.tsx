@@ -84,7 +84,7 @@ const ModalAddCarrera = () => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header className="modaltitle">
+                <Modal.Header className="modaltitle title">
                     <Modal.Title>Agregar carrera</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handleSubmit}>
