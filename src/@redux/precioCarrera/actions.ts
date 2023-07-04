@@ -1,5 +1,5 @@
 // Aca obtenes los get/post/put/delete
-import { PrecioCarreraFilter, TypeActions } from "./types"
+import { TypeActions } from "./types"
 
 const getStart = () => ({
     type: TypeActions.GET_START
@@ -10,9 +10,10 @@ const getComplete = () => ({
 
 const getPrecioCarreras = (
     monto: number | string,
-    matricula: number | string,
-    fecha: string | Date,
-    carreraId:string | number,
+    carreraId: string | number,
+    matricula?: number | string,
+    fecha?: string | Date,
+    carrera?: string | number,
     
 ) => ({
     type: TypeActions.GET_PRECIO_CARRERAS,
@@ -20,6 +21,7 @@ const getPrecioCarreras = (
     matricula,
     fecha,
     carreraId,
+    carrera,
 })
 
 const setPrecioCarrerasStore = (data: any) => ({
@@ -43,12 +45,10 @@ const deletePrecioCarreras = ( data: any ) => ({
     data
 })
 
-const setPrecioCarrerasFilter = (data: PrecioCarreraFilter = {
-    carrera: '',
-    monto: '',
-}) => ({
+const setPrecioCarrerasFilter = (carreraId: number | string, monto: number | string) => ({
     type: TypeActions.SET_PRECIO_CARRERA_FILTER_STORE,
-    data
+    carreraId,
+    monto
 })
 
 

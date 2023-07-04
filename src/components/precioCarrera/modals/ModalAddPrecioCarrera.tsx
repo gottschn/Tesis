@@ -18,7 +18,7 @@ const ModalAddPrecioCarrera = () => {
         monto: 0,
         matricula: 0,
         fecha: new Date(),
-        carrera: 0,
+        carreraId: 0,
     });
     const { monto, matricula, carrera } = form;
 
@@ -38,11 +38,14 @@ const ModalAddPrecioCarrera = () => {
     const handlerClearFilter = () => {
         setClearModal(true)
         handleCloseModal()
-        /* setForm({
+         setForm({
             id: 0,
-            nombre: '',   
-        }) */
-        /* window.location.reload() */
+            monto: 0,
+            matricula: 0,
+            fecha: moment('YYYY-MM-DD').toDate(),
+            carreraId: 0,
+        }) 
+         window.location.reload() 
     }
 
 
@@ -91,7 +94,7 @@ const ModalAddPrecioCarrera = () => {
 
         setErrorMsg(null);
 
-        createPrecioCarreras(form.monto, form.matricula, form.fecha, form.carrera).then((x) => {
+        createPrecioCarreras(form.monto, form.matricula, form.fecha, form.carreraId).then((x) => {
             dispatch(Actions.createPrecioCarreras({
                 ...form,
                 id: x.data.value
@@ -122,7 +125,7 @@ const ModalAddPrecioCarrera = () => {
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
-                <Modal.Header className="modaltitle">
+                <Modal.Header className="modaltitle title">
                     <Modal.Title>Agregar Precio Carrera</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handleSubmit}>
@@ -164,20 +167,20 @@ const ModalAddPrecioCarrera = () => {
                             <Form.Label>Carrera</Form.Label>
                             <Form.Control
                                 as={'select'}
-                                name="carrera"
-                                value={form.carrera}
+                                name="carreraId"
+                                value={form.carreraId}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             >
                                 <option key={`option-carrera-0`} value={0}>Seleccione...</option>
-                                {carreras.carreras.map(x => <option key={`option-carrera-${x.id}`} value={x.id}>{`${x.id} - ${x.descripcion} $`}</option>)}
+                                {carreras.carreras.map(x => <option key={`option-carrera-${x.id}`} value={x.id}>{`Codigo:${x.id} - Carrera:${x.descripcion}`}</option>)}
                             </Form.Control>
                         </Form.Group>
                         <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="contained" color="success" type="submit">
-                            Añadir
+                            Agregar
                         </Button>
                         <Button variant="contained" color="error" onClick={handleCloseModal} >
                             Cancelar

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 
 /* REDUX */
 import { HelperRedux } from '../../../@redux';
@@ -14,12 +14,16 @@ import { CarrerasProps } from '../../../@redux/carreras/types';
 import CarreraFilter from './CarreraFilter';
 import ModalEditCarrera from '../modals/ModalEditCarrera';
 import Columns from './Carreras.json';
+import { Modal } from '../../../app/components/Modal';
 
 
 const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
     const { carreras } = HelperRedux.useSelector((state) => state.carreras)
+    const [showModal, setShowModal] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
+
 
     useEffect(() => {
         if (carreras.length === 0) {
@@ -42,15 +46,19 @@ const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
                     <div className="col-6 d-flex justify-content-end mb-1">
                         <ModalAddCarrera />
                     </div>
+
+                    {/* <Modal visible={true} title={'a'} children={undefined} /> */}
                 </div>
                 <DataGrid
                     singlePagination={true}
                     subTableName='details'
                     pageSize={10}
                     columns={Columns.carreras}
-                    onClickEdit={(row) => { <ModalEditCarrera carrera={props.carrera} /> }}
+                    onClickEdit={(row) => {
+                        setCurrentUser(row)
+                        setShowModal(true)}}
                     onClickDelete={(row) => { <ModalDeleteCarrera carrera={props.carrera} /> }}
-
+                
                     rows={carreras.map(x => ({
                         ...x,
                     }),

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
@@ -9,7 +9,7 @@ import HistoryPrecioCuoList from '../base/HistoryPrecioCuoList';
 const HistoryPrecioCuoModal:React.FC<{precioCuota:PrecioCarreraProps}> = ({...props}) => {
 
     const [showModal, setShowModal] = useState(false);
-	  //const Date = moment(props.precioCuota.fecha).format('DD-MM-YYYY');
+	  
     const handleOpenModal = () => {
         setShowModal(true);
       };
@@ -51,4 +51,4 @@ const HistoryPrecioCuoModal:React.FC<{precioCuota:PrecioCarreraProps}> = ({...pr
     );
 };
 
-export default HistoryPrecioCuoModal;
+export default HistoryPrecioCuoModal; */

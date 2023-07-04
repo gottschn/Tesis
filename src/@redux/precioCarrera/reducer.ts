@@ -3,14 +3,15 @@ import { StateProps, TypeActions } from "./types";
 const initialState: StateProps = {
     isLoading: false,
     precioCarreras: [],
+    carreras: [],
     filter: {
-        carrera: '',
+        carreraId: '',
         monto: '',
     }
 
 }
 
-const reducer = (state = initialState, action: any = {} ) => {
+const reducer = (state = initialState, action: any = {}) => {
     let nextState: StateProps;
     switch (action.type) {
         case TypeActions.GET_START:
@@ -19,13 +20,13 @@ const reducer = (state = initialState, action: any = {} ) => {
                 isLoading: true
             }
             break;
-            case TypeActions.GET_COMPLETE:
+        case TypeActions.GET_COMPLETE:
             nextState = {
                 ...state,
                 isLoading: true
             }
             break;
-            case TypeActions.GET_PRECIO_CARRERAS:
+        case TypeActions.GET_PRECIO_CARRERAS:
             nextState = {
                 ...state,
                 precioCarreras: []
@@ -37,7 +38,7 @@ const reducer = (state = initialState, action: any = {} ) => {
                 precioCarreras: action.data
             }
             break;
-            case TypeActions.CREATE_PRECIO_CARRERAS:
+        case TypeActions.CREATE_PRECIO_CARRERAS:
             nextState = {
                 ...state,
                 precioCarreras: [...state.precioCarreras, action.data]
@@ -47,7 +48,7 @@ const reducer = (state = initialState, action: any = {} ) => {
             nextState = {
                 ...state,
                 precioCarreras: state.precioCarreras.map((precioCuota) =>
-                precioCuota.id === action.id ? action.data : precioCuota
+                    precioCuota.id === action.id ? action.data : precioCuota
                 )
             }
             break;
@@ -57,11 +58,20 @@ const reducer = (state = initialState, action: any = {} ) => {
                 precioCarreras: state.precioCarreras.filter((precioCarrera) => precioCarrera.id !== action.data.id),
             }
             break;
+        case TypeActions.SET_PRECIO_CARRERA_FILTER_STORE:
+            nextState = {
+                ...state,
+                filter: {
+                    carreraId: action.carreraId,
+                    monto: action.monto
+                }
+            }
+            break;
         default:
             nextState = state
             break;
     }
-    
+
     return nextState;
 }
 export default reducer;

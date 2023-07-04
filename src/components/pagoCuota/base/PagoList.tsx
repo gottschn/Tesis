@@ -32,7 +32,7 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
 
     return (
         <>
-        <main>
+       
             <div className="modalMain">
                 <div className="">
                     <h3>Pago de Cuotas</h3>
@@ -59,7 +59,7 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
                 )}
                 filterComponent={(onClosedFilter) => <PagoCuotasFilter onClosed={onClosedFilter} />}
             />
-        </main>
+        
     </>
     );
 };

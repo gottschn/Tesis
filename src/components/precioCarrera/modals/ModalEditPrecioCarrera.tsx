@@ -15,9 +15,9 @@ const ModalEditPrecioCarrera:React.FC<{precioCuota:PrecioCarreraProps}> = ({...p
         monto: props.precioCuota.monto,
         matricula: props.precioCuota.matricula,
         fecha: props.precioCuota.fecha,
-        carrera: props.precioCuota.carrera,
+        carreraId: props.precioCuota.carreraId,
     });
-    const { id, monto , carrera } = form;
+    const { id, monto , carreraId } = form;
     const  dispatch = HelperRedux.useDispatch()
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [showModal, setShowModal] = useState(false);
@@ -42,13 +42,13 @@ const ModalEditPrecioCarrera:React.FC<{precioCuota:PrecioCarreraProps}> = ({...p
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        if (monto === 0 || !carrera) {
+        if (monto === 0 || !carreraId) {
           setErrorMsg('Todos los campos son obligatorios');
           return;
         }
        
         setErrorMsg(null);
-        updatePrecioCarreras(form.id, form.monto, form.matricula, DateNew, form.carrera).then((x) => {
+        updatePrecioCarreras(form.id, form.monto, form.matricula, DateNew, form.carreraId).then((x) => {
           dispatch(Actions.updatePrecioCarreras({...form}, form.id));
         })
         
@@ -107,8 +107,8 @@ const ModalEditPrecioCarrera:React.FC<{precioCuota:PrecioCarreraProps}> = ({...p
                             <Form.Control
                                 type="text"
                                 placeholder="Carrera"
-                                name="carrera"
-                                value={carrera}
+                                name="carreraId"
+                                value={carreraId}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />

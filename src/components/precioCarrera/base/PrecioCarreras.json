@@ -10,6 +10,10 @@
         },
         {
             "field": "carreraId",
+            "name": " Carrera Codigo"
+        },
+        {
+            "field": "carrera",
             "name": " Carrera"
         },
         {

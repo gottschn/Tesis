@@ -1,3 +1,5 @@
+import { CarrerasProps } from "../carreras/types";
+
 const TypeActions = {
     GET_START: '_GET_START',
     GET_ERROR: '_GET_ERROR',
@@ -13,7 +15,11 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     precioCarreras: PrecioCarreraProps[];
-    filter: PrecioCarreraFilter;
+    carreras?: CarrerasProps[];
+    filter: {
+        carreraId: number | string,
+        monto: number | string,
+    };
 }
 
 interface PrecioCarreraProps {
@@ -21,12 +27,13 @@ interface PrecioCarreraProps {
     monto: number;
     matricula: number;
     fecha: Date;
-    carrera: number;
+    carreraId: number,
+    carrera?: CarrerasProps [];
 
 }
 
 interface PrecioCarreraFilter {
-    carrera: number | string,
+    carreraId: number | string,
     monto: number | string,
 }
 

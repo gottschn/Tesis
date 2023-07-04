@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { PrecioCarreraProps } from '../../../@redux/precioCarrera/types';
 import moment from 'moment';
 
@@ -18,4 +18,4 @@ const HistoryPrecioCuoItem:React.FC<{precioCarreras:PrecioCarreraProps}> = ({...
     );
 };
 
-export default HistoryPrecioCuoItem;
+export default HistoryPrecioCuoItem; */

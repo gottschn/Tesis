@@ -9,55 +9,43 @@ import { getPrecioCarreras } from '../../../domain/precioCarreras'
 import { Button } from 'react-bootstrap'
 import { TextInput } from '../../../app/components/TextInput'
 
-/** redux */
-
-
 const PrecioCarreraFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onClosed }) => {
     const dispatch = HelperRedux.useDispatch()
-    const [id, setId] = useState('')
-    const [monto, setMonto] = useState('')
-    const [matricula, setMatricula] = useState('')
-    const [fecha, setFecha] = useState('')
-    const [carreraId, setCarreraId] = useState('')
-
-    const handlerFilter = () => {
-
-        dispatch(Actions.getPrecioCarreras(
-            monto,
-            matricula,
-            fecha,
-            carreraId
-        ))
-
-        onClosed(true)
-    }
+    const { filter } = HelperRedux.useSelector(state => state.precioCarrera)
 
     const handlerClearFilter = () => {
-        setId('')
-        setMonto('')
-        setFecha('')
-        setCarreraId('')
 
         getPrecioCarreras().then(x => { dispatch(Actions.setPrecioCarrerasStore(x.data.value)) })
-        dispatch(Actions.setPrecioCarrerasFilter())
+        dispatch(Actions.setPrecioCarrerasFilter('', ''))
 
         onClosed(false)
     }
 
+    const handlerFilter = () => {
+
+        dispatch(Actions.getPrecioCarreras(filter.carreraId, filter.monto))
+
+        console.log("funca xd")
+
+        onClosed(true)
+    }
+
     return (
-        <div className='container-filter'>
-            <main>
-                <TextInput
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                    label='Codigo de Carrera'
-                />
-                <TextInput
-                    value={monto}
-                    onChange={(e) => setMonto(e.target.value)}
-                    label='Monto'
-                />
-            </main>
+        <div className='container-filter' style={{ width: '280px' }} >
+
+            <TextInput
+
+                value={filter.carreraId}
+                onChange={(event) => dispatch(Actions.setPrecioCarrerasFilter(event.target.value, filter.monto))}
+                label='Codigo de Carrera'
+            />
+
+            <TextInput
+                value={filter.monto}
+                onChange={(event) => dispatch(Actions.setPrecioCarrerasFilter(filter.carreraId, event.target.value))}
+                label='Monto'
+            />
+
 
             <footer className='d-flex justify-content-between mt-3'>
                 <div className='d-flex'>
@@ -72,7 +60,7 @@ const PrecioCarreraFilter: React.FC<{ onClosed: (isActive: boolean) => void }> =
                     <Button
                         className='btn'
                         title='Aplicar'
-                        onClick={() => handlerFilter()}
+                        onClick={handlerFilter}
                     >
                         Aplicar
                     </Button>

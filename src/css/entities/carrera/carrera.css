@@ -13,3 +13,10 @@
     background-color: var(--purple2);
     color: var(--white);
 }
+
+
+.title {
+
+    display: flex;
+    justify-content: center;
+}

@@ -5,9 +5,9 @@ import { HelperRedux } from '../../../@redux';
 import { Table } from 'react-bootstrap';
 import { getPrecioCarreras } from '../../../domain/precioCarreras';
 import { Actions } from '../../../@redux/precioCarrera';
-import HistoryPrecioCuoItem from './HistoryPrecioCuoItem';
+/* import HistoryPrecioCuoItem from './HistoryPrecioCuoItem'; */
 
-const HistoryPrecioCuoList = () => {
+/* const HistoryPrecioCuoList = () => {
     const dispatch = HelperRedux.useDispatch()
     const { precioCarreras } = HelperRedux.useSelector((state) => state.precioCarrera)
     
@@ -52,6 +52,6 @@ const HistoryPrecioCuoList = () => {
             </Table>
         </>
     );
-};
+}; */
 
-export default HistoryPrecioCuoList;
+/* export default HistoryPrecioCuoList; */

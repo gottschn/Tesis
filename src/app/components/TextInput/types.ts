@@ -3,7 +3,7 @@ import React from 'react'
 
 type TextInputProps = TextFieldProps & {
     dataTestId?: string;
-    value?: string;
+    value?: number | string;
 }
 
 type TextInputCompletProps = TextInputProps & {
@@ -12,6 +12,7 @@ type TextInputCompletProps = TextInputProps & {
     dataTestIdInput?: string;
     dataTestIdButtonOption?: string;
     error?: string;
+    value?: string | any;
 }
 
 interface OptionProps {
