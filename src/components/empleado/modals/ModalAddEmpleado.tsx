@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Form } from 'react-bootstrap';
 
 import { HelperRedux } from '../../../@redux';
-import { getCarreras } from '../../../domain/carreras';
 
 import { Actions } from '../../../@redux/alumno';
 import { createEmpleado } from '../../../domain/empleados';
@@ -17,8 +16,7 @@ import { Button } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { getExtensiones } from '../../../domain/extensiones';
 import { getCiudades } from '../../../domain/ciudades';
-
-let newDate = new Date()
+import moment from 'moment';
 
 const ModalAddEmpleado = () => {
 
@@ -27,7 +25,7 @@ const ModalAddEmpleado = () => {
         apynom: '',
         tipoDoc: 0,
         nroDoc: '',
-        fechaNacimiento: newDate,
+        fechaNacimiento: new Date(),
         direccion: '',
         telefono: '',
         mail: '',
@@ -38,10 +36,9 @@ const ModalAddEmpleado = () => {
         codigoPostal: 0,
         areaTrabajo: ''
     });
-    const { id, apynom, tipoDoc, nroDoc, fechaNacimiento, direccion, telefono, mail, extensionId,ciudadId, codigoPostal, areaTrabajo} = form;
 
     const dispatch = HelperRedux.useDispatch()
-    const { empleados, extensiones, ciudades } = HelperRedux.useSelector((state) => state)
+    const { extensiones, ciudades } = HelperRedux.useSelector((state) => state)
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [clearModal, setClearModal] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -57,10 +54,26 @@ const ModalAddEmpleado = () => {
     const handleChange = (e: any) => {
         const { name, value } = e.target;
 
-        if (name === 'carrerasId') {
+        if (name === 'extensionId') {
             setForm({
                 ...form,
                 [name]: [parseInt(value)],
+            });
+            return
+        }
+
+        if (name === 'ciudadId') {
+            setForm({
+                ...form,
+                [name]: [parseInt(value)],
+            });
+            return
+        }
+
+        if (name === 'fechaNacimiento') {
+            setForm({
+                ...form,
+                [name]: moment(value, 'YYYY-MM-DD').toDate()
             });
             return
         }
@@ -73,19 +86,14 @@ const ModalAddEmpleado = () => {
         if (showModal) {
             getExtensiones()
                 .then(x => dispatch(ActionsExtensiones.setExtensionesStore(x.data.value)))
-                .catch(() => alert('Se produjo un bardo'))
+                .catch(() => alert('Se produjo un error'))
         }
         if (showModal) {
             getCiudades()
                 .then(x => dispatch(ActionsCiudades.setCiudadesStore(x.data.value)))
-                .catch(() => alert('Se produjo un bardo'))
+                .catch(() => alert('Se produjo un error'))
         }
     }, [showModal])
-    useEffect(() => {
-        const EmpleadosModal = empleados.empleados.find((x) => x.id)
-        if (EmpleadosModal) setForm(EmpleadosModal)
-
-    }, [])
 
     const handlerClearFilter = () => {
         setClearModal(true)
@@ -99,10 +107,9 @@ const ModalAddEmpleado = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        const { direccion, mail,  telefono,  } = form;
 
         setErrorMsg(null);
-        createEmpleado(form.apynom, form.tipoDoc, form.nroDoc, form.direccion, form.telefono,
+        createEmpleado(form.apynom, form.tipoDoc, form.nroDoc,form.fechaNacimiento, form.direccion, form.telefono,
             form.mail, form.extensionId, form.ciudadId, form.codigoPostal, form.areaTrabajo,).then((x) => {
                 dispatch(Actions.createAlumnos({
                     ...form,
@@ -126,7 +133,7 @@ const ModalAddEmpleado = () => {
                 onClick={(handleOpenModal)}
             >
                 <AddCircleIcon />
-                <span>Agregar Alumno</span>
+                <span>Agregar Empleado</span>
             </Button>
 
             <Modal
@@ -136,7 +143,7 @@ const ModalAddEmpleado = () => {
                 centered
             >
                 <Modal.Header className="modaltitle">
-                    <Modal.Title>Agregar Alumno</Modal.Title>
+                    <Modal.Title>Agregar Empleado</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handleSubmit}>
                     <Modal.Body>
@@ -146,7 +153,7 @@ const ModalAddEmpleado = () => {
                                 type="text"
                                 placeholder="Nombre y Apellido"
                                 name="apynom"
-                                value={apynom}
+                                value={form.apynom}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -157,7 +164,7 @@ const ModalAddEmpleado = () => {
                                 type="text"
                                 placeholder="Tipo de Documento"
                                 name="tipoDoc"
-                                value={tipoDoc}
+                                value={form.tipoDoc}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -168,29 +175,29 @@ const ModalAddEmpleado = () => {
                                 type="text"
                                 placeholder="Numero de Documento"
                                 name="nroDoc"
-                                value={nroDoc}
+                                value={form.nroDoc}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
-                       {/*  <Form.Group className="mb-3">
+                        <Form.Group className="mb-3">
                             <Form.Label>Fecha de Nacimiento</Form.Label>
                             <Form.Control
                                 type="date"
                                 placeholder="Fecha de Nacimiento"
                                 name="fechaNacimiento"
-                                value={fechaNacimiento}
+                                value={moment(form.fechaNacimiento).format('YYYY-MM-DD')}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
-                        </Form.Group> */}
+                        </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Direccion</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Direccion"
                                 name="direccion"
-                                value={direccion}
+                                value={form.direccion}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -201,7 +208,7 @@ const ModalAddEmpleado = () => {
                                 type="text"
                                 placeholder="Telefono"
                                 name="telefono"
-                                value={telefono}
+                                value={form.telefono}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -212,7 +219,7 @@ const ModalAddEmpleado = () => {
                                 type="text"
                                 placeholder="Mail"
                                 name="mail"
-                                value={mail}
+                                value={form.mail}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -223,11 +230,11 @@ const ModalAddEmpleado = () => {
                                 as={'select'}
                                 multiple={false}
                                 name="extensionId"
-                                value={extensionId}
+                                value={form.extensionId}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             >
-                                <option key={`option-carera-0`} value={0}>Seleccione...</option>
+                                <option key={`option-ext-0`} value={0}>Seleccione...</option>
                                 {extensiones.extensiones.map(x => <option key={`option-extensiones-${x.id}`} value={x.id}>{x.descripcion}</option>)}
                             </Form.Control>
                         </Form.Group>
@@ -237,11 +244,11 @@ const ModalAddEmpleado = () => {
                                 as={'select'}
                                 multiple={false}
                                 name="ciudadId"
-                                value={ciudadId}
+                                value={form.ciudadId}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             >
-                                <option key={`option-carera-0`} value={0}>Seleccione...</option>
+                                <option key={`option-ciudad-0`} value={0}>Seleccione...</option>
                                 {ciudades.ciudades.map(x => <option key={`option-ciudades-${x.id}`} value={x.id}>{x.descripcion}</option>)}
                             </Form.Control>
                         </Form.Group>
@@ -251,7 +258,7 @@ const ModalAddEmpleado = () => {
                                 type="text"
                                 placeholder="Codigo Postal"
                                 name="codigoPostal"
-                                value={codigoPostal}
+                                value={form.codigoPostal}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -262,7 +269,7 @@ const ModalAddEmpleado = () => {
                                 type="text"
                                 placeholder="Area de Trabajo"
                                 name="areaTrabajo"
-                                value={areaTrabajo}
+                                value={form.areaTrabajo}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />

@@ -11,6 +11,7 @@ import { Actions } from '../../../@redux/empleado/actions';
 import { getEmpleados } from '../../../domain/empleados';
 import { EmpleadosProps } from '../../../@redux/empleado/types';
 import ModalAddEmpleado from '../modals/ModalAddEmpleado';
+import moment from 'moment';
 
 const EmpleadoList: React.FC<{ empleados: EmpleadosProps }> = ({ ...props }) => {
 
@@ -50,6 +51,7 @@ const EmpleadoList: React.FC<{ empleados: EmpleadosProps }> = ({ ...props }) => 
 
                     rows={empleados.map(x => ({
                         ...x,
+                        fecha:moment(x.fechaNacimiento).format('YYYY-MM-DD')
                     }),
                     )}
                     filterComponent={(onClosedFilter) => <EmpleadoFilter onClosed={onClosedFilter} />}

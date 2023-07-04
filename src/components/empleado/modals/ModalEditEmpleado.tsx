@@ -13,16 +13,16 @@ import { Actions as ActionsCiudades } from '../../../@redux/ciudad';
 import { Actions } from "../../../@redux/empleado/actions";
 import { getCiudades } from "../../../domain/ciudades";
 import { getExtensiones } from "../../../domain/extensiones";
+import moment from "moment";
 
 const ModalEditEmpleado: React.FC<{ empleado: EmpleadosProps }> = ({ ...props }) => {
-    let newDate = new Date()
 
     const [form, setForm] = useState<EmpleadosProps>({
         id: props.empleado.id,
         apynom: props.empleado.apynom,
         tipoDoc: props.empleado.tipoDoc,
         nroDoc: props.empleado.nroDoc,
-        fechaNacimiento: newDate,
+        fechaNacimiento: props.empleado.fechaNacimiento,
         direccion: props.empleado.direccion,
         telefono: props.empleado.telefono,
         mail: props.empleado.mail,
@@ -90,6 +90,7 @@ const ModalEditEmpleado: React.FC<{ empleado: EmpleadosProps }> = ({ ...props })
             form.apynom,
             form.tipoDoc,
             form.nroDoc,
+            form.fechaNacimiento,
             form.direccion,
             form.telefono,
             form.mail,
@@ -163,17 +164,17 @@ const ModalEditEmpleado: React.FC<{ empleado: EmpleadosProps }> = ({ ...props })
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
-                       {/*  <Form.Group className="mb-3">
+                         <Form.Group className="mb-3">
                             <Form.Label>Fecha de Nacimiento</Form.Label>
                             <Form.Control
                                 type="date"
                                 placeholder="Fecha de Nacimiento"
                                 name="fechaNacimiento"
-                                value={fechaNacimiento}
+                                value={moment(fechaNacimiento).format('YYYY-MM-DD')}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
-                        </Form.Group> */}
+                        </Form.Group> 
                         <Form.Group className="mb-3">
                             <Form.Label>Direccion</Form.Label>
                             <Form.Control
