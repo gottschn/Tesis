@@ -118,7 +118,7 @@ const ModalAddPrecioCarrera = () => {
                 <AddCircleIcon />
                 <span>Precio Carrera</span>
             </Button>
-
+            
             <Modal
                 show={showModal}
                 size="lg"
