@@ -1,26 +1,25 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 /* Redux */
 import { HelperRedux } from '../../../@redux';
 import { Actions } from '../../../@redux/Pagos';
 import { PagosProps } from '../../../@redux/Pagos/types';
 
 /* components */
-import { getPagos } from '../../../domain/pagos';
+import { deletePagos, getPagos } from '../../../domain/pagos';
 import ModalAddPagoCuota from '../modals/ModalAddPago';
 import DataGrid from '../../../app/components/DataGrid';
 import PagoCuotasFilter from './PagoFilter';
 import ModalEditPago from '../modals/ModalEditPago';
-import ModalDeletePago from '../modals/ModalDeletePago';
 import Columns from './Pago.json';
-import { useNavigate } from 'react-router-dom';
 import ModalAddPagoMasivo from '../modals/ModalAddPagoMasivo';
 import moment from 'moment';
+import { ModalConfirmation } from '../../../app/components/Modal';
 
 const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
     const { pagos } = HelperRedux.useSelector((state) => state.pagos)
-    const navigate = useNavigate()
+    const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
     useEffect(() => {
         if (pagos.length === 0)
             getInitial();
@@ -31,19 +30,41 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
 
     }
 
+    const handleDeletePagos = () => {
+        const { id } = confirmationDelete.item
+
+        setConfirmationDelete({
+            visible: false,
+            item: { id: 0 }
+        })
+
+        deletePagos(id).then(() => {
+            dispatch(Actions.deletePagos(id))
+        })
+            .catch(error => console.log(error))
+        window.location.reload()
+    }
+
+    const handlerDeleteNotification = () => {
+        setConfirmationDelete({
+            visible: false,
+            item: { id: 0 }
+        })
+    }
+
     return (
         <>
-       
+
             <div className="modalMain">
                 <div className="">
                     <h3>Pago de Cuotas</h3>
                 </div>
 
-                 <div className="">
-                        <ModalAddPagoCuota />
+                <div className="">
+                    <ModalAddPagoCuota />
 
-                        <ModalAddPagoMasivo />
-                </div> 
+                    <ModalAddPagoMasivo />
+                </div>
             </div>
 
             <DataGrid
@@ -52,18 +73,25 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
                 pageSize={10}
                 columns={Columns.pagocuotas}
                 onClickEdit={(row) => { <ModalEditPago pago={props.pago} /> }}
-                onClickDelete={(row) => { <ModalDeletePago pago={props.pago} /> }}
+                onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
                 rows={pagos.map(x => ({
                     ...x,
-                    fechaCarga:moment(x.fechaCarga).format('YYYY-MM-DD'),
-                    fechaRecibo:moment(x.fechaRecibo).format('YYYY-MM-DD')
+                    fechaCarga: moment(x.fechaCarga).format('YYYY-MM-DD'),
+                    fechaRecibo: moment(x.fechaRecibo).format('YYYY-MM-DD')
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PagoCuotasFilter onClosed={onClosedFilter} />}
             />
-        
-    </>
+
+            <ModalConfirmation
+                title='¿Confirma baja del registro?'
+                visible={confirmationDelete.visible}
+                onClickYes={handleDeletePagos}
+                onClickNo={handlerDeleteNotification} children={undefined}
+            />
+
+        </>
     );
 };
 
