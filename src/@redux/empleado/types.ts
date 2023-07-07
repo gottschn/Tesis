@@ -1,3 +1,6 @@
+import { CiudadesProps } from "../ciudad/types";
+import { ExtensionProps } from "../extension/types";
+
 const TypeActions = {
     GET_START: '_GET_START',
     GET_ERROR: '_GET_ERROR',
@@ -14,22 +17,24 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     empleados: EmpleadosProps[];
+    ciudades?: CiudadesProps [];
+    extensiones?: ExtensionProps [];
     filter: EmpleadosFilter;
 }
 
 interface EmpleadosProps {
     id: number;
     apynom: string;
-    tipoDoc: number;
+    tipoDoc: string | number;
     nroDoc: string;
     fechaNacimiento: Date;
     direccion: string;
     telefono: string;
     mail: string;
     extensionId: number;
-    extension: string;
+    extension?: ExtensionProps [];
     ciudadId: number;
-    ciudad: string;
+    ciudad?: CiudadesProps [];
     codigoPostal: number;
     areaTrabajo: string;
 }

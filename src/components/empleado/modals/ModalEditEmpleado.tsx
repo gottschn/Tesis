@@ -94,12 +94,9 @@ const ModalEditEmpleado: React.FC<{ empleado: EmpleadosProps }> = ({ ...props })
             form.direccion,
             form.telefono,
             form.mail,
-            form.extensionId,
-            form.extension,
+            form.areaTrabajo,
             form.ciudadId,
-            form.ciudad,
-            form.codigoPostal,
-            form.areaTrabajo
+            form.extensionId
         ).then(() => {
             dispatch(Actions.updateEmpleados({ ...form }, form.id))
         })

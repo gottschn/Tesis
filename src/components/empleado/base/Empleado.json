@@ -1,6 +1,10 @@
 {
     "empleados": [
         {
+            "field": "id",
+            "name": "Id del Empleado"
+        },
+        {
             "field": "areaTrabajo",
             "name": "Area de Trabajo"
         },
@@ -33,7 +37,7 @@
             "name": "Mail"
         },
         {
-            "field": "extensionid",
+            "field": "extensionId",
             "name": "Extension ID"
         },
         {
@@ -47,14 +51,6 @@
         {
             "field": "ciudad",
             "name": "Ciudad"
-        },
-        {
-            "field": "codigoPostal",
-            "name": "Codigo Postal"
-        },
-        {
-            "field": "id",
-            "name": "Id del Alumno"
         }
     ]
 }

@@ -3,6 +3,8 @@ import { StateProps, TypeActions } from "./types";
 const initialState: StateProps = {
     isLoading: false,
     empleados: [],
+    ciudades: [],
+    extensiones: [],
     filter: {
         dni: '',
         apynom: '',

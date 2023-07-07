@@ -113,12 +113,6 @@ const ModalAddAlumno = () => {
                 .catch(() => alert('Se produjo un error en Extensiones'))
         }
     }, [showModal])
-    /*useEffect(() => {
-        const AlumnosModal = alumnos.alumnos.find((x) => x.id)
-        if (AlumnosModal) setForm(AlumnosModal)
-
-    }, [])
-*/
     const handlerClearFilter = () => {
         setClearModal(true)
         handleCloseModal()

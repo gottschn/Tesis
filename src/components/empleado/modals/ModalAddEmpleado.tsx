@@ -3,7 +3,7 @@ import { Modal, Form } from 'react-bootstrap';
 
 import { HelperRedux } from '../../../@redux';
 
-import { Actions } from '../../../@redux/alumno';
+import { Actions } from '../../../@redux/empleado';
 import { createEmpleado } from '../../../domain/empleados';
 import { EmpleadosProps } from '../../../@redux/empleado/types';
 
@@ -30,11 +30,9 @@ const ModalAddEmpleado = () => {
         telefono: '',
         mail: '',
         extensionId: 0,
-        extension: '',
         ciudadId: 0,
-        ciudad: '',
         codigoPostal: 0,
-        areaTrabajo: ''
+        areaTrabajo: '',
     });
 
     const dispatch = HelperRedux.useDispatch()
@@ -57,7 +55,7 @@ const ModalAddEmpleado = () => {
         if (name === 'extensionId') {
             setForm({
                 ...form,
-                [name]: [parseInt(value)],
+                [name]: [(value)],
             });
             return
         }
@@ -65,7 +63,7 @@ const ModalAddEmpleado = () => {
         if (name === 'ciudadId') {
             setForm({
                 ...form,
-                [name]: [parseInt(value)],
+                [name]: [(value)],
             });
             return
         }
@@ -107,11 +105,10 @@ const ModalAddEmpleado = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-
         setErrorMsg(null);
         createEmpleado(form.apynom, form.tipoDoc, form.nroDoc,form.fechaNacimiento, form.direccion, form.telefono,
-            form.mail, form.extensionId, form.ciudadId, form.codigoPostal, form.areaTrabajo,).then((x) => {
-                dispatch(Actions.createAlumnos({
+            form.mail,form.areaTrabajo, form.ciudadId, form.extensionId).then((x) => {
+                dispatch(Actions.createEmpleados({
                     ...form,
                     id: x.data.value
                 }));
@@ -251,17 +248,6 @@ const ModalAddEmpleado = () => {
                                 <option key={`option-ciudad-0`} value={0}>Seleccione...</option>
                                 {ciudades.ciudades.map(x => <option key={`option-ciudades-${x.id}`} value={x.id}>{x.descripcion}</option>)}
                             </Form.Control>
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Codigo Postal</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Codigo Postal"
-                                name="codigoPostal"
-                                value={form.codigoPostal}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Area de Trabajo</Form.Label>

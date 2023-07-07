@@ -87,7 +87,7 @@ const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
                     fecha: moment(x.fecha).format('YYYY-MM-DD')
                 }),
                 )}
-                filterComponent={(onClosedFilter) => <CarreraFilter onClosed={onClosedFilter} />}
+                filterComponent={(onClosed) => <CarreraFilter onClosed={onClosed} />}
             />
 
             <ModalConfirmation

@@ -15,8 +15,9 @@ import AlumnoFilter from './AlumnoFilter';
 import '../../../app/components/GlobalStyles/css/GlobalStyle.css'
 import ModalAddAlumnoMasivo from '../modals/ModalAddAlumnoMasivo';
 import { ModalConfirmation } from '../../../app/components/Modal';
+import moment from 'moment';
 
-const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
+const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => { 
 
     const dispatch = HelperRedux.useDispatch()
     const { alumnos } = HelperRedux.useSelector((state) => state.alumnos)
@@ -57,7 +58,6 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
             item: { id: 0 }
         })
     }
-
     return (
         <>
             <div className="modalMain">
@@ -83,8 +83,10 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
                 rows={alumnos.map(x => ({
                     ...x,
-                }),
-                )}
+                    pagos: x.pagos.length,
+                    fechaNacimiento:moment(x.fechaNacimiento).format('YYYY-MM-DD'),
+                    fechaIngreso:moment(x.fechaIngreso).format('YYYY-MM-DD')
+                }))}
                 filterComponent={(onClosedFilter) => <AlumnoFilter onClosed={onClosedFilter} />}
             />
 
@@ -96,6 +98,5 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
             />
         </>
     );
-};
-
+}
 export default AlumnoList;
