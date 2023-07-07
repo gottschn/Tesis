@@ -84,7 +84,8 @@ const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
 
                 rows={carreras.map(x => ({
                     ...x,
-                    fecha: moment(x.fecha).format('YYYY-MM-DD')
+                    fecha: moment(x.fecha).format('YYYY-MM-DD'),
+                    precioCarrera: `$ ${x.precioCarrera}`
                 }),
                 )}
                 filterComponent={(onClosed) => <CarreraFilter onClosed={onClosed} />}

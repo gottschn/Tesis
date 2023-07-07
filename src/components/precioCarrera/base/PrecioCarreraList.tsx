@@ -77,7 +77,8 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
                 rows={precioCarreras.map(x => ({
                     ...x,
                     fecha:moment(x.fecha).format('YYYY-MM-DD'),
-                    monto: `$ ${x.monto}` 
+                    monto: `$ ${x.monto}` ,
+                    matricula: `$ ${x.matricula}` 
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PrecioCarreraFilter onClosed={onClosedFilter} />}

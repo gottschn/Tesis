@@ -78,7 +78,8 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
                 rows={pagos.map(x => ({
                     ...x,
                     fechaCarga: moment(x.fechaCarga).format('YYYY-MM-DD'),
-                    fechaRecibo: moment(x.fechaRecibo).format('YYYY-MM-DD')
+                    fechaRecibo: moment(x.fechaRecibo).format('YYYY-MM-DD'),
+                    monto: `$ ${x.monto}`
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PagoCuotasFilter onClosed={onClosedFilter} />}
