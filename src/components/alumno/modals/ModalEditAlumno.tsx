@@ -15,9 +15,6 @@ import { getCiudades } from "../../../domain/ciudades";
 import { getExtensiones } from "../../../domain/extensiones";
 const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
 
-    let newDate = new Date(Date.now());
-    let newDateN = new Date(Date.now());
-
     const [form, setForm] = useState<AlumnoProps>({
         id: props.alumno.id,
         legajo: props.alumno.legajo,
@@ -27,8 +24,8 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
         carrerasId: props.alumno.carrerasId,
         carreras: props.alumno.carreras,
         pagos: props.alumno.pagos,
-        fechaNacimiento: newDate,
-        fechaIngreso: newDateN,
+        fechaNacimiento: props.alumno.fechaNacimiento,
+        fechaIngreso: props.alumno.fechaIngreso,
         direccion:props.alumno.direccion,
         telefono:props.alumno.telefono,
         mail: props.alumno.mail,
@@ -37,6 +34,8 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
         ciudadId:props.alumno.ciudadId,
         ciudad: props.alumno.ciudad,
         codigoPostal: props.alumno.codigoPostal,
+        desde: props.alumno.desde,
+        hasta: props.alumno.hasta,
       });
       const { legajo, apynom, tipoDoc, nroDoc, carrerasId,
         pagos, fechaNacimiento, fechaIngreso, direccion,
@@ -114,11 +113,11 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
             form.apynom,
             form.tipoDoc,
             form.nroDoc,
-            newDate,
+            form.fechaNacimiento,
             form.direccion,
             form.telefono,
             form.mail,
-            newDateN,
+            form.fechaIngreso,
             form.carrerasId,
             form.ciudadId,
             form.extensionId,

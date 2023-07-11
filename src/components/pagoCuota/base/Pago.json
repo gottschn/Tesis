@@ -1,10 +1,6 @@
 {
     "pagocuotas": [
         {
-            "field": "id",
-            "name": "Id"
-        },
-        {
             "field": "legajo",
             "name": "Legajo"
         },
@@ -27,6 +23,10 @@
         {
             "field": "fechaRecibo",
             "name": "Fecha de Recibo"
+        },
+        {
+            "field": "id",
+            "name": "ID del Pago"
         }
     ]
 }

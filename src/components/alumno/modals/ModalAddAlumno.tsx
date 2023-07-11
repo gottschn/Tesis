@@ -41,7 +41,9 @@ const ModalAddAlumno = () => {
         extension: '',
         ciudadId: 0,
         ciudad: '',
-        codigoPostal: 0
+        codigoPostal: 0,
+        desde: new Date(),
+        hasta: new Date(),
     });
 
     const dispatch = HelperRedux.useDispatch()
@@ -116,11 +118,29 @@ const ModalAddAlumno = () => {
     const handlerClearFilter = () => {
         setClearModal(true)
         handleCloseModal()
-        /* setForm({
+         setForm({
             id: 0,
-            nombre: '',   
-        }) */
-        /* window.location.reload() */
+            apynom: '',
+            legajo: '',
+            tipoDoc: 0,
+            nroDoc: '',
+            carrerasId: [],
+            carreras: [],
+            pagos: [],
+            fechaNacimiento: new Date(),
+            fechaIngreso: new Date(),
+            direccion: '',
+            telefono: '',
+            mail: '',
+            extensionId: 0,
+            extension: '',
+            ciudadId: 0,
+            ciudad: '',
+            codigoPostal: 0,
+            desde: new Date(),
+            hasta: new Date(),
+        }) 
+         window.location.reload()
     }
 
     const handleSubmit = (e: any) => {

@@ -3,26 +3,20 @@ import { Modal, Form } from 'react-bootstrap';
 
 import { HelperRedux } from '../../../@redux';
 
-import { Actions } from '../../../@redux/alumno';
+import { Actions } from '../../../@redux/filtros';
 
 
 import '../../../css/entities/carrera/carrera.css';
 import { Button } from '@mui/material';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
-import { addAlumnosMassivo } from '../../../domain/alumnos';
+import { getFiltros } from '../../../domain/filtros';
 
-const ModalAddAlumnoMasivo = () => {
+const ModalFilter = () => {
 
     const dispatch = HelperRedux.useDispatch()
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     const [showModal, setShowModal] = useState(false);
-
-    useEffect(() => {
-        return () => {
-            dispatch(Actions.cleanAlumnosStore())
-        }
-    }, [])
 
     const handleOpenModal = () => {
         setShowModal(true);
@@ -33,11 +27,8 @@ const ModalAddAlumnoMasivo = () => {
     };
     const handlerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
-        
-        addAlumnosMassivo().then(x => alert('todo bien'))
+        /* getFiltros().then(x => alert('todo bien')) */
     }
-    const onConfirmMassiveCreate = () => dispatch(Actions.confirmAlumnosMasivo())
 
     return (
         <>
@@ -48,7 +39,7 @@ const ModalAddAlumnoMasivo = () => {
                 onClick={(handleOpenModal)}
             >
                 <LibraryAddIcon />
-                <span>Importarcion Masiva Alumnos</span>
+                <span>Exportacion Alumnos</span>
             </Button>
 
             <Modal
@@ -57,14 +48,17 @@ const ModalAddAlumnoMasivo = () => {
                 centered
             >
                 <Modal.Header className="modaltitle">
-                    <Modal.Title>Agregar Importacion Masiva</Modal.Title>
+                    <Modal.Title>Filtros Alumnos</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handlerSubmit}>
                     <Modal.Body>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Archivo</Form.Label>
+                    <Form.Group className="mb-3">
+                            <Form.Label>Fecha de Corte</Form.Label>
                             <Form.Control
-                                type="file"
+                                type="date"
+                                placeholder="Fecha de Corte"
+                                name="fechaDeCorte"
+                                /* value={moment(form.fechaNacimiento).format('YYYY-MM-DD')} */
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
@@ -76,7 +70,7 @@ const ModalAddAlumnoMasivo = () => {
                         <Button 
                         variant="contained" 
                         color="success"
-                        onClick={onConfirmMassiveCreate} 
+                        /* onClick={onConfirmMassiveCreate}  */
                         type="submit">
                             Añadir Importacion
                         </Button>
@@ -90,4 +84,4 @@ const ModalAddAlumnoMasivo = () => {
     );
 };
 
-export default ModalAddAlumnoMasivo;
+export default ModalFilter;

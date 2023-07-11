@@ -40,6 +40,8 @@ interface AlumnoProps {
     ciudadId: number,
     ciudad: string,
     codigoPostal: number,
+    desde: Date,
+    hasta: Date,
 }
 
 interface AlumnosFilter {

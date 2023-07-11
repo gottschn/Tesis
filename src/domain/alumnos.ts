@@ -55,9 +55,9 @@ const addAlumnosMassivo = () => {
     return instance.post(`/alumno/cargamasiva`)
 }
 
-/* const deleteAlumnosMassivo = (data: AlumnoProps[]) => {
-    return instance.delete('/alumno/cargamasiva', data[] )
-} */
+ const deleteAlumnosMassivo = (desde:Date, hasta:Date) => {
+    return instance.delete(`/alumno/eliminarmasivo/${desde}, ${hasta}` )
+} 
 
 
 export {
@@ -67,5 +67,5 @@ export {
     deleteAlumno,
     /* Masivo */
     addAlumnosMassivo,
-    /* deleteAlumnosMassivo */
+    deleteAlumnosMassivo 
 }
