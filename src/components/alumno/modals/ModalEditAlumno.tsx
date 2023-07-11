@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import React from 'react';
 import { HelperRedux } from "../../../@redux";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { AlumnoProps } from "../../../@redux/alumno/types";
@@ -13,100 +14,89 @@ import { Actions as ActionsExtensiones } from '../../../@redux/extension';
 import { Actions as ActionsCiudades } from '../../../@redux/ciudad';
 import { getCiudades } from "../../../domain/ciudades";
 import { getExtensiones } from "../../../domain/extensiones";
-const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
 
-    const [form, setForm] = useState<AlumnoProps>({
-        id: props.alumno.id,
-        legajo: props.alumno.legajo,
-        apynom: props.alumno.apynom,
-        tipoDoc: props.alumno.tipoDoc,
-        nroDoc: props.alumno.nroDoc,
-        carrerasId: props.alumno.carrerasId,
-        carreras: props.alumno.carreras,
-        pagos: props.alumno.pagos,
-        fechaNacimiento: props.alumno.fechaNacimiento,
-        fechaIngreso: props.alumno.fechaIngreso,
-        direccion:props.alumno.direccion,
-        telefono:props.alumno.telefono,
-        mail: props.alumno.mail,
-        extensionId: props.alumno.extensionId,
-        extension: props.alumno.extension,
-        ciudadId:props.alumno.ciudadId,
-        ciudad: props.alumno.ciudad,
-        codigoPostal: props.alumno.codigoPostal,
-        desde: props.alumno.desde,
-        hasta: props.alumno.hasta,
-      });
-      const { legajo, apynom, tipoDoc, nroDoc, carrerasId,
-        pagos, fechaNacimiento, fechaIngreso, direccion,
-        telefono, mail, extensionId, ciudadId, codigoPostal} = form;
+
+const ModalEditAlumno:React.FC<{ 
+    alumno: AlumnoProps;
+    visible: boolean;
+    onClosedModal: () => void;
+}> = ({...props}) => {
+
+    const [form, setForm] = useState<AlumnoProps>({} as AlumnoProps);
 
     const  dispatch = HelperRedux.useDispatch()
-    const { alumnos, carreras, ciudades, extensiones } = HelperRedux.useSelector((state) => state)
+    const { carreras, ciudades, extensiones } = HelperRedux.useSelector((state) => state)
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [showModal, setShowModal] = useState(false);
-    const handleOpenModalEdit = () => {
-        setShowModal(true);
-      };
-    
-      const handleCloseModalEdit = () => {
-        setShowModal(false);
-      };
 
     const handleChange = (e: any) => {
+        e.preventDefault()
         const { name, value } = e.target;
-        if(name === 'carrerasId'){
+        if(name === 'carreraId'){
             setForm({
               ...form,
-              [name]: [parseInt(value)],
+              [name]: parseInt(value),
             });
             return
-          }
-          if(name === 'ciudadId'){
+        }
+        if(name === 'ciudadId'){
             setForm({
               ...form,
-              [name]: [parseInt(value)],
+              [name]: parseInt(value),
             });
             return
-          }
-          if(name === 'extensionId'){
+        }
+        if(name === 'extensionId'){
             setForm({
               ...form,
-              [name]: [parseInt(value)],
+              [name]: parseInt(value),
             });
             return
-          }
-          setForm({
+        }
+        setForm({
             ...form,
             [name]: value,
-          });
+        });
     };
-
+    
     useEffect(() => {
-        if(showModal){
-          getCarreras()
+        getCarreras()
             .then(x => dispatch(ActionsCarrera.setCarrerasStore(x.data.value)))
             .catch(() => alert('Se produjo un bardo'))
-        }
-        if(showModal){
-            getCiudades()
-              .then(x => dispatch(ActionsCiudades.setCiudadesStore(x.data.value)))
-              .catch(() => alert('Se produjo un bardo'))
-          }
-          if(showModal){
-            getExtensiones()
-              .then(x => dispatch(ActionsExtensiones.setExtensionesStore(x.data.value)))
-              .catch(() => alert('Se produjo un bardo'))
-          }
-      }, [showModal])
-
-    useEffect(() =>  {
-         setForm(form);
-    }, []);
-
+        getCiudades()
+            .then(x => dispatch(ActionsCiudades.setCiudadesStore(x.data.value)))
+            .catch(() => alert('Se produjo un bardo'))
+        getExtensiones()
+            .then(x => dispatch(ActionsExtensiones.setExtensionesStore(x.data.value)))
+            .catch(() => alert('Se produjo un bardo'))
+    }, [])
+    useEffect(() => {
+        
+        setForm({
+            id: props.alumno.id,
+            legajo: props.alumno.legajo,
+            apynom: props.alumno.apynom,
+            tipoDoc: props.alumno.tipoDoc,
+            nroDoc: props.alumno.nroDoc,
+            carreraId: props.alumno.carreraId,
+            carreras: props.alumno.carreras,
+            pagos: props.alumno.pagos,
+            fechaNacimiento: props.alumno.fechaNacimiento,
+            fechaIngreso: props.alumno.fechaIngreso,
+            direccion:props.alumno.direccion,
+            telefono:props.alumno.telefono,
+            mail: props.alumno.mail,
+            extensionId: props.alumno.extensionId,
+            extension: props.alumno.extension,
+            ciudadId:props.alumno.ciudadId,
+            ciudad: props.alumno.ciudad,
+            codigoPostal: props.alumno.codigoPostal,
+            desde: props.alumno.desde,
+            hasta: props.alumno.hasta,
+        })
+    }, [props.alumno?.id])
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        setErrorMsg(null);
+        // setErrorMsg(null);
         updateAlumno(
             form.id,
             form.legajo,
@@ -118,7 +108,7 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
             form.telefono,
             form.mail,
             form.fechaIngreso,
-            form.carrerasId,
+            form.carreraId,
             form.ciudadId,
             form.extensionId,
             form.codigoPostal,
@@ -126,22 +116,13 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
             dispatch(Actions.updateAlumnos({...form}, form.id))
         })
         .catch(error => console.log(error, "Error"))
-        .finally(() => handleCloseModalEdit())
+        .finally(() => props.onClosedModal())
       };
       
     return (
         <>
-        <Button 
-                variant="warning"
-                className='me-2'
-                onClick={() => {
-                handleOpenModalEdit()
-                 }}
-             >
-                <FontAwesomeIcon icon={faPen} />
-              </Button>
             <Modal
-                show={showModal}
+                show={props.visible}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -152,53 +133,53 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handleSubmit}>
-                <Modal.Body>
+                    <Modal.Body>
                         <Form.Group className="mb-3">
                             <Form.Label>Legajo</Form.Label>
                             <Form.Control
-                                key={legajo}
+                                key={form.legajo}
                                 type="text"
                                 placeholder="Legajo"
                                 name="legajo"
-                                value={legajo}
+                                value={form.legajo}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Nombre y Apellido</Form.Label>
                             <Form.Control
-                                key={apynom}
+                                key={form.apynom}
                                 type="text"
                                 placeholder="Nombre y Apellido"
                                 name="apynom"
-                                value={apynom}
+                                value={form.apynom}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Tipo de Documento</Form.Label>
                             <Form.Control
-                                key={tipoDoc}
+                                key={form.tipoDoc}
                                 type="text"
                                 placeholder="Tipo de Documento"
                                 name="tipoDoc"
-                                value={tipoDoc}
+                                value={form.tipoDoc}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Numero de Documento</Form.Label>
                             <Form.Control
-                                key={nroDoc}
+                                key={form.nroDoc}
                                 type="text"
                                 placeholder="Numero de Documento"
                                 name="nroDoc"
-                                value={nroDoc}
+                                value={form.nroDoc}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         {/*    <Form.Group className="mb-3">
@@ -215,37 +196,37 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
                         <Form.Group className="mb-3">
                             <Form.Label>Direccion</Form.Label>
                             <Form.Control
-                                key={direccion}
+                                key={form.direccion}
                                 type="text"
                                 placeholder="Direccion"
                                 name="direccion"
-                                value={direccion}
+                                value={form.direccion}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Telefono</Form.Label>
                             <Form.Control
-                                key={telefono}
+                                key={form.telefono}
                                 type="text"
                                 placeholder="Telefono"
                                 name="telefono"
-                                value={telefono}
+                                value={form.telefono}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Mail</Form.Label>
                             <Form.Control
-                                key={mail}
+                                key={form.mail}
                                 type="text"
                                 placeholder="Mail"
                                 name="mail"
-                                value={mail}
+                                value={form.mail}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         {/* <Form.Group className="mb-3">
@@ -264,10 +245,10 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
                             <Form.Control
                                 as={'select'}
                                 multiple={false}
-                                name="carrerasId"
-                                value={carrerasId}
+                                name="carreraId"
+                                value={form.carreraId}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             >
                                 <option key={`option-carera-0`} value={0}>Seleccione...</option>
                                 {carreras.carreras.map(x => <option key={`option-carera-${x.id}`} value={x.id}>{x.descripcion}</option>)}
@@ -279,9 +260,9 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
                                 as={'select'}
                                 multiple={false}
                                 name="ciudadId"
-                                value={ciudadId}
+                                value={form.ciudadId}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             >
                                 <option key={`option-ciudad-0`} value={0}>Seleccione...</option>
                                 {ciudades.ciudades.map(x => <option key={`option-ciudad-${x.id}`} value={x.id}>{x.descripcion}</option>)}
@@ -293,9 +274,9 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
                                 as={'select'}
                                 multiple={false}
                                 name="extensionId"
-                                value={extensionId}
+                                value={form.extensionId}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             >
                                 <option key={`option-extension-0`} value={0}>Seleccione...</option>
                                 {extensiones.extensiones.map(x => <option key={`option-extension-${x.id}`} value={x.id}>{x.descripcion}</option>)}
@@ -304,13 +285,13 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
                         <Form.Group className="mb-3">
                             <Form.Label>Codigo Postal</Form.Label>
                             <Form.Control
-                                key={codigoPostal}
+                                key={form.codigoPostal}
                                 type="text"
                                 placeholder="Codigo Postal"
                                 name="codigoPostal"
-                                value={codigoPostal}
+                                value={form.codigoPostal}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
+                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <div>
@@ -321,7 +302,7 @@ const ModalEditAlumno:React.FC<{alumno:AlumnoProps}> = ({...props}) => {
                         <Button variant="success" type="submit">
                             Guardar
                         </Button>
-                        <Button variant="danger" onClick={handleCloseModalEdit}>
+                        <Button variant="danger" onClick={props.onClosedModal}>
                             Cancelar
                         </Button>
                     </Modal.Footer>

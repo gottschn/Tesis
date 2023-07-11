@@ -28,7 +28,7 @@ const getAlumnos = () => {
 
 const updateAlumno = (id:number,legajo:string, apynom: string, tipoDoc: number, nroDoc: string, 
     fechaNacimiento: Date,  direccion: string, telefono:string, mail: string, fechaIngreso: Date,
-     carreraId: [], ciudadId: number, extensionId: number, codigoPostal: number) => {
+     carreraId: number, ciudadId: number, extensionId: number, codigoPostal: number) => {
     return instance.put(`/alumno`,{
         id,
         legajo,

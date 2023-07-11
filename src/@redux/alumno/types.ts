@@ -27,7 +27,7 @@ interface AlumnoProps {
     apynom: string,
     tipoDoc: number,
     nroDoc: string,
-    carrerasId: [];
+    carreraId: number;
     carreras: any[];
     pagos: any[],
     fechaNacimiento: Date,

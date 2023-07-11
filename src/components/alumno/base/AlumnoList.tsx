@@ -15,6 +15,7 @@ import { ModalConfirmation } from "../../../app/components/Modal";
 import moment from "moment";
 import ModalDeleteMasivo from "../modals/ModalDeleteMasivo";
 import ModalFilter from "../modals/ModalFilter";
+import ModalEditAlumno from "../modals/ModalEditAlumno";
 
 const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
   const dispatch = HelperRedux.useDispatch();
@@ -24,7 +25,7 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
     item: { id: 0 },
   });
   const [showModal, setShowModal] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentAlumn, setCurrentAlumn] = useState<AlumnoProps>({} as AlumnoProps);
 
   useEffect(() => {
     if (alumnos.length === 0) getInitial();
@@ -73,6 +74,8 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
           <ModalAddAlumnoMasivo />
 
           <ModalDeleteMasivo  />
+
+          <ModalEditAlumno visible={showModal} onClosedModal={() => setShowModal(false)} alumno={currentAlumn} />
         </div>
       </div>
 
@@ -81,7 +84,7 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
         pageSize={10}
         columns={Columns.alumnos}
         onClickEdit={(row) => {
-          setCurrentUser(row);
+          setCurrentAlumn(row);
           setShowModal(true);
         }}
         onClickDelete={(row) =>
