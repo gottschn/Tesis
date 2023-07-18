@@ -14,6 +14,7 @@ import { Actions as ActionsExtensiones } from '../../../@redux/extension';
 import { Actions as ActionsCiudades } from '../../../@redux/ciudad';
 import { getCiudades } from "../../../domain/ciudades";
 import { getExtensiones } from "../../../domain/extensiones";
+import moment from "moment";
 
 
 const ModalEditAlumno:React.FC<{ 
@@ -70,7 +71,6 @@ const ModalEditAlumno:React.FC<{
             .catch(() => alert('Se produjo un bardo'))
     }, [])
     useEffect(() => {
-        
         setForm({
             id: props.alumno.id,
             legajo: props.alumno.legajo,
@@ -93,10 +93,8 @@ const ModalEditAlumno:React.FC<{
             desde: props.alumno.desde,
             hasta: props.alumno.hasta,
         })
-    }, [props.alumno?.id])
+    }, [props.alumno?.legajo])
     const handleSubmit = (e: any) => {
-        e.preventDefault();
-        // setErrorMsg(null);
         updateAlumno(
             form.id,
             form.legajo,
@@ -137,109 +135,93 @@ const ModalEditAlumno:React.FC<{
                         <Form.Group className="mb-3">
                             <Form.Label>Legajo</Form.Label>
                             <Form.Control
-                                key={form.legajo}
                                 type="text"
                                 placeholder="Legajo"
                                 name="legajo"
                                 value={form.legajo}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Nombre y Apellido</Form.Label>
                             <Form.Control
-                                key={form.apynom}
                                 type="text"
                                 placeholder="Nombre y Apellido"
                                 name="apynom"
                                 value={form.apynom}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Tipo de Documento</Form.Label>
                             <Form.Control
-                                key={form.tipoDoc}
                                 type="text"
                                 placeholder="Tipo de Documento"
                                 name="tipoDoc"
                                 value={form.tipoDoc}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Numero de Documento</Form.Label>
                             <Form.Control
-                                key={form.nroDoc}
                                 type="text"
                                 placeholder="Numero de Documento"
                                 name="nroDoc"
                                 value={form.nroDoc}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
-                        {/*    <Form.Group className="mb-3">
+                           <Form.Group className="mb-3">
                             <Form.Label>Fecha de Nacimiento</Form.Label>
                             <Form.Control
                                 type="date"
                                 placeholder="Fecha de Nacimiento"
                                 name="fechaNacimiento"
-                                value={fechaNacimiento}
+                                value={moment(form.fechaNacimiento).format('YYYY-MM-DD')}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
                             />
-                        </Form.Group> */}
+                        </Form.Group> 
                         <Form.Group className="mb-3">
                             <Form.Label>Direccion</Form.Label>
                             <Form.Control
-                                key={form.direccion}
                                 type="text"
                                 placeholder="Direccion"
                                 name="direccion"
                                 value={form.direccion}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Telefono</Form.Label>
                             <Form.Control
-                                key={form.telefono}
                                 type="text"
                                 placeholder="Telefono"
                                 name="telefono"
                                 value={form.telefono}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Mail</Form.Label>
                             <Form.Control
-                                key={form.mail}
                                 type="text"
                                 placeholder="Mail"
                                 name="mail"
                                 value={form.mail}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
-                        {/* <Form.Group className="mb-3">
+                         <Form.Group className="mb-3">
                             <Form.Label>Fecha de Ingreso</Form.Label>
                             <Form.Control
                                 type="date"
                                 placeholder="Fecha de Ingreso"
                                 name="fechaIngreso"
-                                value={newDateN}
+                                value={moment(form.fechaIngreso).format('YYYY-MM-DD')}
                                 onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
                             />
-                        </Form.Group> */}
+                        </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Carrera</Form.Label>
                             <Form.Control
@@ -248,7 +230,6 @@ const ModalEditAlumno:React.FC<{
                                 name="carreraId"
                                 value={form.carreraId}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             >
                                 <option key={`option-carera-0`} value={0}>Seleccione...</option>
                                 {carreras.carreras.map(x => <option key={`option-carera-${x.id}`} value={x.id}>{x.descripcion}</option>)}
@@ -262,7 +243,6 @@ const ModalEditAlumno:React.FC<{
                                 name="ciudadId"
                                 value={form.ciudadId}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             >
                                 <option key={`option-ciudad-0`} value={0}>Seleccione...</option>
                                 {ciudades.ciudades.map(x => <option key={`option-ciudad-${x.id}`} value={x.id}>{x.descripcion}</option>)}
@@ -276,7 +256,6 @@ const ModalEditAlumno:React.FC<{
                                 name="extensionId"
                                 value={form.extensionId}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             >
                                 <option key={`option-extension-0`} value={0}>Seleccione...</option>
                                 {extensiones.extensiones.map(x => <option key={`option-extension-${x.id}`} value={x.id}>{x.descripcion}</option>)}
@@ -285,13 +264,11 @@ const ModalEditAlumno:React.FC<{
                         <Form.Group className="mb-3">
                             <Form.Label>Codigo Postal</Form.Label>
                             <Form.Control
-                                key={form.codigoPostal}
                                 type="text"
                                 placeholder="Codigo Postal"
                                 name="codigoPostal"
                                 value={form.codigoPostal}
                                 onChange={handleChange}
-                                //onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
                         <div>

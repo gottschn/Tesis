@@ -29,7 +29,7 @@ const ModalAddAlumno = () => {
         legajo: '',
         tipoDoc: 0,
         nroDoc: '',
-        carrerasId: [],
+        carreraId: 0,
         carreras: [],
         pagos: [],
         fechaNacimiento: new Date(),
@@ -124,7 +124,7 @@ const ModalAddAlumno = () => {
             legajo: '',
             tipoDoc: 0,
             nroDoc: '',
-            carrerasId: [],
+            carreraId: 0,
             carreras: [],
             pagos: [],
             fechaNacimiento: new Date(),
@@ -149,7 +149,7 @@ const ModalAddAlumno = () => {
         setErrorMsg(null);
 
         createAlumno(form.legajo, form.apynom, form.tipoDoc, form.nroDoc, form.fechaNacimiento, form.direccion,
-            form.telefono, form.mail, form.fechaIngreso, form.carrerasId, form.extensionId, form.ciudadId, form.codigoPostal).then((x) => {
+            form.telefono, form.mail, form.fechaIngreso, form.carreraId, form.extensionId, form.ciudadId, form.codigoPostal).then((x) => {
                 dispatch(Actions.createAlumnos({
                     ...form,
                     id: x.data.value
@@ -290,8 +290,8 @@ const ModalAddAlumno = () => {
                             <Form.Control
                                 as={'select'}
                                 multiple={false}
-                                name="carrerasId"
-                                value={form.carrerasId}
+                                name="carreraId"
+                                value={form.carreraId}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             >
