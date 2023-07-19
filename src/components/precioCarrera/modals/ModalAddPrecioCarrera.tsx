@@ -20,13 +20,13 @@ const ModalAddPrecioCarrera = () => {
         fecha: new Date(),
         carreraId: 0,
     });
-    const { monto, matricula, carrera } = form;
 
-    const { precioCarrera, carreras } = HelperRedux.useSelector((state) => state)
     const dispatch = HelperRedux.useDispatch()
+    const { precioCarrera, carreras } = HelperRedux.useSelector((state) => state)
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [showModal, setShowModal] = useState(false);
     const [clearModal, setClearModal] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+
     const handleOpenModal = () => {
         setShowModal(true);
     };
@@ -42,7 +42,7 @@ const ModalAddPrecioCarrera = () => {
             id: 0,
             monto: 0,
             matricula: 0,
-            fecha: moment('YYYY-MM-DD').toDate(),
+            fecha: new Date(),
             carreraId: 0,
         }) 
          window.location.reload() 
@@ -136,7 +136,7 @@ const ModalAddPrecioCarrera = () => {
                                 type="text"
                                 placeholder="monto"
                                 name="monto"
-                                value={monto}
+                                value={form.monto}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -147,7 +147,7 @@ const ModalAddPrecioCarrera = () => {
                                 type="text"
                                 placeholder="Matricula"
                                 name="matricula"
-                                value={matricula}
+                                value={form.matricula}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />

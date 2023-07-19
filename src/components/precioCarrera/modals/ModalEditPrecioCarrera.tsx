@@ -1,134 +1,155 @@
 import { useState, useEffect } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
-import React from 'react';
+import React from "react";
 import { HelperRedux } from "../../../@redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { PrecioCarreraProps } from "../../../@redux/precioCarrera/types";
 import { updatePrecioCarreras } from "../../../domain/precioCarreras";
 import { Actions } from "../../../@redux/precioCarrera";
+import { Actions as ActionsCarrera } from "../../../@redux/carreras";
+import { getCarreras } from "../../../domain/carreras";
+import moment from "moment";
 
-const ModalEditPrecioCarrera:React.FC<{precioCuota:PrecioCarreraProps}> = ({...props}) => {
-    let DateNew = new Date();
-    const [form, setForm] = useState<PrecioCarreraProps>({
-        id: props.precioCuota.id,
-        monto: props.precioCuota.monto,
-        matricula: props.precioCuota.matricula,
-        fecha: props.precioCuota.fecha,
-        carreraId: props.precioCuota.carreraId,
+const ModalEditPrecioCarrera: React.FC<{
+  precioCarrera: PrecioCarreraProps;
+  visible: boolean;
+  onClosedModal: () => void;
+}> = ({ ...props }) => {
+  const [form, setForm] = useState<PrecioCarreraProps>(
+    {} as PrecioCarreraProps
+  );
+
+  const dispatch = HelperRedux.useDispatch();
+  const { carreras } = HelperRedux.useSelector((state) => state);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+  const handleChange = (e: any) => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    if (name === "carreraId") {
+      setForm({
+        ...form,
+        [name]: parseInt(value),
+      });
+      return;
+    }
+
+    setForm({
+      ...form,
+      [name]: value,
     });
-    const { id, monto , carreraId } = form;
-    const  dispatch = HelperRedux.useDispatch()
-    const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [showModal, setShowModal] = useState(false);
-    useEffect(() => {
-        setForm(form);
-    }, []);
+  };
 
-    const handleOpenModalEdit = () => {
-        setShowModal(true);
-      };
-    
-      const handleCloseModalEdit = () => {
-        setShowModal(false);
-      };
+  useEffect(() => {
+    getCarreras()
+      .then((x) => dispatch(ActionsCarrera.setCarrerasStore(x.data.value)))
+      .catch(() => alert("Se produjo un bardo"));
+  }, []);
 
-    const handleChange = (e: any) => {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value
-        });
-    };
+  useEffect(() => {
+    setForm({
+      id: props.precioCarrera.id,
+      monto: props.precioCarrera.monto,
+      matricula: props.precioCarrera.matricula,
+      fecha: props.precioCarrera.fecha,
+      carreraId: props.precioCarrera.carreraId,
+      carrera: props.precioCarrera.carrera,
+    });
+  }, [props.precioCarrera.id]);
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        if (monto === 0 || !carreraId) {
-          setErrorMsg('Todos los campos son obligatorios');
-          return;
-        }
-       
-        setErrorMsg(null);
-        updatePrecioCarreras(form.id, form.monto, form.matricula, DateNew, form.carreraId).then((x) => {
-          dispatch(Actions.updatePrecioCarreras({...form}, form.id));
-        })
-        
-        .catch(error => {console.log(error)})
-        .finally(() => {handleCloseModalEdit()})
-      };
-      
-    return (
-        <>
-             <Button /* Boton de mod */
-                        variant="warning"
-                        className='me-2'
-                        onClick={() => {
-                            handleOpenModalEdit()
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faPen} />
-              </Button>
-            <Modal
-                show={showModal}
-                size="lg"
-                aria-labelledby="contained-modal-title-vcenter"
-                centered
-            >
-                <Modal.Header className="modaltitle">
-                    <Modal.Title>
-                        Editar Precio Cuota
-                    </Modal.Title>
-                </Modal.Header>
-                <Form onSubmit={handleSubmit}>
-                    <Modal.Body>
-                    <Form.Group className="mb-3">
-                            <Form.Label>ID</Form.Label>
-                            <Form.Control
-                                type="id"
-                                placeholder="id"
-                                name="id"
-                                value={id}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Precio Cuota</Form.Label>
-                            <Form.Control
-                                type="number"
-                                placeholder="Monto"
-                                name="monto"
-                                value={monto}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Carrera</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Carrera"
-                                name="carreraId"
-                                value={carreraId}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <div>
-                            {errorMsg && (<p className="error-msg">{errorMsg}</p>)}
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="success" type="submit">
-                            Guardar
-                        </Button>
-                        <Button variant="danger" onClick={handleCloseModalEdit}>
-                            Cancelar
-                        </Button>
-                    </Modal.Footer>
-                </Form>
-            </Modal>
-        </>
-    );
+  const handleSubmit = (e: any) => {
+    updatePrecioCarreras(
+      form.id,
+      form.monto,
+      form.matricula,
+      form.fecha,
+      form.carreraId
+    )
+      .then(() => {
+        dispatch(Actions.updatePrecioCarreras({ ...form }, form.id));
+        alert("El Precio de Carrera se Modifico con Exito.");
+      })
+      .catch((error) => console.log(error))
+      .finally(() => props.onClosedModal());
+  };
+
+  return (
+    <>
+      <Modal
+        show={props.visible}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header className="modaltitle">
+          <Modal.Title>Editar Precio Carrera</Modal.Title>
+        </Modal.Header>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Body>
+            <Form.Group className="mb-3">
+              <Form.Label>Monto</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Monto"
+                name="monto"
+                value={form.monto}
+                onChange={handleChange}
+                onFocus={() => setErrorMsg(null)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Matricula</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Matricula"
+                name="matricula"
+                value={form.matricula}
+                onChange={handleChange}
+                onFocus={() => setErrorMsg(null)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Carrera</Form.Label>
+              <Form.Control
+                as={"select"}
+                multiple={false}
+                name="carreraId"
+                value={form.carreraId}
+                onChange={handleChange}
+              >
+                <option key={`option-carera-0`} value={0}>
+                  Seleccione...
+                </option>
+                {carreras.carreras.map((x) => (
+                  <option key={`option-carera-${x.id}`} value={x.id}>
+                    {x.descripcion}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Fecha</Form.Label>
+              <Form.Control
+                type="date"
+                placeholder="Fecha"
+                name="fecha"
+                value={moment(form.fecha).format('YYYY-MM-DD')}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="success" type="submit">
+              Guardar
+            </Button>
+            <Button variant="danger" onClick={props.onClosedModal}>
+              Cancelar
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+    </>
+  );
 };
 
 export default ModalEditPrecioCarrera;

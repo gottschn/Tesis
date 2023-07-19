@@ -13,20 +13,19 @@ import DataGrid from '../../../app/components/DataGrid';
 import { deleteCarreras, getCarreras } from '../../../domain/carreras';
 import Columns from './Carreras.json';
 import moment from 'moment';
+import ModalEditCarrera from '../modals/ModalEditCarrera';
 
 
-const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
+const CarreraList: React.FC<{ carrera: CarrerasProps }> = () => {
 
     const dispatch = HelperRedux.useDispatch()
     const { carreras } = HelperRedux.useSelector((state) => state.carreras)
     const [showModal, setShowModal] = useState(false);
-    const [currentUser, setCurrentUser] = useState({});
+    const [currentCarrera, setCurrentCarrera] = useState<CarrerasProps>({} as CarrerasProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
 
     useEffect(() => {
-        if (carreras.length === 0) {
-            getInitial()
-        }
+        if (carreras.length === 0) { getInitial() }
     }, [])
 
     const getInitial = () => {
@@ -67,9 +66,9 @@ const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
 
                 <div className="col-6 d-flex justify-content-end mb-1">
                     <ModalAddCarrera />
-                </div>
 
-                {/* <Modal visible={true} title={'a'} children={undefined} /> */}
+                    <ModalEditCarrera visible={showModal} onClosedModal={() => setShowModal(false)} carrera={currentCarrera} />
+                </div>
             </div>
             <DataGrid
                 singlePagination={true}
@@ -77,7 +76,7 @@ const CarreraList: React.FC<{ carrera: CarrerasProps }> = ({ ...props }) => {
                 pageSize={10}
                 columns={Columns.carreras}
                 onClickEdit={(row) => {
-                    setCurrentUser(row)
+                    setCurrentCarrera(row)
                     setShowModal(true)
                 }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}

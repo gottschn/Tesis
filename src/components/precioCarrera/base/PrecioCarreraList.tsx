@@ -17,10 +17,14 @@ import moment from 'moment';
 
 
 const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ...props }) => {
+
     const dispatch = HelperRedux.useDispatch()
-    const { precioCarreras } = HelperRedux.useSelector((state) => state.precioCarrera)
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
-    
+    const { precioCarreras } = HelperRedux.useSelector((state) => state.precioCarrera)
+ 
+    const [showModal, setShowModal] = useState(false);
+    const [currentPrecioCarrera, setCurrentPrecioCarrera] = useState<PrecioCarreraProps>({} as PrecioCarreraProps);
+
     useEffect(() => {
         if (precioCarreras.length === 0) {
             getInitial()
@@ -64,6 +68,7 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
 
                 <div className="col-6 d-flex justify-content-end mb-1">
                     <ModalAddPrecioCarrera />
+                    <ModalEditPrecioCarrera visible={showModal} onClosedModal={() => setShowModal(false)} precioCarrera={currentPrecioCarrera} />
                 </div>
             </div>
             <DataGrid
@@ -71,14 +76,17 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
                 subTableName='details'
                 pageSize={10}
                 columns={Columns.precioCarreras}
-                onClickEdit={(row) => { <ModalEditPrecioCarrera precioCuota={props.precioCarrera} /> }}
+                onClickEdit={(row) => {
+                    setCurrentPrecioCarrera(row);
+                    setShowModal(true);
+                }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
                 rows={precioCarreras.map(x => ({
                     ...x,
-                    fecha:moment(x.fecha).format('YYYY-MM-DD'),
-                    monto: `$ ${x.monto}` ,
-                    matricula: `$ ${x.matricula}` 
+                    fecha:moment(x.fecha).format("YYYY-MM-DD"),
+                   /*  monto:`$${x.monto}`,
+                    matricula:`$${x.matricula}`  */
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PrecioCarreraFilter onClosed={onClosedFilter} />}

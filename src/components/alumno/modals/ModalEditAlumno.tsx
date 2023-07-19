@@ -3,8 +3,6 @@ import { Modal, Form, Button } from "react-bootstrap";
 import React from 'react';
 import { HelperRedux } from "../../../@redux";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { AlumnoProps } from "../../../@redux/alumno/types";
 import { updateAlumno } from "../../../domain/alumnos";
 import { Actions } from "../../../@redux/alumno";
@@ -93,7 +91,7 @@ const ModalEditAlumno:React.FC<{
             desde: props.alumno.desde,
             hasta: props.alumno.hasta,
         })
-    }, [props.alumno?.legajo])
+    }, [props.alumno?.id])
     const handleSubmit = (e: any) => {
         updateAlumno(
             form.id,
@@ -112,6 +110,7 @@ const ModalEditAlumno:React.FC<{
             form.codigoPostal,
             ).then(() => {
             dispatch(Actions.updateAlumnos({...form}, form.id))
+            alert('El Alumno se Modifico con Exito.')
         })
         .catch(error => console.log(error, "Error"))
         .finally(() => props.onClosedModal())
