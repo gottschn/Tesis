@@ -20,6 +20,10 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
     const dispatch = HelperRedux.useDispatch()
     const { pagos } = HelperRedux.useSelector((state) => state.pagos)
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
+
+    const [showModal, setShowModal] = useState(false);
+    const [currentPagos, setCurrentPagos] = useState<PagosProps>({} as PagosProps);
+
     useEffect(() => {
         if (pagos.length === 0)
             getInitial();
@@ -64,6 +68,8 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
                     <ModalAddPagoCuota />
 
                     <ModalAddPagoMasivo />
+
+                    <ModalEditPago visible={showModal} onClosedModal={() => setShowModal(false)} pago={currentPagos} />
                 </div>
             </div>
 
@@ -72,14 +78,16 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
                 subTableName='details'
                 pageSize={10}
                 columns={Columns.pagocuotas}
-                onClickEdit={(row) => { <ModalEditPago pago={props.pago} /> }}
+                onClickEdit={(row) => {
+                    setCurrentPagos(row)
+                    setShowModal(true)
+                }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
                 rows={pagos.map(x => ({
                     ...x,
                     fechaCarga: moment(x.fechaCarga).format('YYYY-MM-DD'),
                     fechaRecibo: moment(x.fechaRecibo).format('YYYY-MM-DD'),
-                    monto: `$ ${x.monto}`
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PagoCuotasFilter onClosed={onClosedFilter} />}

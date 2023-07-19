@@ -5,7 +5,7 @@ import Footer from '../components/GlobalStyles/Footer'
 import HeaderOld from '../components/GlobalStyles/HeaderOld'
 /* Pages */
 import {
-    Home, AlumnosPage, CarrerasPage, PagoCuotasPage,
+    Home, AlumnosPage, CarrerasPage,
     PagoPage, PrecioCarrerasPage, CiudadesPage,
     UsuariosPage, EmpleadosPage, ExtensionesPage
 } from '../pages'
@@ -19,7 +19,6 @@ export const PageRoutes = () => {
                     <Route path='/home' element={<Home />} />
                     <Route path='/carreras' element={<CarrerasPage />} />
                     <Route path='/alumnos' element={<AlumnosPage />} />
-                    <Route path='/cuota' element={<PagoCuotasPage />} />
                     <Route path='/pago' element={<PagoPage />} />
                     <Route path='/preciocarrera' element={<PrecioCarrerasPage />} />
                     <Route path='/ciudad' element={<CiudadesPage />} />

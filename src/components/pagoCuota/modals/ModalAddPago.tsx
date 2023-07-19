@@ -18,8 +18,8 @@ const ModalAddPago = () => {
     const [form, setForm] = useState<PagosProps>({
         id: 0,
         legajo: '',
-        cantCuota: 0,
         monto: 0,
+        cantCuota: 0,
         nroRecibo: 0,
         fechaCarga: new Date(),
         fechaRecibo: new Date(),
@@ -67,18 +67,17 @@ const ModalAddPago = () => {
     const handlerClearFilter = () => {
         setClearModal(true)
         handleCloseModal()
-        /*   setForm({
+           setForm({
               id: 0,
+              alumnoId: 0,
               legajo: '',
-              cantCuota: 0,
-              nroCuota: 0,
               monto: 0,
+              cantCuota: 0,
               nroRecibo: 0,
               fechaCarga: new Date(),
               fechaRecibo: new Date(),
-              alumnoId: 0,
           })
-          window.location.reload() */
+          window.location.reload() 
     }
 
 
@@ -139,17 +138,6 @@ const ModalAddPago = () => {
                             </Form.Control>
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>Numeros de Cuotas</Form.Label>
-                            <Form.Control
-                                type="text"
-                                placeholder="Numeros de Cuotas"
-                                name="cantCuota"
-                                value={form.cantCuota}
-                                onChange={handleChange}
-                                onFocus={() => setErrorMsg(null)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
                             <Form.Label>Monto</Form.Label>
                             <Form.Control
                                 type="text"
@@ -161,16 +149,28 @@ const ModalAddPago = () => {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
-                            <Form.Label>numero de Recibo</Form.Label>
+                            <Form.Label>Numeros de Cuotas</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Numero de Recibo"
+                                placeholder="Numeros de Cuotas"
+                                name="cantCuota"
+                                value={form.cantCuota}
+                                onChange={handleChange}
+                                onFocus={() => setErrorMsg(null)}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Numeros de Recibos</Form.Label>
+                            <Form.Control
+                                type="text"
+                                placeholder="Numeros de Recibos"
                                 name="nroRecibo"
                                 value={form.nroRecibo}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
+
                         <Form.Group className="mb-3">
                             <Form.Label>Fecha de Carga</Form.Label>
                             <Form.Control

@@ -14,9 +14,7 @@ const ModalEditPrecioCarrera: React.FC<{
   visible: boolean;
   onClosedModal: () => void;
 }> = ({ ...props }) => {
-  const [form, setForm] = useState<PrecioCarreraProps>(
-    {} as PrecioCarreraProps
-  );
+  const [form, setForm] = useState<PrecioCarreraProps>( {} as PrecioCarreraProps);
 
   const dispatch = HelperRedux.useDispatch();
   const { carreras } = HelperRedux.useSelector((state) => state);

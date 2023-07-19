@@ -8,24 +8,20 @@ const getPagos = () => {
 const createPagos = (legajo: string, cantCuota: number, monto: number, nroRecibo: number, fechaCarga: Date, fechaRecibo: Date) => {
     return instance.post(`/pago`,{
         legajo,
-        cantCuota,
         monto,
+        cantCuota,
         nroRecibo,
         fechaCarga,
         fechaRecibo
     })
 } 
 
-const updatePagos = (id: number , legajo: string, cantCuota: number, monto: number,
-     nroRecibo: number, fechaCarga: Date, fechaRecibo: Date) => {
+const updatePagos = (id:number, legajo: string, monto:number, nroRecibo:number) => {
     return instance.put(`/pago`, {
         id,
         legajo,
-        cantCuota,
         monto,
         nroRecibo,
-        fechaCarga,
-        fechaRecibo
     })
 }
 
