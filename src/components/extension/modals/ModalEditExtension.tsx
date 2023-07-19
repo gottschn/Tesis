@@ -4,34 +4,25 @@ import { HelperRedux } from "../../../@redux";
 import { Actions } from "../../../@redux/extension";
 import { ExtensionProps } from '../../../@redux/extension/types';
 import { updateExtensiones } from '../../../domain/extensiones';
-
-
 import { Modal, Form, Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 
-const ModalEditExtension:React.FC<{extension:ExtensionProps}> = ({...props}) => {
+const ModalEditExtension:React.FC<{
+    extension:ExtensionProps;
+    visible: boolean;
+    onClosedModal: () => void;
+}> = ({...props}) => {
     
-    const [form, setForm] = useState<ExtensionProps>({
-        id: props.extension.id,
-        descripcion: props.extension.descripcion,
-      });
-      const { descripcion } = form;
+    const [form, setForm] = useState<ExtensionProps>({} as ExtensionProps);
 
     const  dispatch = HelperRedux.useDispatch()
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [showModal, setShowModal] = useState(false);
-    useEffect(() => {
-        setForm(form);
-    }, []);
 
-    const handleOpenModalEdit = () => {
-        setShowModal(true);
-      };
-    
-      const handleCloseModalEdit = () => {
-        setShowModal(false);
-      };
+    useEffect(() => {
+        setForm({
+            id: props.extension.id,
+            descripcion: props.extension.descripcion,
+        });
+    }, [props.extension.id]);
 
     const handleChange = (e: any) => {
         setForm({
@@ -42,33 +33,18 @@ const ModalEditExtension:React.FC<{extension:ExtensionProps}> = ({...props}) => 
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-    
-        if (descripcion === '') {
-          setErrorMsg('Todos los campos son obligatorios');
-          return;
-        }
-        setErrorMsg(null);
-        //dispatch(Actions.updateCarreras());
+ 
         updateExtensiones(form.id,form.descripcion).then(() => {
             dispatch(Actions.updateExtensiones({...form}, form.id))
         })
         .catch(error => console.log(error))
-        .finally(() => handleCloseModalEdit())
+        .finally(() => props.onClosedModal())
       };
       
     return (
         <>
-             <Button /* Boton de mod */
-                        variant="warning"
-                        className='me-2'
-                        onClick={() => {
-                            handleOpenModalEdit()
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faPen} />
-              </Button>
             <Modal
-                show={showModal}
+                show={props.visible}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -86,7 +62,7 @@ const ModalEditExtension:React.FC<{extension:ExtensionProps}> = ({...props}) => 
                                 type="text"
                                 placeholder="Nombre de la Extension"
                                 name="descripcion"
-                                value={descripcion}
+                                value={form.descripcion}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -99,7 +75,7 @@ const ModalEditExtension:React.FC<{extension:ExtensionProps}> = ({...props}) => 
                         <Button variant="success" type="submit">
                             Guardar
                         </Button>
-                        <Button variant="danger" onClick={handleCloseModalEdit}>
+                        <Button variant="danger" onClick={props.onClosedModal}>
                             Cancelar
                         </Button>
                     </Modal.Footer>

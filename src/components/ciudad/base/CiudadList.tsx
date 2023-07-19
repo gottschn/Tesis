@@ -12,7 +12,6 @@ import ModalAddCiudad from '../modals/ModalAddCiudad';
 import CiudadFilter from './CiudadFilter';
 import { CiudadesProps } from '../../../@redux/ciudad/types';
 import ModalEditCiudad from '../modals/ModalEditCiudad';
-import ModalDeleteCiudad from '../modals/ModalDeleteCiudad';
 import Columns from './Ciudades.json';
 import { ModalConfirmation } from '../../../app/components/Modal';
 
@@ -21,7 +20,9 @@ const CiudadList: React.FC<{ ciudad: CiudadesProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
     const { ciudades } = HelperRedux.useSelector((state) => state.ciudades)
+    const [currentCiudad, setCurrentCiudad] = useState<CiudadesProps>({} as CiudadesProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (ciudades.length === 0) {
@@ -65,6 +66,8 @@ const CiudadList: React.FC<{ ciudad: CiudadesProps }> = ({ ...props }) => {
 
                 <div className="col-6 d-flex justify-content-end mb-1">
                     <ModalAddCiudad />
+
+                    <ModalEditCiudad visible={showModal} onClosedModal={() => setShowModal(false)} ciudad={currentCiudad} />
                 </div>
             </div>
             <DataGrid
@@ -72,7 +75,10 @@ const CiudadList: React.FC<{ ciudad: CiudadesProps }> = ({ ...props }) => {
                 subTableName='details'
                 pageSize={10}
                 columns={Columns.ciudades}
-                onClickEdit={(row) => { <ModalEditCiudad ciudad={props.ciudad} /> }}
+                onClickEdit={(row) => {
+                    setCurrentCiudad(row)
+                    setShowModal(true)
+                }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
 

@@ -10,7 +10,6 @@ import DataGrid from '../../../app/components/DataGrid';
 import ExtensionFilter from './ExtensionFilter';
 import ModalAddExtension from '../modals/ModalAddExtension';
 import ModalEditExtension from '../modals/ModalEditExtension';
-import ModalDeleteExtension from '../modals/ModalDeleteExtension';
 /* icons */
 import Columns from './Extension.json';
 import { ModalConfirmation } from '../../../app/components/Modal';
@@ -19,7 +18,9 @@ const ExtensionList: React.FC<{ extension: ExtensionProps }> = ({ ...props }) =>
 
     const dispatch = HelperRedux.useDispatch()
     const { extensiones } = HelperRedux.useSelector((state) => state.extensiones)
+     const [currentExtension, setCurrentExtension] = useState<ExtensionProps>({} as ExtensionProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (extensiones.length === 0) {
@@ -63,6 +64,7 @@ const ExtensionList: React.FC<{ extension: ExtensionProps }> = ({ ...props }) =>
 
                 <div className="col-6 d-flex justify-content-end mb-1">
                     <ModalAddExtension />
+                    <ModalEditExtension visible={showModal} onClosedModal={() => setShowModal(false)} extension={currentExtension} />
                 </div>
             </div>
             <DataGrid
@@ -70,7 +72,10 @@ const ExtensionList: React.FC<{ extension: ExtensionProps }> = ({ ...props }) =>
                 subTableName='details'
                 pageSize={10}
                 columns={Columns.extension}
-                onClickEdit={(row) => { <ModalEditExtension extension={props.extension} /> }}
+                onClickEdit={(row) => { 
+                    setCurrentExtension(row)
+                    setShowModal(true)
+                }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
                 rows={extensiones.map(x => ({

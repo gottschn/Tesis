@@ -3,35 +3,27 @@ import { useState, useEffect } from "react";
 import { HelperRedux } from "../../../@redux";
 import { Actions } from "../../../@redux/ciudad";
 import { CiudadesProps } from "../../../@redux/ciudad/types";
-
-
 import { updateCiudades } from "../../../domain/ciudades";
 import { Modal, Form, Button } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 
-const ModalEditCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
+
+const ModalEditCiudad:React.FC<{
+    ciudad:CiudadesProps;
+    visible: boolean;
+    onClosedModal: () => void;
+}> = ({...props}) => {
     
-    const [form, setForm] = useState<CiudadesProps>({
-        id: props.ciudad.id,
-        descripcion: props.ciudad.descripcion,
-      });
-      const { descripcion } = form;
+    const [form, setForm] = useState<CiudadesProps>({} as CiudadesProps);
 
     const  dispatch = HelperRedux.useDispatch()
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [showModal, setShowModal] = useState(false);
-    useEffect(() => {
-        setForm(form);
-    }, []);
 
-    const handleOpenModalEdit = () => {
-        setShowModal(true);
-      };
-    
-      const handleCloseModalEdit = () => {
-        setShowModal(false);
-      };
+    useEffect(() => {
+        setForm({
+            id: props.ciudad.id,
+            descripcion: props.ciudad.descripcion,
+        });
+    }, [props.ciudad.id]);
 
     const handleChange = (e: any) => {
         setForm({
@@ -42,33 +34,20 @@ const ModalEditCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-    
-        if (descripcion === '') {
-          setErrorMsg('Todos los campos son obligatorios');
-          return;
-        }
         setErrorMsg(null);
-        //dispatch(Actions.updateCarreras());
+
         updateCiudades(form.id,form.descripcion).then(() => {
             dispatch(Actions.updateCiudades({...form}, form.id))
+            alert('La Ciudad se Modifico con Exito.');
         })
         .catch(error => console.log(error))
-        .finally(() => handleCloseModalEdit())
+        .finally(() => props.onClosedModal())
       };
       
     return (
         <>
-             <Button /* Boton de mod */
-                        variant="warning"
-                        className='me-2'
-                        onClick={() => {
-                            handleOpenModalEdit()
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faPen} />
-              </Button>
             <Modal
-                show={showModal}
+                show={props.visible}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -86,7 +65,7 @@ const ModalEditCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
                                 type="text"
                                 placeholder="Nombre de la carrera"
                                 name="descripcion"
-                                value={descripcion}
+                                value={form.descripcion}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -99,7 +78,7 @@ const ModalEditCiudad:React.FC<{ciudad:CiudadesProps}> = ({...props}) => {
                         <Button variant="success" type="submit">
                             Guardar
                         </Button>
-                        <Button variant="danger" onClick={handleCloseModalEdit}>
+                        <Button variant="danger" onClick={props.onClosedModal}>
                             Cancelar
                         </Button>
                     </Modal.Footer>
