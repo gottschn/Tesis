@@ -56,7 +56,7 @@ const addAlumnosMassivo = () => {
 }
 
  const deleteAlumnosMassivo = (desde:Date, hasta:Date) => {
-    return instance.delete(`/alumno/eliminarmasivo/${desde}, ${hasta}` )
+    return instance.delete(`/alumno/eliminarmasivo/?desde=${desde}&hasta=${hasta}` )
 } 
 
 

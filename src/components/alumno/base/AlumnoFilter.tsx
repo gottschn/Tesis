@@ -5,88 +5,27 @@ import React, { useState } from 'react'
 /** styles */
 import { HelperRedux } from '../../../@redux'
 import { Actions } from '../../../@redux/alumno'
-import { getAlumnos } from '../../../domain/alumnos'
 import { Button } from 'react-bootstrap'
 import { TextInput } from '../../../app/components/TextInput'
-import { log } from 'console'
 
 const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onClosed }) => {
 
     const dispatch = HelperRedux.useDispatch()
-    const { filter } = HelperRedux.useSelector((state) => state.alumnos)
 
-    const [id, setId] = useState('')
-    const [apynom, setApynom] = useState('')
-    const [tipoDoc, setTipoDoc] = useState('')
     const [nroDoc, setNroDoc] = useState('')
-    const [fechaNacimiento, setFechaNacimiento] = useState('')
-    const [fechaIngreso, setFechaIngreso] = useState('')
-    const [direccion, setDireccion] = useState('')
-    const [telefono, setTelefono] = useState('')
-    const [mail, setMail] = useState('')
-    const [extensionId, setExtensionId] = useState('')
-    const [extension, setExtension] = useState('')
-    const [ciudadId, setCiudadId] = useState('')
-    const [ciudad, setCiudad] = useState('')
-    const [codigoPostal, setCodigoPostal] = useState('')
-    const [pagos, setPagos] = useState('')
-    const [carrerasId, setCarrerasId] = useState('')
-    const [carreras, setCarreras] = useState('')
-
     const [legajo, setLegajo] = useState('')
 
 
     const handlerFilter = () => {
-
-        dispatch(Actions.getAlumnos(
-            id,
-            legajo,
-            apynom,
-            tipoDoc,
-            nroDoc,
-            fechaNacimiento,
-            fechaIngreso,
-            direccion,
-            telefono,
-            mail,
-            extensionId,
-            extension,
-            ciudadId,
-            ciudad,
-            codigoPostal,
-            pagos,
-            carrerasId,
-            carreras,
-        ))
-        console.log(filter.nroDoc,'check')
-
-        dispatch(Actions.setFilterAlumnosStore(filter.nroDoc, filter.legajo))
+        dispatch(Actions.setFilterAlumnosStore(nroDoc, legajo))
 
         onClosed(true)
     }
 
     const handlerClearFilter = () => {
-        setId('')
-        setApynom('')
-        setTipoDoc('')
+        dispatch(Actions.setFilterAlumnosStore('', ''))
+        setLegajo('')
         setNroDoc('')
-        setFechaNacimiento('')
-        setFechaIngreso('')
-        setDireccion('')
-        setTelefono('')
-        setMail('')
-        setExtensionId('')
-        setExtension('')
-        setCiudadId('')
-        setCiudad('')
-        setCodigoPostal('')
-        setPagos('')
-        setCarrerasId('')
-        setCarreras('')
-
-        dispatch(Actions.setFilterAlumnosStore(filter.nroDoc, filter.legajo))
-        getAlumnos().then(x => { dispatch(Actions.setAlumnosStore(x.data.value)) })
-
         onClosed(false)
     }
 
@@ -94,15 +33,15 @@ const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onC
         <div className='container-filter'>
             <main>
                 <TextInput
-                    value={filter.nroDoc}
-                    onChange={(event) => dispatch(Actions.setFilterAlumnosStore(event.target.value,filter.legajo))} 
+                    value={nroDoc}
+                    onChange={(event) => setNroDoc(event.target.value)} 
                     label='DNI'
                     
                 />
 
                 <TextInput
-                    value={filter.legajo}
-                    onChange={(event) => dispatch(Actions.setFilterAlumnosStore(filter.nroDoc, event.target.value))}
+                    value={legajo}
+                    onChange={(event) => setLegajo(event.target.value)}
                     label='Legajo'
                 />
             </main>

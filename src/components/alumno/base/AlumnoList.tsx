@@ -19,7 +19,7 @@ import ModalEditAlumno from "../modals/ModalEditAlumno";
 
 const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
   const dispatch = HelperRedux.useDispatch();
-  const { alumnos } = HelperRedux.useSelector((state) => state.alumnos);
+  const { alumnos, filter } = HelperRedux.useSelector((state) => state.alumnos);
   const [confirmationDelete, setConfirmationDelete] = useState({
     visible: false,
     item: { id: 0 },
@@ -90,7 +90,7 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
         onClickDelete={(row) =>
           setConfirmationDelete({ visible: true, item: row })
         }
-        rows={alumnos.map((x) => ({
+        rows={alumnos.filter(x => x.legajo.includes(filter.legajo) && x.nroDoc.includes(filter.nroDoc)).map((x) => ({
           ...x,
           pagos: x.pagos.length,
           fechaNacimiento: moment(x.fechaNacimiento).format("YYYY-MM-DD"),

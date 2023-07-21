@@ -61,7 +61,7 @@ const LoginForm: VFC<LoginFormProps> = ({ login, error, loading }) => {
                                 id="login-user"
                                 name="username"
                                 value={value}
-                                error={error?.message}
+                                error={error?.message ? true : false}
                                 onChange={onChange}
                                 disabled={loading}
                                 helperText={error?.message}
@@ -85,7 +85,7 @@ const LoginForm: VFC<LoginFormProps> = ({ login, error, loading }) => {
                                 name="password"
                                 type="password"
                                 value={value}
-                                error={error?.message}
+                                error={error?.message ? true : false }
                                 onChange={onChange}
                                 disabled={loading}
                                 helperText={error?.message}

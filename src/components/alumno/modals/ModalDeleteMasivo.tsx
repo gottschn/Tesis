@@ -4,10 +4,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
-import { AlumnoProps } from '../../../@redux/alumno/types';
-import { deleteAlumno, deleteAlumnosMassivo } from '../../../domain/alumnos';
-import { Actions } from '../../../@redux/alumno';
-import moment from 'moment';
+import { deleteAlumnosMassivo } from '../../../domain/alumnos';
 import { Button } from '@mui/material';
 
 const ModalDeleteMasivo = () => {
@@ -15,7 +12,6 @@ const ModalDeleteMasivo = () => {
     const [showModal, setShowModal] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [clearModal, setClearModal] = useState(false);
-    const [form, setForm] = useState<AlumnoProps>({} as AlumnoProps);
 
     const handleOpenModal = () => {
         setShowModal(true);
@@ -28,29 +24,21 @@ const ModalDeleteMasivo = () => {
     const handlerClearFilter = () => {
         setClearModal(true)
         handleCloseModal()
-        /* setForm({
-            id: 0,
-            nombre: '',   
-        }) */
-        /* window.location.reload() */
     }
-      const handleSubmit = (e: any) => {
+      const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        const { desde, hasta } = e.currentTarget
         setErrorMsg(null);
-
-        /* deleteAlumnosMassivo(form.desde, form.hasta ).then((x) => {
-                dispatch(Actions.deleteAlumnosMasivo({
-                    ...form,
-                    data: x.data,
-                }));
+        
+        deleteAlumnosMassivo(desde.value, hasta.value).then((x) => {
                 alert('Se Elimino Masivamente.')
+                window.location.reload()
             })
             .catch(error => {
                 console.log('deleteAlumnosMasivo', error)
 
             })
-            .finally(() => handlerClearFilter()) */ 
+            .finally(() => handlerClearFilter())
     };
 
     return (

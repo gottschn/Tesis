@@ -19,7 +19,7 @@ interface StateProps {
     isLoading: boolean;
     alumnos: AlumnoProps[];
     filter: {
-        nroDoc: number | string,
+        nroDoc: string,
         legajo: string,
     };
 }
