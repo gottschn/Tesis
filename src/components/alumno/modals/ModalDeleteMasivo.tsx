@@ -15,6 +15,7 @@ const ModalDeleteMasivo = () => {
     const [showModal, setShowModal] = useState(false);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const [clearModal, setClearModal] = useState(false);
+    const [form, setForm] = useState<AlumnoProps>({} as AlumnoProps);
 
     const handleOpenModal = () => {
         setShowModal(true);
@@ -38,10 +39,10 @@ const ModalDeleteMasivo = () => {
 
         setErrorMsg(null);
 
-       /*  deleteAlumnosMassivo(form.desde, form.hasta ).then((x) => {
+        /* deleteAlumnosMassivo(form.desde, form.hasta ).then((x) => {
                 dispatch(Actions.deleteAlumnosMasivo({
                     ...form,
-                    data: x.data
+                    data: x.data,
                 }));
                 alert('Se Elimino Masivamente.')
             })
@@ -49,7 +50,7 @@ const ModalDeleteMasivo = () => {
                 console.log('deleteAlumnosMasivo', error)
 
             })
-            .finally(() => handlerClearFilter()) */
+            .finally(() => handlerClearFilter()) */ 
     };
 
     return (

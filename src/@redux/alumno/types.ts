@@ -18,7 +18,10 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     alumnos: AlumnoProps[];
-    filter: AlumnosFilter;
+    filter: {
+        nroDoc: number | string,
+        legajo: string,
+    };
 }
 
 interface AlumnoProps {
@@ -45,7 +48,7 @@ interface AlumnoProps {
 }
 
 interface AlumnosFilter {
-    dni: number | string,
+    nroDoc: number | string,
     legajo: number | string,
  }
 

@@ -70,12 +70,10 @@ const deleteAlumnos = ( data: any ) => ({
     data
 })
 
-const setFilterAlumnosStore = ( data: AlumnosFilter = {
-    dni: '',
-    legajo: '',
-})  => ({
+const setFilterAlumnosStore = ( nroDoc: number | string, legajo: string,)  => ({
     type: TypeActions.SET_ALUMNO_FILTER_STORE,
-    data
+    nroDoc,
+    legajo
 })
 
 const addAlumnosMasivo = () => ({

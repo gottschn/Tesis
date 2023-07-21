@@ -27,7 +27,7 @@ const ModalFilter = () => {
     };
     const handlerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        /* getFiltros().then(x => alert('todo bien')) */
+         /* getFiltros().then(x => alert('todo bien')) */
     }
 
     return (

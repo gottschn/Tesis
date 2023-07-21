@@ -20,7 +20,7 @@ interface UsuarioProps {
     id: number;
     nombre: string;
     password: string;
-    rol: number ;
+    rol: number;
     personaId: number;
 }
 

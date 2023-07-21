@@ -30,11 +30,13 @@ const ModalAddEmpleado = () => {
         telefono: '',
         mail: '',
         extensionId: 0,
+        extension: '',
         ciudadId: 0,
+        ciudad: '',
         codigoPostal: 0,
         areaTrabajo: '',
     });
-
+    
     const dispatch = HelperRedux.useDispatch()
     const { extensiones, ciudades } = HelperRedux.useSelector((state) => state)
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -55,7 +57,7 @@ const ModalAddEmpleado = () => {
         if (name === 'extensionId') {
             setForm({
                 ...form,
-                [name]: [(value)],
+                [name]: parseInt(value),
             });
             return
         }
@@ -63,7 +65,7 @@ const ModalAddEmpleado = () => {
         if (name === 'ciudadId') {
             setForm({
                 ...form,
-                [name]: [(value)],
+                [name]: parseInt(value),
             });
             return
         }
@@ -106,8 +108,9 @@ const ModalAddEmpleado = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         setErrorMsg(null);
-        createEmpleado(form.apynom, form.tipoDoc, form.nroDoc,form.fechaNacimiento, form.direccion, form.telefono,
-            form.mail,form.areaTrabajo, form.ciudadId, form.extensionId).then((x) => {
+        createEmpleado(form.apynom, form.tipoDoc, form.nroDoc, form.fechaNacimiento,
+            form.direccion,form.telefono,form.mail,form.areaTrabajo,
+            form.ciudadId, form.extensionId).then((x) => {
                 dispatch(Actions.createEmpleados({
                     ...form,
                     id: x.data.value

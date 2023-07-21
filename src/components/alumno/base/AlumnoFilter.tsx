@@ -8,14 +8,13 @@ import { Actions } from '../../../@redux/alumno'
 import { getAlumnos } from '../../../domain/alumnos'
 import { Button } from 'react-bootstrap'
 import { TextInput } from '../../../app/components/TextInput'
-import moment from 'moment'
-
-/** redux */
+import { log } from 'console'
 
 const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onClosed }) => {
-    
 
     const dispatch = HelperRedux.useDispatch()
+    const { filter } = HelperRedux.useSelector((state) => state.alumnos)
+
     const [id, setId] = useState('')
     const [apynom, setApynom] = useState('')
     const [tipoDoc, setTipoDoc] = useState('')
@@ -59,6 +58,9 @@ const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onC
             carrerasId,
             carreras,
         ))
+        console.log(filter.nroDoc,'check')
+
+        dispatch(Actions.setFilterAlumnosStore(filter.nroDoc, filter.legajo))
 
         onClosed(true)
     }
@@ -82,8 +84,8 @@ const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onC
         setCarrerasId('')
         setCarreras('')
 
+        dispatch(Actions.setFilterAlumnosStore(filter.nroDoc, filter.legajo))
         getAlumnos().then(x => { dispatch(Actions.setAlumnosStore(x.data.value)) })
-        dispatch(Actions.setFilterAlumnosStore())
 
         onClosed(false)
     }
@@ -92,14 +94,15 @@ const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onC
         <div className='container-filter'>
             <main>
                 <TextInput
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
+                    value={filter.nroDoc}
+                    onChange={(event) => dispatch(Actions.setFilterAlumnosStore(event.target.value,filter.legajo))} 
                     label='DNI'
+                    
                 />
 
                 <TextInput
-                    value={legajo}
-                    onChange={(e) => setLegajo(e.target.value)}
+                    value={filter.legajo}
+                    onChange={(event) => dispatch(Actions.setFilterAlumnosStore(filter.nroDoc, event.target.value))}
                     label='Legajo'
                 />
             </main>

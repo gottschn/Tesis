@@ -10,18 +10,20 @@ import DataGrid from '../../../app/components/DataGrid';
 import UsuarioFilter from './UsuarioFilter';
 import ModalEditUsuario from '../modals/ModalEditUsuario';
 import ModalAddUsuario from '../modals/ModalAddUsuario';
-import ModalDeleteUsuario from '../modals/ModalDeleteUsuario';
 /* icons */
 
 import Columns from './Usuarios.json';
 import { ModalConfirmation } from '../../../app/components/Modal';
+import { current } from '@reduxjs/toolkit';
 
 
 const UsuarioList: React.FC<{ usuario: UsuarioProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
     const { usuarios } = HelperRedux.useSelector((state) => state.usuarios)
+    const [currentUsuario, setCurrentUsuario] = useState<UsuarioProps>({} as UsuarioProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         getInitial()
@@ -63,6 +65,8 @@ const UsuarioList: React.FC<{ usuario: UsuarioProps }> = ({ ...props }) => {
 
                 <div className="col-6 d-flex justify-content-end mb-1">
                     <ModalAddUsuario />
+                    <ModalEditUsuario visible={showModal} onClosedModal={() => setShowModal(false)} usuario={currentUsuario} />
+
                 </div>
             </div>
             <DataGrid
@@ -70,7 +74,10 @@ const UsuarioList: React.FC<{ usuario: UsuarioProps }> = ({ ...props }) => {
                 subTableName='details'
                 pageSize={10}
                 columns={Columns.usuarios}
-                onClickEdit={(row) => { <ModalEditUsuario usuario={props.usuario} /> }}
+                onClickEdit={(row) => { 
+                    setCurrentUsuario(row)
+                    setShowModal(true)
+                }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
                 rows={usuarios.map(x => ({

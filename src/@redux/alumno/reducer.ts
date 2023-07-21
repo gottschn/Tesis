@@ -4,7 +4,7 @@ const initialState: StateProps = {
     isLoading: false,
     alumnos: [],
     filter: {
-        dni: '',
+        nroDoc: '',
         legajo: '',
     }
 }
@@ -62,6 +62,15 @@ const reducer = (state = initialState, action: any = {} ) => {
                 alumnos: [],
             }
             break;
+            case TypeActions.SET_ALUMNO_FILTER_STORE:
+            nextState = {
+                ...state,
+                filter: {
+                    nroDoc: action.nroDoc,
+                    legajo: action.legajo
+                }
+            }
+            break
         default:
             nextState = state
             break;

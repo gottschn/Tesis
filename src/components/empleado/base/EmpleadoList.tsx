@@ -13,12 +13,15 @@ import { EmpleadosProps } from '../../../@redux/empleado/types';
 import ModalAddEmpleado from '../modals/ModalAddEmpleado';
 import moment from 'moment';
 import { ModalConfirmation } from '../../../app/components/Modal';
+import ModalEditEmpleado from '../modals/ModalEditEmpleado';
 
 const EmpleadoList: React.FC<{ empleados: EmpleadosProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
     const { empleados } = HelperRedux.useSelector((state) => state.empleados)
+    const [currentEmpleado, setCurrentEmpleado] = useState<EmpleadosProps>({} as EmpleadosProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (empleados.length === 0)
@@ -61,6 +64,7 @@ const EmpleadoList: React.FC<{ empleados: EmpleadosProps }> = ({ ...props }) => 
 
                 <div className="">
                     <ModalAddEmpleado />
+                    <ModalEditEmpleado visible={showModal} onClosedModal={() => setShowModal(false)} empleado={currentEmpleado} />
                 </div>
             </div>
 
@@ -69,12 +73,15 @@ const EmpleadoList: React.FC<{ empleados: EmpleadosProps }> = ({ ...props }) => 
                 subTableName='details'
                 pageSize={10}
                 columns={Columns.empleados}
-                /*  onClickEdit={(row) => { <ModalEditAlumno alumno={props.alumno} /> }} */
+                 onClickEdit={(row) => { 
+                    setCurrentEmpleado(row)
+                    setShowModal(true)
+                 }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
                 rows={empleados.map(x => ({
                     ...x,
-                    fecha: moment(x.fechaNacimiento).format('YYYY-MM-DD')
+                    fechaNacimiento: moment(x.fechaNacimiento).format("YYYY-MM-DD"),
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <EmpleadoFilter onClosed={onClosedFilter} />}

@@ -9,31 +9,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { updateUsuarios } from '../../../domain/usuarios';
 
-const ModalEditUsuario:React.FC<{usuario:UsuarioProps}> = ({...props}) => {
-    
-    const [form, setForm] = useState<UsuarioProps>({
+const ModalEditUsuario:React.FC<{
+    usuario:UsuarioProps;
+    visible: boolean;
+    onClosedModal: () => void
+}> = ({...props}) => {
+    const [form, setForm] = useState<UsuarioProps>({} as UsuarioProps);
+
+    const  dispatch = HelperRedux.useDispatch()
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
+    useEffect(() => {
+        setForm({
         id: props.usuario.id,
         nombre: props.usuario.nombre,
         password: props.usuario.password,
         rol: props.usuario.rol,
         personaId: props.usuario.personaId
-      });
-      const { nombre,password,rol } = form;
-
-    const  dispatch = HelperRedux.useDispatch()
-    const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [showModal, setShowModal] = useState(false);
-    useEffect(() => {
-        setForm(form);
-    }, []);
-
-    const handleOpenModalEdit = () => {
-        setShowModal(true);
-      };
-    
-      const handleCloseModalEdit = () => {
-        setShowModal(false);
-      };
+        });
+    }, [props.usuario.id]);
 
     const handleChange = (e: any) => {
         setForm({
@@ -44,33 +38,18 @@ const ModalEditUsuario:React.FC<{usuario:UsuarioProps}> = ({...props}) => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-    
-        if (nombre === '') {
-          setErrorMsg('Todos los campos son obligatorios');
-          return;
-        }
-        setErrorMsg(null);
-        //dispatch(Actions.updateCarreras());
+        
         updateUsuarios(form.id,form.nombre, form.password, form.rol, form.personaId).then(() => {
             dispatch(Actions.updateUsuarios({...form}, form.id))
         })
         .catch(error => console.log(error))
-        .finally(() => handleCloseModalEdit())
+        .finally(() => props.onClosedModal())
       };
       
     return (
         <>
-             <Button
-                        variant="warning"
-                        className='me-2'
-                        onClick={() => {
-                            handleOpenModalEdit()
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faPen} />
-              </Button>
             <Modal
-                show={showModal}
+                show={props.visible}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -88,7 +67,7 @@ const ModalEditUsuario:React.FC<{usuario:UsuarioProps}> = ({...props}) => {
                                 type="text"
                                 placeholder="Nombre del Usuario"
                                 name="nombre"
-                                value={nombre}
+                                value={form.nombre}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -99,7 +78,7 @@ const ModalEditUsuario:React.FC<{usuario:UsuarioProps}> = ({...props}) => {
                                 type="text"
                                 placeholder="Contraseña"
                                 name="password"
-                                value={password}
+                                value={form.password}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -110,7 +89,7 @@ const ModalEditUsuario:React.FC<{usuario:UsuarioProps}> = ({...props}) => {
                                 type="text"
                                 placeholder="Rol"
                                 name="rol"
-                                value={rol}
+                                value={form.rol}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
@@ -123,7 +102,7 @@ const ModalEditUsuario:React.FC<{usuario:UsuarioProps}> = ({...props}) => {
                         <Button variant="success" type="submit">
                             Guardar
                         </Button>
-                        <Button variant="danger" onClick={handleCloseModalEdit}>
+                        <Button variant="danger" onClick={props.onClosedModal}>
                             Cancelar
                         </Button>
                     </Modal.Footer>

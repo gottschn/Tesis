@@ -6,10 +6,10 @@ const getEmpleados = () => {
 }
 
 
- const createEmpleado = (apynom:string, tipoDoc: number | string, nroDoc: string, 
-    fechaNacimiento: Date, direccion: string, telefono: string,  mail: string,
-    areaTrabajo: string, ciudadId: number,extensionId:number ) => {
-    return instance.post(`/empleado`,{
+ const createEmpleado = (apynom:string, tipoDoc: number, nroDoc:string, 
+    fechaNacimiento: Date, direccion: string, telefono: string, mail: string,
+    areaTrabajo:string, ciudadId:number, extensionId:number ) => {
+    return instance.post(`/Empleado`,{
         apynom,
         tipoDoc,
         nroDoc,
@@ -19,7 +19,7 @@ const getEmpleados = () => {
         mail,
         areaTrabajo,
         ciudadId,
-        extensionId
+        extensionId,
     })
 }
 
