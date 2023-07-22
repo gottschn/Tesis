@@ -21,7 +21,9 @@ interface StateProps {
     isLoading: boolean;
     pagos: PagosProps[];
     alumnos: AlumnoProps[]; 
-    filter: PagosFilter;
+    filter: {
+        legajo: string,
+    };
 }
 
 interface PagosProps {

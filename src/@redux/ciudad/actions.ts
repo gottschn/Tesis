@@ -39,12 +39,9 @@ const deleteCiudades = ( data: any ) => ({
     data
 })
 
-const setFilterCiudadesStore = (data: CiudadesFilter  = {
-    id: '', 
-    descripcion: '', 
-}) => ({
+const setFilterCiudadesStore = (descripcion: string) => ({
     type: TypeActions.SET_CIUDADES_FILTER_STORE,
-    data
+    descripcion
 })
 
 

@@ -57,6 +57,14 @@ const reducer = (state = initialState, action: any = {} ) => {
                 pagos: state.pagos.filter((pago) => pago.id !== action.data.id),
             }
             break;
+            case TypeActions.SET_PAGO_FILTER_STORE:
+            nextState = {
+                ...state,
+                filter: {
+                    legajo: action.legajo
+                }
+            }
+            break;
         default:
             nextState = state
             break;

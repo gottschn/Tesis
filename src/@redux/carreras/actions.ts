@@ -43,9 +43,8 @@ const deleteCarreras = ( data: any ) => ({
     data
 })
 
-const setFilterCarreraStore = (id: number | string, descripcion: string) => ({
+const setFilterCarreraStore = (descripcion: string) => ({
     type: TypeActions.SET_CARRERA_FILTER_STORE,
-    id,
     descripcion
 })
 

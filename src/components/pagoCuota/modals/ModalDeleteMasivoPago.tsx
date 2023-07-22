@@ -3,8 +3,8 @@ import { Modal, Form } from 'react-bootstrap';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { deleteAlumnosMassivo } from '../../../domain/alumnos';
 import { Button } from '@mui/material';
+import { deletePagosMassivo } from '../../../domain/pagos';
 
 const ModalDeleteMasivo = () => {
     const [showModal, setShowModal] = useState(false);
@@ -28,12 +28,12 @@ const ModalDeleteMasivo = () => {
         const { desde, hasta } = e.currentTarget
         setErrorMsg(null);
         
-        deleteAlumnosMassivo(desde.value, hasta.value).then((x) => {
+        deletePagosMassivo(desde.value, hasta.value).then((x) => {
                 alert('Se Elimino Masivamente.')
                 window.location.reload()
             })
             .catch(error => {
-                console.log('deleteAlumnosMasivo', error)
+                console.log('deletePagosMasivo', error)
 
             })
             .finally(() => handlerClearFilter())
@@ -41,7 +41,7 @@ const ModalDeleteMasivo = () => {
 
     return (
         <>
-             <Button  /* Boton de eliminar */
+             <Button
                   className='modalMargin'
                   size='small'
                   variant="contained"

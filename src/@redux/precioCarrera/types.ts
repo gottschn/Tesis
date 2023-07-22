@@ -17,8 +17,8 @@ interface StateProps {
     precioCarreras: PrecioCarreraProps[];
     carreras?: CarrerasProps[];
     filter: {
-        carreraId: number | string,
-        monto: number | string,
+        carrera: string,
+        id: number | string,
     };
 }
 

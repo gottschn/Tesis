@@ -13,7 +13,9 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     ciudades: CiudadesProps[];
-    filter: CiudadesFilter;
+    filter: {
+        descripcion: string,
+    };
 }
 
 interface CiudadesProps {

@@ -33,10 +33,15 @@ const addPagosMassivo = () => {
     return instance.post(`/pago/cargamasiva`)
 }
 
+const deletePagosMassivo = (desde:Date, hasta:Date) => {
+    return instance.delete(`/pago/eliminarmasivo/?desde=${desde}&hasta=${hasta}` )
+} 
+
 export {
     getPagos,
     createPagos,
     updatePagos,
     deletePagos,
-    addPagosMassivo
+    addPagosMassivo,
+    deletePagosMassivo
 }

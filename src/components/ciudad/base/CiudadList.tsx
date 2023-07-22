@@ -19,7 +19,7 @@ import { ModalConfirmation } from '../../../app/components/Modal';
 const CiudadList: React.FC<{ ciudad: CiudadesProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
-    const { ciudades } = HelperRedux.useSelector((state) => state.ciudades)
+    const { ciudades, filter} = HelperRedux.useSelector((state) => state.ciudades)
     const [currentCiudad, setCurrentCiudad] = useState<CiudadesProps>({} as CiudadesProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
     const [showModal, setShowModal] = useState(false);
@@ -82,7 +82,7 @@ const CiudadList: React.FC<{ ciudad: CiudadesProps }> = ({ ...props }) => {
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
 
-                rows={ciudades.map(x => ({
+                rows={ciudades.filter(x => x.descripcion.includes(filter.descripcion)).map(x => ({
                     ...x,
                 }),
                 )}

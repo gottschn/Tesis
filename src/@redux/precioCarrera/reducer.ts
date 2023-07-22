@@ -5,8 +5,8 @@ const initialState: StateProps = {
     precioCarreras: [],
     carreras: [],
     filter: {
-        carreraId: '',
-        monto: '',
+        carrera: '',
+        id: 0,
     }
 
 }
@@ -62,8 +62,8 @@ const reducer = (state = initialState, action: any = {}) => {
             nextState = {
                 ...state,
                 filter: {
-                    carreraId: action.carreraId,
-                    monto: action.monto
+                    carrera: action.carrera,
+                    id: action.id
                 }
             }
             break;

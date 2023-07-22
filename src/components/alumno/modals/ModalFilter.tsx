@@ -13,9 +13,8 @@ import { getFiltros } from '../../../domain/filtros';
 
 const ModalFilter = () => {
 
-    const dispatch = HelperRedux.useDispatch()
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-
+    const [clearModal, setClearModal] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
     const handleOpenModal = () => {
@@ -25,9 +24,23 @@ const ModalFilter = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+    const handlerClearFilter = () => {
+        setClearModal(true)
+        handleCloseModal()
+    }
+
     const handlerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-         /* getFiltros().then(x => alert('todo bien')) */
+        const { fechaDeCorte } = e.currentTarget
+         getFiltros(fechaDeCorte.value).then((x) => {
+            alert('Se Filtro Correctamente.')
+            window.location.reload()
+        })
+        .catch(error => {
+            console.log('GetFiltro', error)
+
+        })
+        .finally(() => handlerClearFilter())
     }
 
     return (
@@ -58,7 +71,6 @@ const ModalFilter = () => {
                                 type="date"
                                 placeholder="Fecha de Corte"
                                 name="fechaDeCorte"
-                                /* value={moment(form.fechaNacimiento).format('YYYY-MM-DD')} */
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
@@ -70,7 +82,6 @@ const ModalFilter = () => {
                         <Button 
                         variant="contained" 
                         color="success"
-                        /* onClick={onConfirmMassiveCreate}  */
                         type="submit">
                             Añadir Importacion
                         </Button>

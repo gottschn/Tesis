@@ -19,7 +19,7 @@ import ModalEditCarrera from '../modals/ModalEditCarrera';
 const CarreraList: React.FC<{ carrera: CarrerasProps }> = () => {
 
     const dispatch = HelperRedux.useDispatch()
-    const { carreras } = HelperRedux.useSelector((state) => state.carreras)
+    const { carreras, filter } = HelperRedux.useSelector((state) => state.carreras)
     const [showModal, setShowModal] = useState(false);
     const [currentCarrera, setCurrentCarrera] = useState<CarrerasProps>({} as CarrerasProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
@@ -81,7 +81,7 @@ const CarreraList: React.FC<{ carrera: CarrerasProps }> = () => {
                 }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
-                rows={carreras.map(x => ({
+                rows={carreras.filter(x => x.descripcion.includes(filter.descripcion)).map(x => ({
                     ...x,
                     fecha: moment(x.fecha).format('YYYY-MM-DD'),
                     precioCarrera: `$ ${x.precioCarrera}`

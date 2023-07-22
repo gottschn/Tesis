@@ -5,7 +5,6 @@ const initialState: StateProps = {
     isLoading: false,
     carreras: [],
     filter: {
-        id: '',
         descripcion: ''
     }
 
@@ -62,7 +61,6 @@ const reducer = (state = initialState, action: any = {}) => {
             nextState = {
                 ...state,
                 filter: {
-                    id: action.id,
                     descripcion: action.descripcion
                 }
             }

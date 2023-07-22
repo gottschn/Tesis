@@ -45,10 +45,9 @@ const deletePrecioCarreras = ( data: any ) => ({
     data
 })
 
-const setPrecioCarrerasFilter = (carreraId: number | string, monto: number | string) => ({
+const setPrecioCarrerasFilter = (id: number | string) => ({
     type: TypeActions.SET_PRECIO_CARRERA_FILTER_STORE,
-    carreraId,
-    monto
+    id
 })
 
 

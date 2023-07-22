@@ -1,51 +1,38 @@
 import React, { useState } from 'react'
-
-/** components */
-
-/** styles */
 import { HelperRedux } from '../../../@redux'
 import { Actions } from '../../../@redux/carreras'
-import { getCarreras } from '../../../domain/carreras'
-import { Button } from 'react-bootstrap'
+
+/** components */
 import { TextInput } from '../../../app/components/TextInput'
 
-/** redux */
-
+/** styles */
+import { getCarreras } from '../../../domain/carreras'
+import { Button } from 'react-bootstrap'
 
 const CarreraFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onClosed }) => {
   const dispatch = HelperRedux.useDispatch()
-  const { filter } = HelperRedux.useSelector(state => state.carreras)
+  const [descripcion, setDescripcion] = useState('')
 
   const handlerClearFilter = () => {
 
     getCarreras().then(x => { dispatch(Actions.setCarrerasStore(x.data.value)) })
-    dispatch(Actions.setFilterCarreraStore(0, ''))
-
+    dispatch(Actions.setFilterCarreraStore(''))
+    setDescripcion('')
     onClosed(false)
   }
   const handlerFilter = () => {
-
-    dispatch(Actions.getCarreras(filter.id, filter.descripcion))
-
-    console.log(filter.id, "funca xd")
-
+    dispatch(Actions.setFilterCarreraStore(descripcion))
     onClosed(true)
   }
 
   return (
-    <div className='container-filter' style={{ width: '270px' }} >
+    <div className='container-filter' style={{ width: '260px' }} >
 
       <TextInput
-        value={filter.id}
-        onChange={(event) => dispatch(Actions.setFilterCarreraStore(event.target.value, filter.descripcion))}
-        label='Codigo de Carrera'
+        value={descripcion}
+        onChange={(event) => setDescripcion(event.target.value)}
+        label='Nombre de la Carrera'
       />
-      <TextInput
-        value={filter.descripcion}
-        onChange={(event) => dispatch(Actions.setFilterCarreraStore(filter.id, event.target.value,))}
-        label='Descripcion'
-      />
-
 
       <footer className='d-flex justify-content-between mt-3'>
         <div className='d-flex'>
@@ -53,13 +40,15 @@ const CarreraFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ on
             className='btn mx-1'
             title='Limpiar'
             onClick={handlerClearFilter}
+            variant='outline-danger'
           >
             Limpiar
           </Button>
 
           <Button
-            className='btn'
+            className='btn mx-5'
             title='Aplicar'
+            variant= 'outline-success'
             onClick={handlerFilter}
           >
             Aplicar

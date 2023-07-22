@@ -14,11 +14,12 @@ import Columns from './Pago.json';
 import ModalAddPagoMasivo from '../modals/ModalAddPagoMasivo';
 import moment from 'moment';
 import { ModalConfirmation } from '../../../app/components/Modal';
+import ModalDeleteMasivoPago from '../modals/ModalDeleteMasivoPago';
 
 const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
-    const { pagos } = HelperRedux.useSelector((state) => state.pagos)
+    const { pagos, filter} = HelperRedux.useSelector((state) => state.pagos)
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
 
     const [showModal, setShowModal] = useState(false);
@@ -65,9 +66,11 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
                 </div>
 
                 <div className="">
-                    <ModalAddPagoCuota />
 
                     <ModalAddPagoMasivo />
+                    <ModalDeleteMasivoPago />
+                    <ModalAddPagoCuota />
+                    
 
                     <ModalEditPago visible={showModal} onClosedModal={() => setShowModal(false)} pago={currentPagos} />
                 </div>
@@ -84,7 +87,7 @@ const PagoList: React.FC<{ pago: PagosProps }> = ({ ...props }) => {
                 }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
-                rows={pagos.map(x => ({
+                rows={pagos.filter( x => x.legajo.includes(filter.legajo)).map(x => ({
                     ...x,
                     fechaCarga: moment(x.fechaCarga).format('YYYY-MM-DD'),
                     fechaRecibo: moment(x.fechaRecibo).format('YYYY-MM-DD'),

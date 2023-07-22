@@ -30,7 +30,7 @@ const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onC
     }
 
     return (
-        <div className='container-filter'>
+        <div className='container-filter' style={{ width: '260px' }} >
             <main>
                 <TextInput
                     value={nroDoc}
@@ -51,14 +51,16 @@ const AlumnoFilter: React.FC<{ onClosed: (isActive: boolean) => void }> = ({ onC
                     <Button
                         className='btn mx-1'
                         title='Limpiar'
+                        variant='outline-danger'
                         onClick={handlerClearFilter}
                     >
                         Limpiar
                     </Button>
 
                     <Button
-                        className='btn'
+                        className='btn mx-5'
                         title='Aplicar'
+                        variant='outline-success'
                         onClick={() => handlerFilter()}
                     >
                         Aplicar

@@ -69,11 +69,11 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
         <div>
           <ModalFilter />
 
-          <ModalAddAlumno />
-
+          <ModalDeleteMasivo  />
+          
           <ModalAddAlumnoMasivo />
 
-          <ModalDeleteMasivo  />
+          <ModalAddAlumno />
 
           <ModalEditAlumno visible={showModal} onClosedModal={() => setShowModal(false)} alumno={currentAlumn} />
         </div>

@@ -14,7 +14,9 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     carreras: CarrerasProps[];
-    filter: CarrerasFilter;
+    filter: {
+        descripcion: string,
+    };
 }
 
 interface CarrerasProps {

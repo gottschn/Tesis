@@ -20,7 +20,7 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
 
     const dispatch = HelperRedux.useDispatch()
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
-    const { precioCarreras } = HelperRedux.useSelector((state) => state.precioCarrera)
+    const { precioCarreras, filter } = HelperRedux.useSelector((state) => state.precioCarrera)
  
     const [showModal, setShowModal] = useState(false);
     const [currentPrecioCarrera, setCurrentPrecioCarrera] = useState<PrecioCarreraProps>({} as PrecioCarreraProps);
@@ -82,11 +82,9 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
                 }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
-                rows={precioCarreras.map(x => ({
+                rows={precioCarreras.filter(x => x.id.toString().includes(filter.id.toString())).map(x => ({
                     ...x,
                     fecha:moment(x.fecha).format("YYYY-MM-DD"),
-                   /*  monto:`$${x.monto}`,
-                    matricula:`$${x.matricula}`  */
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PrecioCarreraFilter onClosed={onClosedFilter} />}
