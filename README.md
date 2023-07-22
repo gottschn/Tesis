@@ -1,46 +1,28 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1> Para Iniciar el Proyecto</h1>
+npm start
 
-## Available Scripts
+General
+Este proyecto está diseñado para el área de cobranzas de la Universidad Tecnológica Nacional - FRT.
+Fue creado en base a los requerimientos pedidos por esta área, con el fin de procesar los pagos que los alumnos de diversas carreras realizan mensualmente. De esta forma, se centralizará toda la información financiera referida a los pagos de cuotas.
+El programa está planteado en base a una API desarrollada en .NET que luego será consumida desde una aplicación web (en este caso una aplicación react) y/o mobile.
 
-In the project directory, you can run:
+Tecnologias utilizadas:
+Back-end (API): ASP .NET, JWT, Swagger, EntityFramework, SpreadsheetLight (manejo de Excel) y EFCore.BulkExtensions (manejo de datos masivo).
+Frontend: React,Redux.
+Base de datos: MSSQL.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<h1>Dinamica de Uso</h1>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Dinámica De Uso
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+El programa de cobranzas es una herramienta diseñada para facilitar la gestión y control de los procesos de cobro de la facultad. Su objetivo principal es agilizar y automatizar las tareas relacionadas con la recuperación de pagos pendientes y el seguimiento de la cuenta de los alumnos.
+La aplicación cuenta con un login básico en el cual, tanto los alumnos como los directores y las personas relacionadas con el área de cobranzas, ingresarán sus datos para poder autenticarse. Luego de la autorización se genera un token en el cual se encuentra la información del usuario y su rol. A partir de este rol, el usuario tendrá acceso a determinadas rutas (por ejemplo: los alumnos no pueden tener acceso a la creación de las cuotas, de los pagos, de otros alumnos, entre otras; sin embargo, el usuario administrador si las tiene).
+Luego de iniciar sesión, nos redirigirá a una pantalla home donde tendremos una barra de navegación en la parte superior de la pantalla donde se encontrarán los botones que nos redirigirá a las páginas correspondientes a cada endpoint(detallado en la sección siguiente).
+Suponiendo que somos usuarios administradores, podremos crear, eliminar, modificar y obtener las siguientes entidades: las carreras de la facultad que manejan cuotas pagas; el precio de las cuotas; todas las personas que manejan el sistema, tanto alumnos como los empleados que tienen acceso al sistema; la información de los usuarios y sus respectivos roles; y por último la información de los pagos.
+Con respecto a los pagos, a pedido del área de cobranzas, estos mismos pueden ser realizados de manera masiva a través de un archivo Excel de referencia, el cual el sistema mapeará los datos a la base de datos. Esta implementación también fue diseñada para los alumnos, los cuales tienen una inserción masiva a través de Excel. A su vez, ambas entidades, pueden realizar una eliminación masiva de registros especificando la fecha y hora desde/hasta la que se quiere eliminar.
+Toda esta información, se muestran en tablas dentro de cada página de una manera muy intuitiva para que el usuario navegue por la aplicación sin ninguna complicación. En el caso en el que desee agregar, editar o modificar registros en alguna de las entidades, se muestran los botones que nos abren modales (también llamados ventanas emergentes) con todas las características de la entidad.

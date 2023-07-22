@@ -5,7 +5,7 @@ export const Home = () => {
     return (
         <>
             <div className='title'>
-                <h1>Bienvenido a la Pagina </h1>
+                <h1>Bienvenido al Home </h1>
             </div>
 
             <div className='title'>
