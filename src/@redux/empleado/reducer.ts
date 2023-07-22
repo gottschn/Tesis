@@ -4,8 +4,8 @@ const initialState: StateProps = {
     isLoading: false,
     empleados: [],
     filter: {
-        dni: '',
         apynom: '',
+        areaTrabajo: '',
     }
 }
 
@@ -54,6 +54,15 @@ const reducer = (state = initialState, action: any = {} ) => {
             nextState = {
                 ...state,
                 empleados: state.empleados.filter((empleado) => empleado.id !== action.data.id),
+            }
+            break;
+            case TypeActions.SET_EMPLEADOS_FILTER_STORE:
+            nextState = {
+                ...state,
+                filter: {
+                    apynom: action.apynom,
+                    areaTrabajo: action.areaTrabajo
+                },
             }
             break;
         default:

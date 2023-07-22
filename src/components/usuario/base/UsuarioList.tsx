@@ -20,7 +20,7 @@ import { current } from '@reduxjs/toolkit';
 const UsuarioList: React.FC<{ usuario: UsuarioProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
-    const { usuarios } = HelperRedux.useSelector((state) => state.usuarios)
+    const { usuarios, filter  } = HelperRedux.useSelector((state) => state.usuarios)
     const [currentUsuario, setCurrentUsuario] = useState<UsuarioProps>({} as UsuarioProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
     const [showModal, setShowModal] = useState(false);
@@ -80,7 +80,7 @@ const UsuarioList: React.FC<{ usuario: UsuarioProps }> = ({ ...props }) => {
                 }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
-                rows={usuarios.map(x => ({
+                rows={usuarios.filter(x => x.nombre.includes(filter.nombre)).map(x => ({
                     ...x,
                 }),
                 )}

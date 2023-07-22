@@ -62,12 +62,10 @@ const deleteEmpleados = ( data: any ) => ({
     data
 })
 
-const setFilterEmpleadosStore = ( data: EmpleadosFilter = {
-    dni: '',
-    apynom: '',
-})  => ({
+const setFilterEmpleadosStore = (apynom: string, areaTrabajo: string)  => ({
     type: TypeActions.SET_EMPLEADOS_FILTER_STORE,
-    data
+    apynom,
+    areaTrabajo
 })
 
 

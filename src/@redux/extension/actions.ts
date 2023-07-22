@@ -39,12 +39,9 @@ const deleteExtensiones = ( data: any ) => ({
     data
 })
 
-const setFilterExtensionesStore = (data: ExtensionFilter  = {
-    id: '', 
-    descripcion: '', 
-}) => ({
+const setFilterExtensionesStore = (descripcion: string) => ({
     type: TypeActions.SET_EXTENSIONES_FILTER_STORE,
-    data
+    descripcion
 })
 
 

@@ -13,7 +13,9 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     extensiones: ExtensionProps[];
-    filter: ExtensionFilter;
+    filter: {
+        descripcion: string
+    };
 }
 
 interface ExtensionProps {

@@ -17,7 +17,7 @@ import { ModalConfirmation } from '../../../app/components/Modal';
 const ExtensionList: React.FC<{ extension: ExtensionProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
-    const { extensiones } = HelperRedux.useSelector((state) => state.extensiones)
+    const { extensiones, filter} = HelperRedux.useSelector((state) => state.extensiones)
      const [currentExtension, setCurrentExtension] = useState<ExtensionProps>({} as ExtensionProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
     const [showModal, setShowModal] = useState(false);
@@ -78,7 +78,7 @@ const ExtensionList: React.FC<{ extension: ExtensionProps }> = ({ ...props }) =>
                 }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
-                rows={extensiones.map(x => ({
+                rows={extensiones.filter(x => x.descripcion.includes(filter.descripcion)).map(x => ({
                     ...x,
                 }),
                 )}

@@ -46,12 +46,9 @@ const deleteUsuarios = ( data: any ) => ({
     data
 })
 
-const setFilterUsuariosStore = (data: UsuarioFilter  = {
-    id: '', 
-    nombre: '', 
-}) => ({
+const setFilterUsuariosStore = ( nombre: string,) => ({
     type: TypeActions.SET_USUARIOS_FILTER_STORE,
-    data
+    nombre
 })
 
 

@@ -5,7 +5,6 @@ const initialState: StateProps = {
     isLoading: false,
     usuarios: [],
     filter: {
-        id: '',
         nombre: ''
     }
 
@@ -56,6 +55,14 @@ const reducer = (state = initialState, action: any = {}) => {
             nextState = {
                 ...state,
                 usuarios: state.usuarios.filter((usuario) => usuario.id !== action.data.id),
+            }
+            break;
+            case TypeActions.SET_USUARIOS_FILTER_STORE:
+            nextState = {
+                ...state,
+                filter: {
+                    nombre: action.nombre
+                },
             }
             break;
         default:

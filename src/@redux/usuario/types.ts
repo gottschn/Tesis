@@ -13,7 +13,9 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     usuarios: UsuarioProps[];
-    filter: UsuarioFilter;
+    filter: {
+        nombre: string,
+    };
 }
 
 interface UsuarioProps {

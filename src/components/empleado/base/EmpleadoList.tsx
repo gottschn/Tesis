@@ -18,7 +18,7 @@ import ModalEditEmpleado from '../modals/ModalEditEmpleado';
 const EmpleadoList: React.FC<{ empleados: EmpleadosProps }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
-    const { empleados } = HelperRedux.useSelector((state) => state.empleados)
+    const { empleados, filter} = HelperRedux.useSelector((state) => state.empleados)
     const [currentEmpleado, setCurrentEmpleado] = useState<EmpleadosProps>({} as EmpleadosProps);
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
     const [showModal, setShowModal] = useState(false);
@@ -79,7 +79,7 @@ const EmpleadoList: React.FC<{ empleados: EmpleadosProps }> = ({ ...props }) => 
                  }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
-                rows={empleados.map(x => ({
+                rows={empleados.filter(x => x.apynom.includes(filter.apynom) && x.areaTrabajo.includes(filter.areaTrabajo) ).map(x => ({
                     ...x,
                     fechaNacimiento: moment(x.fechaNacimiento).format("YYYY-MM-DD"),
                 }),

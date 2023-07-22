@@ -14,7 +14,10 @@ const TypeActions = {
 interface StateProps {
     isLoading: boolean;
     empleados: EmpleadosProps[];
-    filter: EmpleadosFilter;
+    filter: {
+        apynom: string,
+        areaTrabajo: string,
+    };
 }
 
 interface EmpleadosProps {
