@@ -5,8 +5,7 @@ const initialState: StateProps = {
     precioCarreras: [],
     carreras: [],
     filter: {
-        carrera: '',
-        id: 0,
+        descripcion: '',
     }
 
 }
@@ -62,8 +61,7 @@ const reducer = (state = initialState, action: any = {}) => {
             nextState = {
                 ...state,
                 filter: {
-                    carrera: action.carrera,
-                    id: action.id
+                    descripcion: action.descripcion,
                 }
             }
             break;

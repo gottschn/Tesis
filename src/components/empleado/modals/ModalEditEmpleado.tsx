@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
 import React from "react";
 import { HelperRedux } from "../../../@redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 import { updateEmpleado } from "../../../domain/empleados";
 import { EmpleadosProps } from "../../../@redux/empleado/types";
@@ -14,6 +12,7 @@ import { Actions } from "../../../@redux/empleado/actions";
 import { getCiudades } from "../../../domain/ciudades";
 import { getExtensiones } from "../../../domain/extensiones";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 const ModalEditEmpleado: React.FC<{
   empleado: EmpleadosProps;
@@ -97,10 +96,15 @@ const ModalEditEmpleado: React.FC<{
     )
       .then(() => {
         dispatch(Actions.updateEmpleados({ ...form }, form.id));
-        alert("El Empleado se Modifico con Exito.");
+        Swal.fire({
+          icon: 'success',
+          text: 'El Empleado se modifico con exito.',
+          showConfirmButton: false,
+          timer: 1500, 
+      })
       })
       .catch((error) => console.log(error, "Error"))
-      /* .finally(() => props.onClosedModal()); */
+      .finally(() => props.onClosedModal()); 
   };
 
   return (

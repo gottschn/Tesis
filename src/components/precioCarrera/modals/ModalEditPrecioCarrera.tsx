@@ -8,13 +8,16 @@ import { Actions } from "../../../@redux/precioCarrera";
 import { Actions as ActionsCarrera } from "../../../@redux/carreras";
 import { getCarreras } from "../../../domain/carreras";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 const ModalEditPrecioCarrera: React.FC<{
   precioCarrera: PrecioCarreraProps;
   visible: boolean;
   onClosedModal: () => void;
 }> = ({ ...props }) => {
-  const [form, setForm] = useState<PrecioCarreraProps>( {} as PrecioCarreraProps);
+  const [form, setForm] = useState<PrecioCarreraProps>(
+    {} as PrecioCarreraProps
+  );
 
   const dispatch = HelperRedux.useDispatch();
   const { carreras } = HelperRedux.useSelector((state) => state);
@@ -55,6 +58,7 @@ const ModalEditPrecioCarrera: React.FC<{
   }, [props.precioCarrera.id]);
 
   const handleSubmit = (e: any) => {
+    e.preventDefault();
     updatePrecioCarreras(
       form.id,
       form.monto,
@@ -64,7 +68,12 @@ const ModalEditPrecioCarrera: React.FC<{
     )
       .then(() => {
         dispatch(Actions.updatePrecioCarreras({ ...form }, form.id));
-        alert("El Precio de Carrera se Modifico con Exito.");
+        Swal.fire({
+          icon: "success",
+          text: "El Precio de la Carrera se modifico con exito.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((error) => console.log(error))
       .finally(() => props.onClosedModal());
@@ -74,7 +83,6 @@ const ModalEditPrecioCarrera: React.FC<{
     <>
       <Modal
         show={props.visible}
-        size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -130,7 +138,7 @@ const ModalEditPrecioCarrera: React.FC<{
                 type="date"
                 placeholder="Fecha"
                 name="fecha"
-                value={moment(form.fecha).format('YYYY-MM-DD')}
+                value={moment(form.fecha).format("YYYY-MM-DD")}
                 onChange={handleChange}
               />
             </Form.Group>

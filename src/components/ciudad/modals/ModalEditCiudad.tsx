@@ -5,6 +5,7 @@ import { Actions } from "../../../@redux/ciudad";
 import { CiudadesProps } from "../../../@redux/ciudad/types";
 import { updateCiudades } from "../../../domain/ciudades";
 import { Modal, Form, Button } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 
 const ModalEditCiudad:React.FC<{
@@ -38,7 +39,12 @@ const ModalEditCiudad:React.FC<{
 
         updateCiudades(form.id,form.descripcion).then(() => {
             dispatch(Actions.updateCiudades({...form}, form.id))
-            alert('La Ciudad se Modifico con Exito.');
+            Swal.fire({
+                icon: 'success',
+                text: 'La Ciudad se modifico con exito.',
+                showConfirmButton: false,
+                timer: 1500, 
+            })
         })
         .catch(error => console.log(error))
         .finally(() => props.onClosedModal())
@@ -48,7 +54,6 @@ const ModalEditCiudad:React.FC<{
         <>
             <Modal
                 show={props.visible}
-                size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >

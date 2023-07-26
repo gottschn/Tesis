@@ -61,7 +61,7 @@ const ModalFilter = () => {
                 centered
             >
                 <Modal.Header className="modaltitle">
-                    <Modal.Title>Filtros Alumnos</Modal.Title>
+                    <Modal.Title>Exportacion de Alumnos</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handlerSubmit}>
                     <Modal.Body>
@@ -83,10 +83,10 @@ const ModalFilter = () => {
                         variant="contained" 
                         color="success"
                         type="submit">
-                            Añadir Importacion
+                            Exportar Alumnos
                         </Button>
                         <Button variant="contained" color="error" onClick={handleCloseModal} >
-                            Cancelar Importacion
+                            Cancelar Exportacion
                         </Button>
                     </Modal.Footer>
                 </Form>

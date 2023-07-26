@@ -7,6 +7,7 @@ import { CarrerasProps } from "../../../@redux/carreras/types";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { createCarreras } from "../../../domain/carreras";
 import { Button } from "@mui/material";
+import Swal from "sweetalert2";
 
 const ModalAddCarrera = () => {
   const [form, setForm] = useState<CarrerasProps>({
@@ -50,12 +51,11 @@ const ModalAddCarrera = () => {
     handleCloseModal();
     setForm({
       id: 0,
-      descripcion: "",
+      descripcion: '',
       cantCuotas: 0,
       precioCarrera: 0,
       fecha: "",
     });
-    window.location.reload();
   };
 
   const handleSubmit = (e: any) => {
@@ -69,7 +69,14 @@ const ModalAddCarrera = () => {
     createCarreras(form.descripcion, form.cantCuotas)
       .then((x) => {
         dispatch(Actions.createCarreras({ ...form, id: x.data.value }));
-        alert('Se Registro La Carrera con Exito.')
+        Swal.fire({
+          icon: 'success',
+          text: 'La carrera se registro con exito.',
+          showConfirmButton: false,
+          timer: 1500, 
+        }).then(() => {
+          window.location.reload()
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -93,7 +100,6 @@ const ModalAddCarrera = () => {
 
       <Modal
         show={showModal}
-        size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -124,7 +130,7 @@ const ModalAddCarrera = () => {
                 onFocus={() => setErrorMsg(null)}
               />
             </Form.Group>
-            <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>
+            <div>{errorMsg && <p className="error">{errorMsg}</p>}</div>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="contained" color="success" type="submit">

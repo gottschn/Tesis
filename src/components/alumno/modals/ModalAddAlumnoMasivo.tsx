@@ -57,10 +57,10 @@ const ModalAddAlumnoMasivo = () => {
                 centered
             >
                 <Modal.Header className="modaltitle">
-                    <Modal.Title>Agregar Importacion Masiva</Modal.Title>
+                    <Modal.Title>Importacion Masiva de Alumnos</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handlerSubmit}>
-                    <Modal.Body>
+             {/*        <Modal.Body>
                         <Form.Group className="mb-3">
                             <Form.Label>Archivo</Form.Label>
                             <Form.Control
@@ -71,7 +71,7 @@ const ModalAddAlumnoMasivo = () => {
                         <div>
                             {errorMsg && (<p className="error-msg">{errorMsg}</p>)}
                         </div>
-                    </Modal.Body>
+                    </Modal.Body> */}
                     <Modal.Footer>
                         <Button 
                         variant="contained" 

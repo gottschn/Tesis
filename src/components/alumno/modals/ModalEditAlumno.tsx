@@ -13,6 +13,7 @@ import { Actions as ActionsCiudades } from '../../../@redux/ciudad';
 import { getCiudades } from "../../../domain/ciudades";
 import { getExtensiones } from "../../../domain/extensiones";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 
 const ModalEditAlumno:React.FC<{ 
@@ -93,6 +94,8 @@ const ModalEditAlumno:React.FC<{
         })
     }, [props.alumno?.id])
     const handleSubmit = (e: any) => {
+        e.preventDefault();
+
         updateAlumno(
             form.id,
             form.legajo,
@@ -110,7 +113,12 @@ const ModalEditAlumno:React.FC<{
             form.codigoPostal,
             ).then(() => {
             dispatch(Actions.updateAlumnos({...form}, form.id))
-            alert('El Alumno se Modifico con Exito.')
+            Swal.fire({
+                icon: 'success',
+                text: 'El Alumno se modifico con exito.',
+                showConfirmButton: false,
+                timer: 1500,
+            })
         })
         .catch(error => console.log(error, "Error"))
         .finally(() => props.onClosedModal())

@@ -5,12 +5,12 @@
             "name": "Id del Empleado"
         },
         {
-            "field": "areaTrabajo",
-            "name": "Area de Trabajo"
-        },
-        {
             "field": "apynom",
             "name": "Nombre y Apellido"
+        },
+        {
+            "field": "areaTrabajo",
+            "name": "Area de Trabajo"
         },
         {
             "field": "tipoDoc",

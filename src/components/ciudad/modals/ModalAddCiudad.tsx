@@ -8,6 +8,7 @@ import { Button } from '@mui/material';
 import { CiudadesProps } from '../../../@redux/ciudad/types';
 import { Actions } from '../../../@redux/ciudad/actions';
 import { createCiudades } from '../../../domain/ciudades';
+import Swal from 'sweetalert2';
 
 const ModalAddCiudad = () => {
 
@@ -47,7 +48,6 @@ const ModalAddCiudad = () => {
             id: 0,
             descripcion: '',
         })
-        window.location.reload()
     }
 
     const handleChange = (e: any) => {
@@ -60,7 +60,11 @@ const ModalAddCiudad = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        const { descripcion} = form;
+
+        if (form.descripcion === "") {
+            setErrorMsg("Todos los campos son obligatorios");
+            return;
+          }
 
         setErrorMsg(null);
 
@@ -69,7 +73,14 @@ const ModalAddCiudad = () => {
                 ...form,
                 id: x.data.value
             }));
-            alert('Se Registro la Ciudad con Exito.')
+            Swal.fire({
+                icon: 'success',
+                text: 'La Ciudad se registro con exito.',
+                showConfirmButton: false,
+                timer: 1500, 
+              }).then(() => {
+                window.location.reload()
+              })
         })
             .catch(error => {
                 console.log('createCiudades', error)
@@ -93,7 +104,6 @@ const ModalAddCiudad = () => {
 
             <Modal
                 show={showModal}
-                size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
@@ -113,7 +123,7 @@ const ModalAddCiudad = () => {
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
-                        <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>
+                        <div>{errorMsg && <p className="error">{errorMsg}</p>}</div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="contained" color="success" type="submit">

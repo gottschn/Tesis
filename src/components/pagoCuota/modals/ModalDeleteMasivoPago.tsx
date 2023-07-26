@@ -59,7 +59,7 @@ const ModalDeleteMasivo = () => {
                 centered
             >
                 <Modal.Header className="modaltitle">
-                    <Modal.Title>Eliminar Masivamente</Modal.Title>
+                    <Modal.Title>Eliminacion Masiva de Pagos</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handleSubmit}>
                     <Modal.Body>

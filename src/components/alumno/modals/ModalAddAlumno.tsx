@@ -20,6 +20,7 @@ import '../../../app/components/GlobalStyles/css/GlobalStyle.css'
 import { Button } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const ModalAddAlumno = () => {
 
@@ -139,14 +140,16 @@ const ModalAddAlumno = () => {
             codigoPostal: 0,
             desde: new Date(),
             hasta: new Date(),
-        }) 
-         window.location.reload()
+        })
     }
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
-        setErrorMsg(null);
+        if (form.legajo === "" || form.apynom === "") {
+            setErrorMsg("Todos los campos son obligatorios");
+            return;
+          }
 
         createAlumno(form.legajo, form.apynom, form.tipoDoc, form.nroDoc, form.fechaNacimiento, form.direccion,
             form.telefono, form.mail, form.fechaIngreso, form.carreraId, form.extensionId, form.ciudadId, form.codigoPostal).then((x) => {
@@ -154,7 +157,14 @@ const ModalAddAlumno = () => {
                     ...form,
                     id: x.data.value
                 }));
-                alert('Se Registro el Alumno con Exito.')
+                Swal.fire({
+                    icon: 'success',
+                    text: 'El Alumno se registro con exito.',
+                    showConfirmButton: false,
+                    timer: 1500, 
+                  }).then(() => {
+                    window.location.reload()
+                  })
             })
             .catch(error => {
                 console.log('createAlumno', error)
@@ -339,7 +349,7 @@ const ModalAddAlumno = () => {
                             />
                         </Form.Group>
                         <div>
-                            {errorMsg && (<p className="error-msg">{errorMsg}</p>)}
+                            {errorMsg && (<p className="error">{errorMsg}</p>)}
                         </div>
                     </Modal.Body>
                     <Modal.Footer>

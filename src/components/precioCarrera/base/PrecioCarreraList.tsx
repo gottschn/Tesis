@@ -14,14 +14,16 @@ import DataGrid from '../../../app/components/DataGrid';
 import { deletePrecioCarreras, getPrecioCarreras } from '../../../domain/precioCarreras';
 import Columns from './PrecioCarreras.json';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 
-const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ...props }) => {
+const PrecioCarreraList: React.FC<{ 
+    precioCarrera: PrecioCarreraProps
+ }> = ({ ...props }) => {
 
     const dispatch = HelperRedux.useDispatch()
     const [confirmationDelete, setConfirmationDelete] = useState({ visible: false, item: { id: 0 } })
     const { precioCarreras, filter } = HelperRedux.useSelector((state) => state.precioCarrera)
- 
     const [showModal, setShowModal] = useState(false);
     const [currentPrecioCarrera, setCurrentPrecioCarrera] = useState<PrecioCarreraProps>({} as PrecioCarreraProps);
 
@@ -48,7 +50,14 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
             dispatch(Actions.deletePrecioCarreras(id))
         })
         .catch(error => console.log(error))
-        window.location.reload()
+        Swal.fire({
+            icon: 'success',
+            text: 'El Precio de Carrera se elimino con exito.',
+            showConfirmButton: false,
+            timer: 1500, 
+        }).then( () => {
+            window.location.reload();
+        })
     }
 
     const handlerDeleteNotification = () => {
@@ -71,6 +80,7 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
                     <ModalEditPrecioCarrera visible={showModal} onClosedModal={() => setShowModal(false)} precioCarrera={currentPrecioCarrera} />
                 </div>
             </div>
+            
             <DataGrid
                 singlePagination={true}
                 subTableName='details'
@@ -82,13 +92,15 @@ const PrecioCarreraList: React.FC<{ precioCarrera: PrecioCarreraProps }> = ({ ..
                 }}
                 onClickDelete={(row) => setConfirmationDelete({ visible: true, item: row })}
 
-                rows={precioCarreras.filter(x => x.id.toString().includes(filter.id.toString())).map(x => ({
+                rows={precioCarreras?.filter( x => x.carrera?.includes(filter.descripcion))
+                    .map(x => ({
                     ...x,
                     fecha:moment(x.fecha).format("YYYY-MM-DD"),
                 }),
                 )}
                 filterComponent={(onClosedFilter) => <PrecioCarreraFilter onClosed={onClosedFilter} />}
             />
+           
 
             <ModalConfirmation
                 title='¿Confirma baja del registro?'

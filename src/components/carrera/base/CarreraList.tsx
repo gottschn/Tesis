@@ -14,6 +14,7 @@ import { deleteCarreras, getCarreras } from '../../../domain/carreras';
 import Columns from './Carreras.json';
 import moment from 'moment';
 import ModalEditCarrera from '../modals/ModalEditCarrera';
+import Swal from 'sweetalert2';
 
 
 const CarreraList: React.FC<{ carrera: CarrerasProps }> = () => {
@@ -53,8 +54,18 @@ const CarreraList: React.FC<{ carrera: CarrerasProps }> = () => {
             dispatch(Actions.deleteCarreras(id))
         })
         .catch(error => console.log(error))
-        window.location.reload()
+        Swal.fire({
+            icon: 'success',
+            text: 'La carrera se elimino con exito.',
+            showConfirmButton: false,
+            timer: 1500, 
+        }).then( () => {
+            window.location.reload();
+        })
+
     };
+
+    
 
     return (
         <>

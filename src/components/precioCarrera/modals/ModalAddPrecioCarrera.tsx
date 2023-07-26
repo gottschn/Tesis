@@ -11,6 +11,7 @@ import { Button } from '@mui/material';
 import { PrecioCarreraProps } from '../../../@redux/precioCarrera/types';
 import { createPrecioCarreras } from '../../../domain/precioCarreras';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 const ModalAddPrecioCarrera = () => {
 
     const [form, setForm] = useState<PrecioCarreraProps>({
@@ -45,7 +46,6 @@ const ModalAddPrecioCarrera = () => {
             fecha: new Date(),
             carreraId: 0,
         }) 
-         window.location.reload() 
     }
 
 
@@ -92,6 +92,10 @@ const ModalAddPrecioCarrera = () => {
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
+        if (!form.monto) {
+            setErrorMsg("Todos los campos son obligatorios");
+            return;
+          }
         setErrorMsg(null);
 
         createPrecioCarreras(form.monto, form.matricula, form.fecha, form.carreraId).then((x) => {
@@ -99,7 +103,14 @@ const ModalAddPrecioCarrera = () => {
                 ...form,
                 id: x.data.value
             }));
-            alert('Se Registro Correctamente el Precio Carrera.')
+            Swal.fire({
+                icon: 'success',
+                text: 'El Precio de la Carrera se registro con exito.',
+                showConfirmButton: false,
+                timer: 1500, 
+              }).then(() => {
+                window.location.reload()
+              })
         })
             .catch(error => {
                 console.log(error)
@@ -121,7 +132,6 @@ const ModalAddPrecioCarrera = () => {
             
             <Modal
                 show={showModal}
-                size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
@@ -176,7 +186,7 @@ const ModalAddPrecioCarrera = () => {
                                 {carreras.carreras.map(x => <option key={`option-carrera-${x.id}`} value={x.id}>{`Codigo:${x.id} - Carrera:${x.descripcion}`}</option>)}
                             </Form.Control>
                         </Form.Group>
-                        <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>
+                        <div>{errorMsg && <p className="error">{errorMsg}</p>}</div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="contained" color="success" type="submit">

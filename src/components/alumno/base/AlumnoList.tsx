@@ -16,6 +16,7 @@ import moment from "moment";
 import ModalDeleteMasivo from "../modals/ModalDeleteMasivo";
 import ModalFilter from "../modals/ModalFilter";
 import ModalEditAlumno from "../modals/ModalEditAlumno";
+import Swal from "sweetalert2";
 
 const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
   const dispatch = HelperRedux.useDispatch();
@@ -50,7 +51,14 @@ const AlumnoList: React.FC<{ alumno: AlumnoProps }> = ({ ...props }) => {
         dispatch(Actions.deleteAlumnos(id));
       })
       .catch((error) => console.log(error));
-    window.location.reload();
+      Swal.fire({
+        icon: 'success',
+        text: 'El Alumno se elimino con exito.',
+        showConfirmButton: false,
+        timer: 1500, 
+    }).then( () => {
+        window.location.reload();
+    })
   };
 
   const handlerDeleteNotification = () => {

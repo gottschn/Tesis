@@ -48,7 +48,6 @@ const ModalAddPagoMasivo = () => {
 
             <Modal
                 show={showModal}
-                size="sm"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
@@ -56,13 +55,13 @@ const ModalAddPagoMasivo = () => {
                     <Modal.Title>Importacion Masiva de Pagos</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={handlerSubmit}>
-                    <Modal.Body>
+                  {/*   <Modal.Body>
                         
                         <p> Hola</p>
                         <div>
                             {errorMsg && (<p className="error-msg">{errorMsg}</p>)}
                         </div>
-                    </Modal.Body>
+                    </Modal.Body> */}
                     <Modal.Footer>
                         <Button 
                         variant="contained" 

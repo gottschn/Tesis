@@ -8,6 +8,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Button } from '@mui/material';
 import '../../../css/entities/carrera/carrera.css';
 import { createExtensiones } from '../../../domain/extensiones';
+import Swal from 'sweetalert2';
 
 const ModalAddExtension = () => {
 
@@ -15,7 +16,6 @@ const ModalAddExtension = () => {
         id: 0,
         descripcion: '',
     });
-    const { descripcion } = form;
 
     const dispatch = HelperRedux.useDispatch()
     const { extensiones } = HelperRedux.useSelector((state) => state.extensiones)
@@ -47,7 +47,6 @@ const ModalAddExtension = () => {
             id: 0,
             descripcion: '',
         })
-        window.location.reload()
     }
 
     const handleChange = (e: any) => {
@@ -60,16 +59,26 @@ const ModalAddExtension = () => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        const { descripcion} = form;
 
+        if (form.descripcion === "") {
+            setErrorMsg("Todos los campos son obligatorios");
+            return;
+          }
         setErrorMsg(null);
 
-        createExtensiones(descripcion).then((x) => {
+        createExtensiones(form.descripcion).then((x) => {
             dispatch(Actions.createExtensiones({
                 ...form,
                 id: x.data.value
             }));
-            alert('Se Registro la Extension con Exito.')
+            Swal.fire({
+                icon: 'success',
+                text: 'La Extension se registro con exito.',
+                showConfirmButton: false,
+                timer: 1500, 
+              }).then(() => {
+                window.location.reload()
+              })
         })
             .catch(error => {
                 console.log('createExtensiones', error)
@@ -93,7 +102,6 @@ const ModalAddExtension = () => {
 
             <Modal
                 show={showModal}
-                size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >
@@ -108,12 +116,12 @@ const ModalAddExtension = () => {
                                 type="text"
                                 placeholder="Nombre"
                                 name="descripcion"
-                                value={descripcion}
+                                value={form.descripcion}
                                 onChange={handleChange}
                                 onFocus={() => setErrorMsg(null)}
                             />
                         </Form.Group>
-                        <div>{errorMsg && <p className="error-msg">{errorMsg}</p>}</div>
+                        <div>{errorMsg && <p className="error">{errorMsg}</p>}</div>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="contained" color="success" type="submit">

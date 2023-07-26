@@ -5,6 +5,7 @@ import { HelperRedux } from "../../../@redux";
 import { Actions } from "../../../@redux/carreras";
 import { updateCarreras } from "../../../domain/carreras"
 import { CarrerasProps } from "../../../@redux/carreras/types";
+import Swal from "sweetalert2";
 
 const ModalEditCarrera:React.FC<{
     carrera:CarrerasProps;
@@ -39,7 +40,12 @@ const ModalEditCarrera:React.FC<{
 
         updateCarreras(form.id,form.descripcion,form.cantCuotas).then(() => {
             dispatch(Actions.updateCarreras({...form}, form.id))
-           alert('La Carrera se Modifico con Exito.');
+            Swal.fire({
+                icon: 'success',
+                text: 'La carrera se modifico con exito.',
+                showConfirmButton: false,
+                timer: 1500, 
+            })
         })
         .catch(error => console.log(error))
         .finally(() => props.onClosedModal())
@@ -49,7 +55,6 @@ const ModalEditCarrera:React.FC<{
         <>
             <Modal
                 show={props.visible}
-                size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >

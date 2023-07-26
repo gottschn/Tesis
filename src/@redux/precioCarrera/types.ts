@@ -17,8 +17,7 @@ interface StateProps {
     precioCarreras: PrecioCarreraProps[];
     carreras?: CarrerasProps[];
     filter: {
-        carrera: string,
-        id: number | string,
+        descripcion: any,
     };
 }
 
@@ -28,7 +27,7 @@ interface PrecioCarreraProps {
     matricula: number;
     fecha: Date;
     carreraId: number,
-    carrera?: CarrerasProps [];
+    carrera?: CarrerasProps[];
 
 }
 

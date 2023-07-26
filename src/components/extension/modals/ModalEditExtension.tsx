@@ -5,6 +5,7 @@ import { Actions } from "../../../@redux/extension";
 import { ExtensionProps } from '../../../@redux/extension/types';
 import { updateExtensiones } from '../../../domain/extensiones';
 import { Modal, Form, Button } from "react-bootstrap";
+import Swal from 'sweetalert2';
 
 const ModalEditExtension:React.FC<{
     extension:ExtensionProps;
@@ -36,6 +37,12 @@ const ModalEditExtension:React.FC<{
  
         updateExtensiones(form.id,form.descripcion).then(() => {
             dispatch(Actions.updateExtensiones({...form}, form.id))
+            Swal.fire({
+                icon: 'success',
+                text: 'La Extension se modifico con exito.',
+                showConfirmButton: false,
+                timer: 1500, 
+            })
         })
         .catch(error => console.log(error))
         .finally(() => props.onClosedModal())
@@ -45,7 +52,6 @@ const ModalEditExtension:React.FC<{
         <>
             <Modal
                 show={props.visible}
-                size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
             >

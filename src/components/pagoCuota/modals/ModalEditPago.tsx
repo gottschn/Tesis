@@ -7,6 +7,7 @@ import { HelperRedux } from "../../../@redux";
 import { updatePagos } from "../../../domain/pagos";
 import { Actions } from "../../../@redux/Pagos";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 const ModalEditPago: React.FC<{
   pago: PagosProps;
@@ -52,7 +53,12 @@ const ModalEditPago: React.FC<{
     )
       .then(() => {
         dispatch(Actions.updatePagos({ ...form }, form.id));
-        alert("El Pago se Modifico con Exito.");
+        Swal.fire({
+          icon: 'success',
+          text: 'El Pago se modifico con exito.',
+          showConfirmButton: false,
+          timer: 1500, 
+      })
       })
       .catch((error) => {
         console.log(error);

@@ -14,18 +14,18 @@ const PrecioCarreraFilter: React.FC<{
 }> = ({ onClosed }) => {
   const dispatch = HelperRedux.useDispatch();
   const { filter } = HelperRedux.useSelector((state) => state.precioCarrera);
-  const [ id, setId] = useState('')
+  const [ descripcion, setDescripcion] = useState('')
 
 
   const handlerClearFilter = () => {
     getPrecioCarreras().then((x) => {dispatch(Actions.setPrecioCarrerasStore(x.data.value));});
     dispatch(Actions.setPrecioCarrerasFilter(''));
-    setId('')
+    setDescripcion('')
     onClosed(false);
   };
 
   const handlerFilter = () => {
-    dispatch(Actions.setPrecioCarrerasFilter(id));
+    dispatch(Actions.setPrecioCarrerasFilter(descripcion));
 
     onClosed(true);
   };
@@ -33,9 +33,9 @@ const PrecioCarreraFilter: React.FC<{
   return (
     <div className="container-filter" style={{ width: "280px" }}>
       <TextInput
-        value={id}
-        onChange={(event) => setId(event.target.value)}
-        label='Codigo del Precio de la Carrera'
+        value={descripcion}
+        onChange={(event) => setDescripcion(event.target.value)}
+        label='Nombre de la Carrera'
       />
       <footer className="d-flex justify-content-between mt-3">
         <div className="d-flex">
