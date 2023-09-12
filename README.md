@@ -1,16 +1,16 @@
 # Getting Started with Create React App
 
-<h1> Para Iniciar el Proyecto</h1>
+Para Iniciar el Proyecto
 npm start
 
-General
+<h1> General</h1>
 Este proyecto está diseñado para el área de cobranzas de la Universidad Tecnológica Nacional - FRT.
 Fue creado en base a los requerimientos pedidos por esta área, con el fin de procesar los pagos que los alumnos de diversas carreras realizan mensualmente. De esta forma, se centralizará toda la información financiera referida a los pagos de cuotas.
 El programa está planteado en base a una API desarrollada en .NET que luego será consumida desde una aplicación web (en este caso una aplicación react) y/o mobile.
 
 Tecnologias utilizadas:
 Back-end (API): ASP .NET, JWT, Swagger, EntityFramework, SpreadsheetLight (manejo de Excel) y EFCore.BulkExtensions (manejo de datos masivo).
-Frontend: React,Redux.
+Frontend: React TS,Redux,Axios(Conexion con la Api), Material UI y Bootstrap para el Diseño del front..
 Base de datos: MSSQL.
 
 
